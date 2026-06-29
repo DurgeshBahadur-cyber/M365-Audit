@@ -1,0 +1,290 @@
+import React, { useState } from 'react';
+import clsx from 'clsx';
+import Layout from '@theme/Layout';
+import Link from '@docusaurus/Link';
+import useBaseUrl from '@docusaurus/useBaseUrl';
+import styles from './get-started.module.css';
+
+const frameworks = [
+  {
+    id: "m365",
+    title: "M365 Advisor Baselines",
+    subtitle: "Best-practice security tests for tenant posture",
+    desc: "170+ automated checks validating authentication strength, conditional access, administration settings, and external sharing policies.",
+    accent: "#ff7a7a",
+    glow: "rgba(255, 122, 122, 0.15)",
+    icon: "🔥",
+    tag: "M365 Posture",
+    setupCmd: "Install-Module Pester -SkipPublisherCheck -Force -Scope CurrentUser\nInstall-Module M365Advisor -Scope CurrentUser\n\nmd m365advisor-tests\ncd m365advisor-tests\nInstall-M365AdvisorTests",
+    connectCmd: "Connect-M365Advisor",
+    runCmd: "Invoke-M365Advisor"
+  },
+  {
+    id: "eidsca",
+    title: "Entra ID SCA",
+    subtitle: "Identity attack & defense playbook checks",
+    desc: "40+ checks analyzing tenant configuration against common Entra ID attack vectors, privilege escalation paths, and bypass scenarios.",
+    accent: "#00f2fe",
+    glow: "rgba(0, 242, 254, 0.15)",
+    icon: "🛡️",
+    tag: "Entra Security",
+    setupCmd: "Install-Module Pester -SkipPublisherCheck -Force -Scope CurrentUser\nInstall-Module M365Advisor -Scope CurrentUser\n\nmd m365advisor-tests\ncd m365advisor-tests\nInstall-M365AdvisorTests",
+    connectCmd: "Connect-M365Advisor",
+    runCmd: "Invoke-M365Advisor -Tag \"EIDSCA\""
+  },
+  {
+    id: "cisa",
+    title: "CISA SCuBA Baselines",
+    subtitle: "Federal cloud security benchmarks",
+    desc: "Hardened tenant validation rules matching CISA Secure Cloud Business Applications guidelines for high-value government and enterprise assets.",
+    accent: "#c084fc",
+    glow: "rgba(192, 132, 252, 0.15)",
+    icon: "🦅",
+    tag: "CISA SCuBA",
+    setupCmd: "Install-Module Pester -SkipPublisherCheck -Force -Scope CurrentUser\nInstall-Module M365Advisor -Scope CurrentUser\n# Install optional modules required for CISA services\nInstall-Module Az.Accounts, ExchangeOnlineManagement, MicrosoftTeams, PnP.PowerShell -Scope CurrentUser\n\nmd m365advisor-tests\ncd m365advisor-tests\nInstall-M365AdvisorTests",
+    connectCmd: "Connect-M365Advisor -Service All",
+    runCmd: "Invoke-M365Advisor -Tag \"CISA\""
+  },
+  {
+    id: "cis",
+    title: "CIS Benchmarks",
+    subtitle: "Foundations benchmark certification mapping",
+    desc: "Over 44+ automated controls mapped to CIS Microsoft 365 Foundations Benchmark Levels 1 and 2 guidelines for defense-in-depth.",
+    accent: "#fb923c",
+    glow: "rgba(251, 146, 60, 0.15)",
+    icon: "🌀",
+    tag: "CIS Benchmark",
+    setupCmd: "Install-Module Pester -SkipPublisherCheck -Force -Scope CurrentUser\nInstall-Module M365Advisor -Scope CurrentUser\n# Install optional modules required for CIS services\nInstall-Module Az.Accounts, ExchangeOnlineManagement, MicrosoftTeams, PnP.PowerShell -Scope CurrentUser\n\nmd m365advisor-tests\ncd m365advisor-tests\nInstall-M365AdvisorTests",
+    connectCmd: "Connect-M365Advisor -Service All",
+    runCmd: "Invoke-M365Advisor -Tag \"CIS\""
+  },
+  {
+    id: "orca",
+    title: "ORCA Exchange Hygiene",
+    subtitle: "Exchange Online analyzer baseline",
+    desc: "60+ critical security hygiene rules validating mail flow rules, anti-phishing, safe attachments, and email authentication standards.",
+    accent: "#2dd4bf",
+    glow: "rgba(45, 212, 191, 0.15)",
+    icon: "🐋",
+    tag: "ORCA Exchange",
+    setupCmd: "Install-Module Pester -SkipPublisherCheck -Force -Scope CurrentUser\nInstall-Module M365Advisor -Scope CurrentUser\n# Install Exchange Online management module\nInstall-Module ExchangeOnlineManagement -Scope CurrentUser\n\nmd m365advisor-tests\ncd m365advisor-tests\nInstall-M365AdvisorTests",
+    connectCmd: "Connect-M365Advisor -Service ExchangeOnline",
+    runCmd: "Invoke-M365Advisor -Tag \"ORCA\""
+  }
+];
+
+function CopyButton({ text }) {
+  const [copied, setCopied] = useState(false);
+
+  const handleCopy = () => {
+    navigator.clipboard.writeText(text);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
+
+  return (
+    <button
+      className={clsx(styles.copyButton, copied && styles.copyButtonSuccess)}
+      onClick={handleCopy}
+      type="button"
+    >
+      {copied ? (
+        <>
+          <span>✓</span> Copied!
+        </>
+      ) : (
+        <>
+          <span>📋</span> Copy
+        </>
+      )}
+    </button>
+  );
+}
+
+export default function GetStarted() {
+  const [selectedId, setSelectedId] = useState("m365"); // default select first
+  const [step, setStep] = useState(1); // 1 = select, 2 = commands
+
+  const selectedFramework = frameworks.find(f => f.id === selectedId);
+
+  return (
+    <Layout
+      title="Get Started Wizard"
+      description="Select your Microsoft 365 compliance framework and get running commands instantly."
+    >
+      <div className={styles.getStartedPage}>
+        <div className={styles.gridBackground} />
+        <div className={styles.heroGlow} />
+
+        <div className="container">
+          <div className={styles.wizardHeader}>
+            <h1 className={styles.wizardTitle}>Setup Wizard</h1>
+            <p className={styles.wizardDesc}>
+              Configure and run M365 Advisor security audits tailored to your company's compliance benchmarks in a couple of steps.
+            </p>
+          </div>
+
+          {/* Steps Breadcrumb */}
+          <div className={styles.stepsIndicator}>
+            <div className={clsx(styles.stepNode, step >= 1 && styles.stepNodeActive)}>
+              <div className={styles.stepNumber}>1</div>
+              <span>Select Framework</span>
+            </div>
+            <div className={clsx(styles.stepLine, step >= 2 && styles.stepLineActive)} />
+            <div className={clsx(styles.stepNode, step >= 2 && styles.stepNodeActive)}>
+              <div className={styles.stepNumber}>2</div>
+              <span>Run Commands</span>
+            </div>
+          </div>
+
+          {step === 1 ? (
+            <>
+              {/* Step 1 Content */}
+              <div className={styles.frameworkGrid}>
+                {frameworks.map((fw) => (
+                  <div
+                    key={fw.id}
+                    className={clsx(styles.frameworkCard, selectedId === fw.id && styles.frameworkCardSelected)}
+                    style={{
+                      '--card-accent': fw.accent,
+                      '--card-glow': fw.glow
+                    }}
+                    onClick={() => setSelectedId(fw.id)}
+                  >
+                    <div>
+                      <div className={styles.cardHeader}>
+                        <div className={styles.cardIcon}>{fw.icon}</div>
+                        <div className={styles.cardRadio}>
+                          <div className={styles.cardRadioDot} />
+                        </div>
+                      </div>
+                      <h3 className={styles.cardTitle}>{fw.title}</h3>
+                      <p className={styles.cardSubtitle}>{fw.subtitle}</p>
+                      <p className={styles.cardDesc}>{fw.desc}</p>
+                    </div>
+                    <span className={styles.cardTag}>{fw.tag}</span>
+                  </div>
+                ))}
+              </div>
+
+              <div className={styles.actionsRow}>
+                <button
+                  className={styles.btnPrimary}
+                  disabled={!selectedId}
+                  onClick={() => setStep(2)}
+                  type="button"
+                >
+                  Continue to Commands →
+                </button>
+              </div>
+            </>
+          ) : (
+            <>
+              {/* Step 2 Content */}
+              <div className={styles.commandsContainer}>
+
+                <div
+                  className={styles.selectedBadge}
+                  style={{
+                    '--card-accent': selectedFramework.accent,
+                    '--card-glow': selectedFramework.glow
+                  }}
+                >
+                  <span className={styles.selectedIcon}>{selectedFramework.icon}</span>
+                  <span>Targeting: <span className={styles.selectedText}>{selectedFramework.title}</span></span>
+                </div>
+
+                {/* Step 2.1: Install */}
+                <div className={styles.commandStep}>
+                  <div className={styles.commandStepHeader}>
+                    <div className={styles.commandStepTitle}>
+                      <span className={styles.commandStepNum}>1</span>
+                      Install PowerShell Module
+                    </div>
+                    <CopyButton text={selectedFramework.setupCmd} />
+                  </div>
+                  <p className={styles.commandStepDesc}>
+                    Run this command in administrative PowerShell to install the M365Advisor module, Pester utility, and default tests directory.
+                  </p>
+                  <div className={styles.terminalWrapper}>
+                    <div className={styles.terminalHeader}>
+                      <div className={styles.terminalDots}>
+                        <div className={styles.terminalDot} />
+                        <div className={styles.terminalDot} />
+                        <div className={styles.terminalDot} />
+                      </div>
+                      <div className={styles.terminalTitle}>PowerShell</div>
+                    </div>
+                    <pre className={styles.terminalBody}>{selectedFramework.setupCmd}</pre>
+                  </div>
+                </div>
+
+                {/* Step 2.2: Connect */}
+                <div className={styles.commandStep}>
+                  <div className={styles.commandStepHeader}>
+                    <div className={styles.commandStepTitle}>
+                      <span className={styles.commandStepNum}>2</span>
+                      Establish M365 Connection
+                    </div>
+                    <CopyButton text={selectedFramework.connectCmd} />
+                  </div>
+                  <p className={styles.commandStepDesc}>
+                    Authenticate to your Microsoft 365 tenant. A web login window will prompt you to approve access to Microsoft Graph API.
+                  </p>
+                  <div className={styles.terminalWrapper}>
+                    <div className={styles.terminalHeader}>
+                      <div className={styles.terminalDots}>
+                        <div className={styles.terminalDot} />
+                        <div className={styles.terminalDot} />
+                        <div className={styles.terminalDot} />
+                      </div>
+                      <div className={styles.terminalTitle}>PowerShell</div>
+                    </div>
+                    <pre className={styles.terminalBody}>{selectedFramework.connectCmd}</pre>
+                  </div>
+                </div>
+
+                {/* Step 2.3: Run */}
+                <div className={styles.commandStep}>
+                  <div className={styles.commandStepHeader}>
+                    <div className={styles.commandStepTitle}>
+                      <span className={styles.commandStepNum}>3</span>
+                      Run Framework Assessment
+                    </div>
+                    <CopyButton text={selectedFramework.runCmd} />
+                  </div>
+                  <p className={styles.commandStepDesc}>
+                    Initiate the automated compliance check. When complete, test results are automatically rendered as an HTML dashboard under your local output folder.
+                  </p>
+                  <div className={styles.terminalWrapper}>
+                    <div className={styles.terminalHeader}>
+                      <div className={styles.terminalDots}>
+                        <div className={styles.terminalDot} />
+                        <div className={styles.terminalDot} />
+                        <div className={styles.terminalDot} />
+                      </div>
+                      <div className={styles.terminalTitle}>PowerShell</div>
+                    </div>
+                    <pre className={styles.terminalBody}>{selectedFramework.runCmd}</pre>
+                  </div>
+                </div>
+
+              </div>
+
+              <div className={styles.actionsRow}>
+                <button
+                  className={styles.btnSecondary}
+                  onClick={() => setStep(1)}
+                  type="button"
+                >
+                  ← Back to Frameworks
+                </button>
+              </div>
+            </>
+          )}
+
+        </div>
+      </div>
+    </Layout>
+  );
+}

@@ -1,0 +1,139 @@
+﻿function Get-MtMarkdownReport {
+    <#
+    .Synopsis
+     Generates a markdown report using the M365Advisor test results format.
+
+    .Description
+       This markdown report can be used in GitHub actions to display the test results in a formatted way.
+
+    .Example
+       $pesterResults = Invoke-Pester -PassThru
+       $m365advisorResults = ConvertTo-MtM365AdvisorResult -PesterResults $pesterResults
+       Get-MtMarkdownReport $m365advisorResults
+    #>
+    [CmdletBinding()]
+    param(
+        # The M365Advisor test results returned from `Invoke-Pester -PassThru | ConvertTo-MtM365AdvisorResult`
+        [Parameter(Mandatory = $true, Position = 0)]
+        [psobject] $M365AdvisorResults
+    )
+    $StatusIcon = @{
+        Passed      = '<img src="https://m365advisor.dev/img/test-result/pill-pass.png" height="25" alt="Passed"/>'
+        Failed      = '<img src="https://m365advisor.dev/img/test-result/pill-fail.png" height="25" alt="Failed"/>'
+        NotRun      = '<img src="https://m365advisor.dev/img/test-result/pill-notrun.png" height="25" alt="Not Run"/>'
+        Skipped     = '<img src="https://m365advisor.dev/img/test-result/pill-notrun.png" height="25" alt="Skipped"/>'
+        Investigate = '<img src="https://m365advisor.dev/img/test-result/pill-investigate.png" height="25" alt="Investigate"/>'
+        Error       = '<img src="https://m365advisor.dev/img/test-result/pill-fail.png" height="25" alt="Error"/>'
+    }
+
+    $StatusIconSm = @{
+        Passed      = '✅'
+        Failed      = '❌'
+        NotRun      = '❔'
+        Skipped     = '🚫'
+        Investigate = '🔍'
+        Error       = '⚠️'
+    }
+
+    $ResultDisplayName = @{
+        Passed      = 'Passed'
+        Failed      = 'Failed'
+        NotRun      = 'Not Run'
+        Skipped     = 'Skipped'
+        Investigate = 'Investigate'
+        Error       = 'Error'
+    }
+
+    $SeverityIcon = @{
+        Critical = '🔴 Critical'
+        High     = '🟠 High'
+        Medium   = '🟡 Medium'
+        Low      = '🟢 Low'
+        Info     = 'ℹ️ Info'
+    }
+
+    function GetSeverityText($severity) {
+        if ($severity -and $SeverityIcon.ContainsKey($severity)) { return $SeverityIcon[$severity] } else { return $severity }
+    }
+
+    function GetTestSummary() {
+        $summary = @'
+|Test|Severity|Status|
+|-|:-:|:-:|
+
+'@
+        foreach ($test in $M365AdvisorResults.Tests) {
+            $severityText = GetSeverityText $test.Severity
+            $summary += "| $($test.Name) | $severityText | $($StatusIcon[$test.Result]) |`n"
+        }
+        return $summary
+    }
+
+    function GetTestDetails() {
+
+        foreach ($test in $M365AdvisorResults.Tests) {
+
+            $details += "### $($StatusIconSm[$test.Result]) $($test.Name)`n`n"
+
+            $severityText = GetSeverityText $test.Severity
+            $resultName = if ($ResultDisplayName.ContainsKey($test.Result)) { $ResultDisplayName[$test.Result] } else { $test.Result }
+            $details += "**Severity:** $severityText &nbsp;&nbsp;&nbsp;&nbsp; **Status:** $($StatusIconSm[$test.Result]) $resultName`n`n"
+
+            if (![string]::IsNullOrEmpty($test.ResultDetail)) {
+                # Test author has provided details
+                $details += "#### Overview`n`n$($test.ResultDetail.TestDescription)`n`n"
+                $details += "#### Test Results`n`n$($test.ResultDetail.TestResult)`n`n"
+            } elseif (![string]::IsNullOrEmpty($test.ScriptBlock)) {
+                # Test author has not provided details, use default code in script
+                # make sure we do not execute the code in the script block!
+                $cleanedScriptBlock = $test.ScriptBlock.ToString() -replace '%\w+%', '' -replace '\$_', '€_' # or show me how I can make it not execute the $_ thing
+                $details += "#### Overview`n`n``````ps1`n$cleanedScriptBlock`n```````n`n"
+                if (![string]::IsNullOrEmpty($test.ErrorRecord)) {
+                    $details += "#### Reason for failure`n`n$($test.ErrorRecord)`n`n"
+                }
+            }
+
+            if (![string]::IsNullOrEmpty($test.HelpUrl)) { $details += "**Learn more**: [$($test.HelpUrl)]($($test.HelpUrl))`n`n" }
+            if (![string]::IsNullOrEmpty($test.Tag)) {
+                $tags = '`{0}`' -f ($test.Tag -join '` `')
+                $details += "**Tag**: $tags`n`n"
+            }
+
+            if (![string]::IsNullOrEmpty($test.Block)) {
+                $category = '`{0}`' -f ($test.Block -join '` `')
+                $details += "**Category**: $category`n`n"
+            }
+
+            if (![string]::IsNullOrEmpty($test.ScriptBlockFile)) { $details += "**Source**: ``$($test.ScriptBlockFile)```n`n" }
+
+            $details += "---`n`n"
+        }
+
+        return $details
+    }
+
+    $markdownFilePath = Join-Path -Path $PSScriptRoot -ChildPath '../assets/ReportTemplate.md'
+    $templateMarkdown = Get-Content -Path $markdownFilePath -Raw
+
+    # Execute functions first so they don't mess with the markdown template
+    $textSummary = GetTestSummary
+    $textDetails = GetTestDetails
+
+    $templateMarkdown = $templateMarkdown -replace '%TenandId%', $M365AdvisorResults.TenantId
+    $templateMarkdown = $templateMarkdown -replace '%TenantName%', $M365AdvisorResults.TenantName
+    $templateMarkdown = $templateMarkdown -replace '%TenantName%', $M365AdvisorResults.TenantVersion
+    $templateMarkdown = $templateMarkdown -replace '%ModuleVersion%', $M365AdvisorResults.CurrentVersion
+    $templateMarkdown = $templateMarkdown -replace '%TestDate%', $M365AdvisorResults.ExecutedAt
+    $templateMarkdown = $templateMarkdown -replace '%TotalCount%', $M365AdvisorResults.TotalCount
+    $templateMarkdown = $templateMarkdown -replace '%PassedCount%', $M365AdvisorResults.PassedCount
+    $templateMarkdown = $templateMarkdown -replace '%FailedCount%', $M365AdvisorResults.FailedCount
+    $templateMarkdown = $templateMarkdown -replace '%InvestigateCount%', $M365AdvisorResults.InvestigateCount
+    $templateMarkdown = $templateMarkdown -replace '%SkippedCount%', $M365AdvisorResults.SkippedCount
+    $templateMarkdown = $templateMarkdown -replace '%NotRunCount%', $M365AdvisorResults.NotRunCount
+
+    $templateMarkdown = $templateMarkdown -replace '%TestSummary%', $textSummary
+    $templateMarkdown = $templateMarkdown -replace '%TestDetails%', $textDetails
+
+    return $templateMarkdown
+}
+
