@@ -119,20 +119,20 @@
     $textSummary = GetTestSummary
     $textDetails = GetTestDetails
 
-    $templateMarkdown = $templateMarkdown -replace '%TenandId%', $M365AdvisorResults.TenantId
-    $templateMarkdown = $templateMarkdown -replace '%TenantName%', $M365AdvisorResults.TenantName
-    $templateMarkdown = $templateMarkdown -replace '%TenantName%', $M365AdvisorResults.TenantVersion
-    $templateMarkdown = $templateMarkdown -replace '%ModuleVersion%', $M365AdvisorResults.CurrentVersion
-    $templateMarkdown = $templateMarkdown -replace '%TestDate%', $M365AdvisorResults.ExecutedAt
-    $templateMarkdown = $templateMarkdown -replace '%TotalCount%', $M365AdvisorResults.TotalCount
-    $templateMarkdown = $templateMarkdown -replace '%PassedCount%', $M365AdvisorResults.PassedCount
-    $templateMarkdown = $templateMarkdown -replace '%FailedCount%', $M365AdvisorResults.FailedCount
-    $templateMarkdown = $templateMarkdown -replace '%InvestigateCount%', $M365AdvisorResults.InvestigateCount
-    $templateMarkdown = $templateMarkdown -replace '%SkippedCount%', $M365AdvisorResults.SkippedCount
-    $templateMarkdown = $templateMarkdown -replace '%NotRunCount%', $M365AdvisorResults.NotRunCount
+    $templateMarkdown = $templateMarkdown.Replace('%TenandId%', $M365AdvisorResults.TenantId)
+    $templateMarkdown = $templateMarkdown.Replace('%TenantName%', $M365AdvisorResults.TenantName)
+    $templateMarkdown = $templateMarkdown.Replace('%TenantName%', $M365AdvisorResults.TenantVersion)
+    $templateMarkdown = $templateMarkdown.Replace('%ModuleVersion%', $M365AdvisorResults.CurrentVersion)
+    $templateMarkdown = $templateMarkdown.Replace('%TestDate%', $M365AdvisorResults.ExecutedAt)
+    $templateMarkdown = $templateMarkdown.Replace('%TotalCount%', $M365AdvisorResults.TotalCount)
+    $templateMarkdown = $templateMarkdown.Replace('%PassedCount%', $M365AdvisorResults.PassedCount)
+    $templateMarkdown = $templateMarkdown.Replace('%FailedCount%', $M365AdvisorResults.FailedCount)
+    $templateMarkdown = $templateMarkdown.Replace('%InvestigateCount%', $M365AdvisorResults.InvestigateCount)
+    $templateMarkdown = $templateMarkdown.Replace('%SkippedCount%', $M365AdvisorResults.SkippedCount)
+    $templateMarkdown = $templateMarkdown.Replace('%NotRunCount%', $M365AdvisorResults.NotRunCount)
 
-    $templateMarkdown = $templateMarkdown -replace '%TestSummary%', $textSummary
-    $templateMarkdown = $templateMarkdown -replace '%TestDetails%', $textDetails
+    $templateMarkdown = $templateMarkdown.Replace('%TestSummary%', $textSummary)
+    $templateMarkdown = $templateMarkdown.Replace('%TestDetails%', $textDetails)
 
     return $templateMarkdown
 }

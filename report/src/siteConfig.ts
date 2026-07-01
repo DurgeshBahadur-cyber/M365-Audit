@@ -1,6 +1,6 @@
 export const siteConfig = {
-  name: "Maester",
-  url: "https://maester.dev",
+  name: "M365Advisor",
+  url: "https://m365advisor.dev",
   description: "Test results for your Microsoft 365 tenant",
   baseLinks: {
     home: "/",

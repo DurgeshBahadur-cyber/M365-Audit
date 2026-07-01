@@ -1,4 +1,4 @@
-﻿function Test-MtPrivPermanentDirectoryRole {
+function Test-MtPrivPermanentDirectoryRole {
     <#
     .Synopsis
     Checks if Permanent Assignments for Entra ID roles exists
@@ -41,7 +41,11 @@
       }
 
       if ($null -ne $FilteredAccessLevel) {
-        $EamClassification = Invoke-WebRequest -Uri 'https://raw.githubusercontent.com/Cloud-Architekt/AzurePrivilegedIAM/main/Classification/Classification_EntraIdDirectoryRoles.json' | ConvertFrom-Json -Depth 10
+        $convertParams = @{}
+        if ($PSVersionTable.PSVersion.Major -ge 6) {
+            $convertParams['Depth'] = 10
+        }
+        $EamClassification = Invoke-WebRequest -Uri 'https://raw.githubusercontent.com/Cloud-Architekt/AzurePrivilegedIAM/main/Classification/Classification_EntraIdDirectoryRoles.json' | ConvertFrom-Json @convertParams
         $FilteredClassification = ($EamClassification | Where-Object { $_.Classification.EAMTierLevelName -eq $FilteredAccessLevel }).RoleId
         $DirectAssignments = $DirectAssignments | Where-Object { $_.roleDefinitionId -in $FilteredClassification }
       }

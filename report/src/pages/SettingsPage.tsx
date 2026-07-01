@@ -112,23 +112,23 @@ export default function SettingsPage() {
         {/* About */}
         <section>
           <h2 className="mb-4 text-lg font-semibold text-gray-900">
-            About Maester
+            About M365Advisor
           </h2>
           <div className="rounded-md border border-gray-200 bg-white p-6">
             <p className="text-gray-600">
-              Maester is a PowerShell-based test automation framework for
+              M365Advisor is a PowerShell-based test automation framework for
               Microsoft 365 and Azure. It runs security configuration checks and
               generates detailed reports to help organizations maintain
               compliance and best practices.
             </p>
             <div className="mt-4">
               <a
-                href="https://maester.dev"
+                href="https://m365advisor.dev"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-orange-600 hover:text-orange-700"
               >
-                Learn more at maester.dev →
+                Learn more at m365advisor.dev →
               </a>
             </div>
           </div>

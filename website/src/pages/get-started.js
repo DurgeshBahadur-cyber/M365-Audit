@@ -15,7 +15,7 @@ const frameworks = [
     glow: "rgba(255, 122, 122, 0.15)",
     icon: "🔥",
     tag: "M365 Posture",
-    setupCmd: "Install-Module Pester -SkipPublisherCheck -Force -Scope CurrentUser\nInstall-Module M365Advisor -Scope CurrentUser\n\nmd m365advisor-tests\ncd m365advisor-tests\nInstall-M365AdvisorTests",
+    setupCmd: "Install-Module Pester -SkipPublisherCheck -Force -Scope CurrentUser\nInstall-Module M365Advisor -Scope CurrentUser\n\nmd M365Advisor-tests\ncd M365Advisor-tests\nInstall-M365AdvisorTests",
     connectCmd: "Connect-M365Advisor",
     runCmd: "Invoke-M365Advisor"
   },
@@ -28,9 +28,9 @@ const frameworks = [
     glow: "rgba(0, 242, 254, 0.15)",
     icon: "🛡️",
     tag: "Entra Security",
-    setupCmd: "Install-Module Pester -SkipPublisherCheck -Force -Scope CurrentUser\nInstall-Module M365Advisor -Scope CurrentUser\n\nmd m365advisor-tests\ncd m365advisor-tests\nInstall-M365AdvisorTests",
+    setupCmd: "Install-Module Pester -SkipPublisherCheck -Force -Scope CurrentUser\nInstall-Module M365Advisor -Scope CurrentUser\n\nmd M365Advisor-tests\ncd M365Advisor-tests\nInstall-M365AdvisorTests",
     connectCmd: "Connect-M365Advisor",
-    runCmd: "Invoke-M365Advisor -Tag \"EIDSCA\""
+    runCmd: "Invoke-M365Advisor"
   },
   {
     id: "cisa",
@@ -41,9 +41,9 @@ const frameworks = [
     glow: "rgba(192, 132, 252, 0.15)",
     icon: "🦅",
     tag: "CISA SCuBA",
-    setupCmd: "Install-Module Pester -SkipPublisherCheck -Force -Scope CurrentUser\nInstall-Module M365Advisor -Scope CurrentUser\n# Install optional modules required for CISA services\nInstall-Module Az.Accounts, ExchangeOnlineManagement, MicrosoftTeams, PnP.PowerShell -Scope CurrentUser\n\nmd m365advisor-tests\ncd m365advisor-tests\nInstall-M365AdvisorTests",
-    connectCmd: "Connect-M365Advisor -Service All",
-    runCmd: "Invoke-M365Advisor -Tag \"CISA\""
+    setupCmd: "Install-Module Pester -SkipPublisherCheck -Force -Scope CurrentUser\nInstall-Module M365Advisor -Scope CurrentUser\n\nmd M365Advisor-tests\ncd M365Advisor-tests\nInstall-M365AdvisorTests",
+    connectCmd: "Connect-M365Advisor",
+    runCmd: "Invoke-M365Advisor"
   },
   {
     id: "cis",
@@ -54,9 +54,9 @@ const frameworks = [
     glow: "rgba(251, 146, 60, 0.15)",
     icon: "🌀",
     tag: "CIS Benchmark",
-    setupCmd: "Install-Module Pester -SkipPublisherCheck -Force -Scope CurrentUser\nInstall-Module M365Advisor -Scope CurrentUser\n# Install optional modules required for CIS services\nInstall-Module Az.Accounts, ExchangeOnlineManagement, MicrosoftTeams, PnP.PowerShell -Scope CurrentUser\n\nmd m365advisor-tests\ncd m365advisor-tests\nInstall-M365AdvisorTests",
-    connectCmd: "Connect-M365Advisor -Service All",
-    runCmd: "Invoke-M365Advisor -Tag \"CIS\""
+    setupCmd: "Install-Module Pester -SkipPublisherCheck -Force -Scope CurrentUser\nInstall-Module M365Advisor -Scope CurrentUser\n\nmd M365Advisor-tests\ncd M365Advisor-tests\nInstall-M365AdvisorTests",
+    connectCmd: "Connect-M365Advisor",
+    runCmd: "Invoke-M365Advisor"
   },
   {
     id: "orca",
@@ -67,9 +67,9 @@ const frameworks = [
     glow: "rgba(45, 212, 191, 0.15)",
     icon: "🐋",
     tag: "ORCA Exchange",
-    setupCmd: "Install-Module Pester -SkipPublisherCheck -Force -Scope CurrentUser\nInstall-Module M365Advisor -Scope CurrentUser\n# Install Exchange Online management module\nInstall-Module ExchangeOnlineManagement -Scope CurrentUser\n\nmd m365advisor-tests\ncd m365advisor-tests\nInstall-M365AdvisorTests",
-    connectCmd: "Connect-M365Advisor -Service ExchangeOnline",
-    runCmd: "Invoke-M365Advisor -Tag \"ORCA\""
+    setupCmd: "Install-Module Pester -SkipPublisherCheck -Force -Scope CurrentUser\nInstall-Module M365Advisor -Scope CurrentUser\n\nmd M365Advisor-tests\ncd M365Advisor-tests\nInstall-M365AdvisorTests",
+    connectCmd: "Connect-M365Advisor",
+    runCmd: "Invoke-M365Advisor"
   }
 ];
 

@@ -1,4 +1,4 @@
-﻿---
+---
 title: Installation guide
 ---
 
@@ -8,8 +8,8 @@ title: Installation guide
 Install-Module Pester -SkipPublisherCheck -Force -Scope CurrentUser
 Install-Module M365Advisor -Scope CurrentUser
 
-md m365advisor-tests
-cd m365advisor-tests
+md M365Advisor-tests
+cd M365Advisor-tests
 Install-M365AdvisorTests
 ```
 

@@ -20,7 +20,7 @@ import {
 import { RiGithubFill } from "@remixicon/react"
 import { Link, useLocation } from "react-router-dom"
 import React, { useState, createContext, useContext, useRef, useEffect } from "react"
-import maesterLogo from "@/assets/maester.png"
+import m365advisorLogo from "@/assets/m365advisor.png"
 import { useTenant } from "@/context/TenantContext"
 import { scrollReportToTop } from "@/lib/reportLinks"
 
@@ -184,17 +184,17 @@ export function Sidebar() {
         isCollapsed ? "justify-center px-2" : "px-4"
       )}>
         <Link to="/" onClick={scrollReportToTop} aria-label="Home" className="flex items-center gap-3 overflow-hidden">
-          <span className="sr-only">Maester Logo (go home)</span>
+          <span className="sr-only">M365Advisor Logo (go home)</span>
           <img
-            src={maesterLogo}
-            alt="Maester"
+            src={m365advisorLogo}
+            alt="M365Advisor"
             width={32}
             height={32}
             className="h-8 w-8 shrink-0"
           />
           {!isCollapsed && (
             <div className="flex flex-col overflow-hidden">
-              <span className="text-sm font-semibold tracking-tight text-gray-900 dark:text-gray-100">Maester</span>
+              <span className="text-sm font-semibold tracking-tight text-gray-900 dark:text-gray-100">M365Advisor</span>
               <span className="truncate text-xs tracking-tight text-gray-500 dark:text-gray-400">
                 {displayTenantName}
               </span>
@@ -343,25 +343,25 @@ function SettingsMenu({ isCollapsed, tenantName, tenantId, pathname }: SettingsM
     {
       label: "Documentation",
       icon: BookOpen,
-      href: "https://maester.dev/docs/intro",
+      href: "https://m365advisor.dev/docs/intro",
       external: true,
     },
     {
       label: "GitHub",
       icon: RiGithubFill,
-      href: "https://github.com/maester365/maester",
+      href: "https://github.com/m365advisor365/m365advisor",
       external: true,
     },
     {
       label: "Issues",
       icon: CircleAlert,
-      href: "https://github.com/maester365/maester/issues",
+      href: "https://github.com/m365advisor365/m365advisor/issues",
       external: true,
     },
     {
       label: "Join Discord",
       icon: MessageCircle,
-      href: "https://discord.maester.dev/",
+      href: "https://discord.m365advisor.dev/",
       external: true,
     },
   ]

@@ -99,7 +99,7 @@ export default function ConfigPage() {
   const { isCollapsed } = useSidebar()
   const { selectedTenant: testResults, tenants } = useTenant()
   const isMultiTenant = tenants.length > 1
-  const originalConfig = testResults?.MaesterConfig
+  const originalConfig = testResults?.M365AdvisorConfig
 
   // State for edited emergency access accounts
   const [editedEmergencyAccounts, setEditedEmergencyAccounts] = useState<EmergencyAccessAccount[]>(
@@ -249,7 +249,7 @@ export default function ConfigPage() {
     const url = URL.createObjectURL(blob)
     const a = document.createElement("a")
     a.href = url
-    a.download = "maester-config.json"
+    a.download = "m365advisor-config.json"
     document.body.appendChild(a)
     a.click()
     document.body.removeChild(a)
@@ -279,10 +279,10 @@ export default function ConfigPage() {
       <div className="p-6">
         <div className="flex items-center gap-3 mb-6">
           <FileJson className="h-8 w-8 text-orange-500" />
-          <h1 className="text-2xl font-bold text-gray-900 dark:text-gray-100">Maester Configuration</h1>
+          <h1 className="text-2xl font-bold text-gray-900 dark:text-gray-100">M365Advisor Configuration</h1>
         </div>
         <Card className="p-6">
-          <p className="text-gray-500 dark:text-gray-400">No Maester configuration available. Make sure maester-config.json exists in your tests folder.</p>
+          <p className="text-gray-500 dark:text-gray-400">No M365Advisor configuration available. Make sure m365advisor-config.json exists in your tests folder.</p>
         </Card>
       </div>
     )
@@ -299,7 +299,7 @@ export default function ConfigPage() {
     <div className="p-6 pb-24">
       <div className="flex items-center gap-3 mb-6">
         <FileJson className="h-8 w-8 text-orange-500" />
-        <h1 className="text-2xl font-bold text-gray-900 dark:text-gray-100">Maester Configuration</h1>
+        <h1 className="text-2xl font-bold text-gray-900 dark:text-gray-100">M365Advisor Configuration</h1>
       </div>
       {showInfoBar && (
         <div className="mb-4 flex items-center gap-2 text-sm text-gray-500 dark:text-gray-400">

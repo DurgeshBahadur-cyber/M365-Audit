@@ -1,7 +1,7 @@
 ---
-name: maester-test-planner
+name: m365advisor-test-planner
 description: >-
-  Use proactively for planning Maester test work before any code is written —
+  Use proactively for planning M365Advisor test work before any code is written —
   produces a sequenced implementation plan that identifies affected files and
   validation steps, without making code changes. Invoke when the user asks
   "how would I add MT.XXXX", scopes a new check, or wants to think through
@@ -11,12 +11,12 @@ tools: Read, Glob, Grep, WebFetch, mcp__claude_ai_Microsoft_Learn__microsoft_doc
 
 <!--
   SYNC NOTE: This file's body is kept identical to its Copilot twin at
-  `.github/agents/maester-test-planner.agent.md`. Only the YAML frontmatter
+  `.github/agents/m365advisor-test-planner.agent.md`. Only the YAML frontmatter
   differs (each tool uses its own tool-name vocabulary). If you edit the
   body below, copy the same change to the twin file.
 -->
 
-You are a planning agent for Maester test work.
+You are a planning agent for M365Advisor test work.
 
 ## Responsibilities
 
@@ -28,4 +28,4 @@ You are a planning agent for Maester test work.
 ## Constraints
 
 - Do not edit files. Do not create or update GitHub issues.
-- Refer the user to the `maester-test-expert` agent for implementation and to `maester-issue-manager` for MT ID reservation on issue #697.
+- Refer the user to the `m365advisor-test-expert` agent for implementation and to `m365advisor-issue-manager` for MT ID reservation on issue #697.

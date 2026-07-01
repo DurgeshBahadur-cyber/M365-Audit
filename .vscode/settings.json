@@ -20,5 +20,5 @@
     "editor.defaultFormatter": "dbaeumer.vscode-eslint"
   },
   "eslint.format.enable": true,
-  "cSpell.words": ["Contoso", "Maester"]
+  "cSpell.words": ["Contoso", "M365Advisor"]
 }

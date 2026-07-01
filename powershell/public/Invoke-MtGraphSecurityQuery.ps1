@@ -1,4 +1,4 @@
-﻿function Invoke-MtGraphSecurityQuery {
+function Invoke-MtGraphSecurityQuery {
     <#
     .SYNOPSIS
     Execute KQL query in Microsoft 365 Defender Advanced Hunting by using Graph API Security endpoint to get results programmatically.
@@ -73,7 +73,11 @@
                 foreach ($prop in $propertiesToConvert) {
                     if (![string]::IsNullOrWhiteSpace($item.$prop)) {
                         try {
-                            $item.$prop = $item.$prop | ConvertFrom-Json -Depth 10
+                            $convertParams = @{}
+                            if ($PSVersionTable.PSVersion.Major -ge 6) {
+                                $convertParams['Depth'] = 10
+                            }
+                            $item.$prop = $item.$prop | ConvertFrom-Json @convertParams
                         }
                         catch {
                             Write-Verbose "Failed to convert property $($item.$prop) on $($prop) for item with ID '$($item.Id)': $_"

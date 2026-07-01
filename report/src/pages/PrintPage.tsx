@@ -5,7 +5,7 @@ import { RiPrinterLine } from "@remixicon/react"
 import StatusLabel from "@/components/StatusLabel"
 import SeverityBadge from "@/components/SeverityBadge"
 import ResultInfo from "@/components/ResultInfo"
-import maesterLogo from "@/assets/maester.png"
+import m365advisorLogo from "@/assets/m365advisor.png"
 
 export default function PrintPage() {
   const { selectedTenant: testResults } = useTenant()
@@ -77,12 +77,12 @@ export default function PrintPage() {
         <div className="mb-6">
           <div className="mb-4 flex items-center gap-3">
             <img
-              src={maesterLogo}
-              alt="Maester Logo"
+              src={m365advisorLogo}
+              alt="M365Advisor Logo"
               className="h-10 w-10"
             />
             <h1 className="text-2xl font-semibold tracking-tight text-gray-900 dark:text-gray-100">
-              Maester Test Results
+              M365Advisor Test Results
             </h1>
           </div>
           <p className="mt-1 text-sm text-gray-500 dark:text-gray-400">

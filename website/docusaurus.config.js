@@ -18,15 +18,15 @@ const config = {
   favicon: "img/favicon.ico",
 
   // Set the production url of your site here
-  url: "https://maester.dev",
+  url: "https://m365advisor.dev",
   // Set the /<baseUrl>/ pathname under which your site is served
   // For GitHub pages deployment, it is often '/<projectName>/'
   baseUrl: "/",
 
   // GitHub pages deployment config.
   // If you aren't using GitHub pages, you don't need these.
-  organizationName: "maester365", // Usually your GitHub org/user name.
-  projectName: "maester", // Usually your repo name.
+  organizationName: "m365advisor365", // Usually your GitHub org/user name.
+  projectName: "m365advisor", // Usually your repo name.
 
   onBrokenLinks: "throw",
   // onBrokenMarkdownLinks: "warn", // Deprecated and moved to markdown.hooks.onBrokenMarkdownLinks
@@ -99,7 +99,7 @@ const config = {
       ({
         docs: {
           sidebarPath: "./sidebars.js",
-          editUrl: "https://github.com/maester365/maester/tree/main/website",
+          editUrl: "https://github.com/m365advisor365/m365advisor/tree/main/website",
           lastVersion: hasCurrentVersion ? currentVersion : 'current',
           versions: {
             current: {
@@ -141,7 +141,7 @@ const config = {
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
       // Replace with your project's social card
-      image: "img/maester-social-card.jpg",
+      image: "img/m365advisor-social-card.jpg",
       navbar: {
         title: "M365 Advisor",
         logo: {
@@ -176,7 +176,7 @@ const config = {
           {
             "aria-label": "GitHub Repository",
             className: "navbar--github-link",
-            href: "https://github.com/maester365/maester",
+            href: "https://github.com/m365advisor365/m365advisor",
             position: "right",
           },
           {

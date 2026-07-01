@@ -16,7 +16,7 @@ function generateMarkdown(results: any) {
     ? `${results.TenantName} (${results.TenantId})`
     : `Tenant ID: ${results.TenantId}`
 
-  let md = `# Maester Test Results\n\n`
+  let md = `# M365Advisor Test Results\n\n`
   md += `**Tenant:** ${tenantName}  \n`
   md += `**Date:** ${testDateLocal}\n\n`
 

@@ -19,7 +19,7 @@
 
 /* For readability concerns, you should choose a lighter palette in dark mode. */
 [data-theme="dark"] {
-  /* Coral red — keeps the Maester ember-red feel while remaining legible on
+  /* Coral red — keeps the M365Advisor ember-red feel while remaining legible on
      dark backgrounds. Tuned for >= 5.5:1 contrast on Docusaurus dark canvas
      (#1b1b1d) and the homepage's #050608 surface. */
   --ifm-color-primary: #ff7a7a;

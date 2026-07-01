@@ -12,17 +12,17 @@ description: "Searchable M365 Advisor test documentation generated from Pester t
 
 # Tests Overview
 
-This section is generated from the Maester test source. Each page includes the test ID, severity, tags, PowerShell command, overview, remediation details, and related references when available.
+This section is generated from the M365Advisor test source. Each page includes the test ID, severity, tags, PowerShell command, overview, remediation details, and related references when available.
 
 ## Test Suites
 
 | Suite | Tests | Description |
 | --- | ---: | --- |
-| [M365 Advisor](./maester) | 149 | M365 Advisor security tests for Microsoft 365 and Microsoft Entra configurations. |
+| [M365 Advisor](./m365advisor) | 149 | M365 Advisor security tests for Microsoft 365 and Microsoft Entra configurations. |
 | [Entra ID SCA](./eidsca) | 44 | Entra ID Security Config Analyzer tests mapped to Microsoft Entra security configuration checks. |
 | [CISA](./cisa) | 73 | CISA SCuBA baseline tests for Microsoft 365 security configurations. |
-| [CIS](./cis) | 44 | CIS Microsoft 365 Foundations Benchmark controls implemented as Maester tests. |
-| [ORCA](./orca) | 67 | ORCA Exchange Online security configuration tests included in Maester. |
+| [CIS](./cis) | 44 | CIS Microsoft 365 Foundations Benchmark controls implemented as M365Advisor tests. |
+| [ORCA](./orca) | 67 | ORCA Exchange Online security configuration tests included in M365Advisor. |
 
 ## All Tests
 
