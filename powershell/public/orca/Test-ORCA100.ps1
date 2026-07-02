@@ -1,4 +1,4 @@
-﻿function Test-ORCA100{
+function Test-ORCA100{
     <#
     .SYNOPSIS
     Bulk Complaint Level threshold is between 4 and 6.
@@ -21,7 +21,7 @@
     Write-Verbose "Test-ORCA100"
     if(!(Test-MtConnection ExchangeOnline)){
         Add-MtTestResultDetail -SkippedBecause NotConnectedExchange
-        return = $null
+        return $null
     }
     if(Test-MtConnection SecurityCompliance){
         $SCC = $true
@@ -54,7 +54,7 @@
         return $null
     }elseif($obj.SCC -and -not $SCC) {
         Add-MtTestResultDetail -SkippedBecause NotConnectedSecurityCompliance
-        return = $null
+        return $null
     }
 
     $testResult = ($obj.ResultStandard -eq "Pass" -or $obj.ResultStandard -eq "Informational")

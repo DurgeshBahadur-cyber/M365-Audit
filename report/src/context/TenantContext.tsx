@@ -32,11 +32,78 @@ interface TenantProviderProps {
  */
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 function normalizeTenants(testResults: any): TenantResult[] {
+  let rawTenants: any[] = [];
   if (Array.isArray(testResults?.Tenants) && testResults.Tenants.length > 0) {
-    return testResults.Tenants
+    rawTenants = testResults.Tenants;
+  } else if (testResults) {
+    rawTenants = [testResults];
+  } else {
+    rawTenants = [];
   }
-  // Legacy single-tenant format — wrap in array
-  return [testResults]
+
+  // Filter each tenant to only include CIS rules/checks, and update counts/blocks
+  return rawTenants.map((tenant) => {
+    if (!tenant || !Array.isArray(tenant.Tests)) {
+      return tenant;
+    }
+
+    const cisTests = tenant.Tests.filter((test: any) => {
+      const hasCisBlock = test.Block && test.Block.toUpperCase() === 'CIS';
+      const hasCisTag = Array.isArray(test.Tag) && test.Tag.some((t: any) => typeof t === 'string' && t.toUpperCase().includes('CIS'));
+      return hasCisBlock || hasCisTag;
+    });
+
+    const passedCount = cisTests.filter((t: any) => t.Result === 'Passed').length;
+    const failedCount = cisTests.filter((t: any) => t.Result === 'Failed').length;
+    const errorCount = cisTests.filter((t: any) => t.Result === 'Error').length;
+    const investigateCount = cisTests.filter((t: any) => t.Result === 'Investigate').length;
+    const skippedCount = cisTests.filter((t: any) => t.Result === 'Skipped').length;
+    const notRunCount = cisTests.filter((t: any) => t.Result === 'NotRun').length;
+    const totalCount = cisTests.length;
+
+    const cisBlocks = Array.isArray(tenant.Blocks)
+      ? tenant.Blocks.filter((block: any) => block.Name && block.Name.toUpperCase() === 'CIS')
+      : [];
+
+    if (cisBlocks.length === 0 && cisTests.length > 0) {
+      cisBlocks.push({
+        Name: "CIS",
+        PassedCount: passedCount,
+        FailedCount: failedCount,
+        ErrorCount: errorCount,
+        InvestigateCount: investigateCount,
+        SkippedCount: skippedCount,
+        NotRunCount: notRunCount,
+        TotalCount: totalCount,
+      });
+    } else {
+      for (let i = 0; i < cisBlocks.length; i++) {
+        cisBlocks[i] = {
+          ...cisBlocks[i],
+          PassedCount: passedCount,
+          FailedCount: failedCount,
+          ErrorCount: errorCount,
+          InvestigateCount: investigateCount,
+          SkippedCount: skippedCount,
+          NotRunCount: notRunCount,
+          TotalCount: totalCount,
+        };
+      }
+    }
+
+    return {
+      ...tenant,
+      Tests: cisTests,
+      Blocks: cisBlocks,
+      PassedCount: passedCount,
+      FailedCount: failedCount,
+      ErrorCount: errorCount,
+      InvestigateCount: investigateCount,
+      SkippedCount: skippedCount,
+      NotRunCount: notRunCount,
+      TotalCount: totalCount,
+    };
+  });
 }
 
 export function TenantProvider({ testResults, children }: TenantProviderProps) {

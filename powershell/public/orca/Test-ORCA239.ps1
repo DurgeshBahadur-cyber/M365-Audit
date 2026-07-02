@@ -1,4 +1,4 @@
-﻿function Test-ORCA239{
+function Test-ORCA239{
     <#
     .SYNOPSIS
     No exclusions for the built-in protection policies.
@@ -21,7 +21,7 @@
     Write-Verbose "Test-ORCA239"
     if(!(Test-MtConnection ExchangeOnline)){
         Add-MtTestResultDetail -SkippedBecause NotConnectedExchange
-        return = $null
+        return $null
     }
     if(Test-MtConnection SecurityCompliance){
         $SCC = $true
@@ -54,7 +54,7 @@
         return $null
     }elseif($obj.SCC -and -not $SCC) {
         Add-MtTestResultDetail -SkippedBecause NotConnectedSecurityCompliance
-        return = $null
+        return $null
     }
 
     $testResult = ($obj.ResultStandard -eq "Pass" -or $obj.ResultStandard -eq "Informational")

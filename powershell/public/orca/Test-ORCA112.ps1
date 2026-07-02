@@ -1,4 +1,4 @@
-﻿function Test-ORCA112{
+function Test-ORCA112{
     <#
     .SYNOPSIS
     Anti-spoofing protection action is configured to Move message to the recipients' Junk Email folders in Anti-phishing policy.
@@ -21,7 +21,7 @@
     Write-Verbose "Test-ORCA112"
     if(!(Test-MtConnection ExchangeOnline)){
         Add-MtTestResultDetail -SkippedBecause NotConnectedExchange
-        return = $null
+        return $null
     }
     if(Test-MtConnection SecurityCompliance){
         $SCC = $true
@@ -54,7 +54,7 @@
         return $null
     }elseif($obj.SCC -and -not $SCC) {
         Add-MtTestResultDetail -SkippedBecause NotConnectedSecurityCompliance
-        return = $null
+        return $null
     }
 
     $testResult = ($obj.ResultStandard -eq "Pass" -or $obj.ResultStandard -eq "Informational")

@@ -238,7 +238,16 @@
                 $out.OutputFolderFileName = "TestResults-$timestamp"
             }
 
-            $out.OutputHtmlFile = Join-Path $out.OutputFolder "$($out.OutputFolderFileName).html"
+            if ([string]::IsNullOrEmpty($OutputHtmlFile)) {
+                $downloadsFolder = Join-Path $env:USERPROFILE 'Downloads'
+                if (-not (Test-Path $downloadsFolder) -and $env:HOME) {
+                    $downloadsFolder = Join-Path $env:HOME 'Downloads'
+                }
+                if (-not (Test-Path $downloadsFolder)) {
+                    $downloadsFolder = $out.OutputFolder
+                }
+                $out.OutputHtmlFile = Join-Path $downloadsFolder "$($out.OutputFolderFileName).html"
+            }
             $out.OutputMarkdownFile = Join-Path $out.OutputFolder "$($out.OutputFolderFileName).md"
             $out.OutputMarkdownSummaryFile = Join-Path $out.OutputFolder "$($out.OutputFolderFileName)-summary.md"
             $out.OutputJsonFile = Join-Path $out.OutputFolder "$($out.OutputFolderFileName).json"
@@ -492,11 +501,11 @@
             $m365advisorResults | ConvertTo-Json -Depth 5 -WarningAction SilentlyContinue | Out-File -FilePath $out.OutputJsonFile -Encoding UTF8
         }
 
-        if (![string]::IsNullOrEmpty($out.OutputMarkdownFile)) {
-            Write-MtProgress -Activity 'Creating markdown report'
-            $output = Get-MtMarkdownReport -M365AdvisorResults $m365advisorResults
-            $output | Out-File -FilePath $out.OutputMarkdownFile -Encoding UTF8
-        }
+        # if (![string]::IsNullOrEmpty($out.OutputMarkdownFile)) {
+        #     Write-MtProgress -Activity 'Creating markdown report'
+        #     $output = Get-MtMarkdownReport -M365AdvisorResults $m365advisorResults
+        #     $output | Out-File -FilePath $out.OutputMarkdownFile -Encoding UTF8
+        # }
 
         if (![string]::IsNullOrEmpty($out.OutputMarkdownSummaryFile)) {
             Write-MtProgress -Activity 'Creating markdown summary report'

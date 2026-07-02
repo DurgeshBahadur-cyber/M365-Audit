@@ -1,4 +1,4 @@
-﻿<#
+<#
 .SYNOPSIS
     Builds the M365Advisor PowerShell module into a consolidated, publishable artifact.
 
@@ -34,13 +34,13 @@
 [CmdletBinding()]
 param (
     [Parameter()]
-    [string] $SourceRoot = (Resolve-Path -LiteralPath "$PSScriptRoot/../powershell").Path,
+    [string] $SourceRoot,
 
     [Parameter()]
-    [string] $TestsRoot = (Resolve-Path -LiteralPath "$PSScriptRoot/../tests").Path,
+    [string] $TestsRoot,
 
     [Parameter()]
-    [string] $OutputRoot = "$PSScriptRoot/../module",
+    [string] $OutputRoot,
 
     [Parameter()]
     [switch] $Format,
@@ -51,6 +51,31 @@ param (
 
 Set-StrictMode -Version Latest
 $ErrorActionPreference = 'Stop'
+
+# Resolve paths inside script body where $PSScriptRoot is guaranteed to be available
+$RealSourceRoot = if ([string]::IsNullOrEmpty($SourceRoot)) {
+    (Resolve-Path -LiteralPath "$PSScriptRoot/../powershell").Path
+} else {
+    (Resolve-Path -LiteralPath $SourceRoot).Path
+}
+
+$RealTestsRoot = if ([string]::IsNullOrEmpty($TestsRoot)) {
+    (Resolve-Path -LiteralPath "$PSScriptRoot/../tests").Path
+} else {
+    (Resolve-Path -LiteralPath $TestsRoot).Path
+}
+
+$RealOutputRoot = if ([string]::IsNullOrEmpty($OutputRoot)) {
+    [System.IO.Path]::GetFullPath((Join-Path $PSScriptRoot "../module"))
+} else {
+    [System.IO.Path]::GetFullPath($OutputRoot)
+}
+
+# Update variables used by the rest of the script
+$SourceRoot = $RealSourceRoot
+$TestsRoot = $RealTestsRoot
+$OutputRoot = $RealOutputRoot
+
 
 function Format-ParseErrorSummary {
     param (
@@ -622,6 +647,24 @@ $AssetsOutput = Join-Path $OutputRoot 'assets'
 Copy-Item -Path $AssetsSource -Destination $AssetsOutput -Recurse -Force
 Write-Host '   Copied: assets/'
 
+# Copy markdown documentation/description files for tests
+$PublicSource = Join-Path $SourceRoot 'public'
+$PublicOutput = Join-Path $OutputRoot 'public'
+if (Test-Path $PublicSource) {
+    # Get all .md files under public/ and copy them preserving directory structure
+    Get-ChildItem -Path $PublicSource -Filter *.md -Recurse | ForEach-Object {
+        $relativeDir = Split-Path $_.FullName.Substring($PublicSource.Length)
+        # Trim leading slash if any
+        $relativeDir = $relativeDir.TrimStart('\').TrimStart('/')
+        $destDir = Join-Path $PublicOutput $relativeDir
+        if (-not (Test-Path $destDir)) {
+            $null = New-Item -ItemType Directory -Path $destDir -Force
+        }
+        Copy-Item -Path $_.FullName -Destination $destDir -Force
+    }
+    Write-Host '   Copied: public/ *.md files'
+}
+
 # Format file
 $FormatFile = Join-Path $SourceRoot 'M365Advisor.Format.ps1xml'
 if (Test-Path -LiteralPath $FormatFile) {
@@ -648,9 +691,31 @@ $OutputManifest = Join-Path $OutputRoot 'M365Advisor.psd1'
 Copy-Item -Path "$SourceRoot/M365Advisor.psd1" -Destination $OutputManifest -Force
 
 # Update FunctionsToExport and ScriptsToProcess in the output manifest.
-Update-ModuleManifest -Path $OutputManifest `
-    -FunctionsToExport $ExportFunctionList.ToArray() `
-    -ScriptsToProcess @('OrcaClasses.ps1')
+# Temporarily clear RequiredModules to bypass PowerShell manifest validation bugs during update.
+$manifestTemplate = Get-Content -Path "$SourceRoot/M365Advisor.psd1" -Raw
+$requiredModulesPattern = '(?s)RequiredModules\s*=\s*@\(\s*[^)]+?\s*\)'
+if ($manifestTemplate -match $requiredModulesPattern) {
+    $originalRequiredModules = $Matches[0]
+    $tempContent = $manifestTemplate -replace $requiredModulesPattern, 'RequiredModules = @()'
+    Set-Content -Path $OutputManifest -Value $tempContent -Encoding UTF8
+    
+    # Call Update-ModuleManifest on the temp manifest
+    Update-ModuleManifest -Path $OutputManifest `
+        -FunctionsToExport '*' `
+        -ScriptsToProcess @('OrcaClasses.ps1')
+    
+    # Restore the original RequiredModules block
+    $updatedContent = Get-Content -Path $OutputManifest -Raw
+    $updatedContentWithRequiredModules = $updatedContent -replace '(?m)^\s*#?\s*RequiredModules\s*=\s*@\(\)', $originalRequiredModules
+    
+    $utf8Bom = New-Object System.Text.UTF8Encoding $true
+    [System.IO.File]::WriteAllText($OutputManifest, $updatedContentWithRequiredModules, $utf8Bom)
+} else {
+    # Fallback to direct update if pattern doesn't match
+    Update-ModuleManifest -Path $OutputManifest `
+        -FunctionsToExport '*' `
+        -ScriptsToProcess @('OrcaClasses.ps1')
+}
 
 Write-Host "   FunctionsToExport: $($ExportFunctionList.Count) functions"
 Write-Host '   ScriptsToProcess:  OrcaClasses.ps1'

@@ -1,4 +1,4 @@
-﻿function Invoke-MtGraphRequest {
+function Invoke-MtGraphRequest {
     <#
     .SYNOPSIS
     Enhanced version of Invoke-MgGraphRequest that supports paging, batching and caching.
@@ -80,7 +80,12 @@
         if ([string]::IsNullOrEmpty($GraphBaseUri)) {
             if ([string]::IsNullOrEmpty($__MtSession.GraphBaseUri)) {
                 Write-Verbose -Message "Setting GraphBaseUri to default value from MgContext."
-                $__MtSession.GraphBaseUri = $((Get-MgEnvironment -Name (Get-MgContext).Environment).GraphEndpoint)
+                $mgContext = Get-MgContext
+                if ($mgContext -and $mgContext.Environment) {
+                    $__MtSession.GraphBaseUri = $((Get-MgEnvironment -Name $mgContext.Environment).GraphEndpoint)
+                } else {
+                    $__MtSession.GraphBaseUri = 'https://graph.microsoft.com'
+                }
             }
         }
         $GraphBaseUri = $__MtSession.GraphBaseUri

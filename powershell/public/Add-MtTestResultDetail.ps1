@@ -129,34 +129,62 @@
     if ([string]::IsNullOrEmpty($Description)) {
         # Check if a markdown file exists for the cmdlet and parse the content
         try {
-            $cmdletPath = $MyInvocation.PSCommandPath
-            $markdownPath = $cmdletPath -replace '.ps1', '.md'
-            if (Test-Path $markdownPath) {
-                # Read the content and split it into description and result with "<!--- Results --->" as the separator
-                $content = Get-Content $markdownPath -Raw -ErrorAction Stop
-                $splitContent = $content -split "<!--- Results --->"
-                $mdDescription = $splitContent[0]
-                $mdResult = $splitContent[1]
+            # Find the caller cmdlet name from the call stack
+            $callerName = $null
+            foreach ($frame in Get-PSCallStack) {
+                if ($frame.Command -like 'Test-*') {
+                    $callerName = $frame.Command
+                    break
+                }
+            }
 
-                if (![string]::IsNullOrEmpty($Result)) {
-                    # If a result was provided in the parameter insert it into the markdown content
-                    try {
-                        if ($mdResult -match "%TestResult%") {
-                            $mdResult = $mdResult -replace "%TestResult%", $Result
-                        } else {
-                            $mdResult = $Result
-                        }
-                    } catch {
-                        Write-Warning "Failed to process markdown result template: $($_.Exception.Message)"
-                        $mdResult = $Result
-                    } # End of try-catch for result replacement in the markdown template.
+            if ($callerName) {
+                # Find the module root directory (where M365Advisor.psd1 is located)
+                $moduleRoot = $PSScriptRoot
+                while ($moduleRoot -and -not (Test-Path (Join-Path $moduleRoot "M365Advisor.psd1"))) {
+                    $parent = Split-Path $moduleRoot -Parent
+                    if ($parent -eq $moduleRoot -or [string]::IsNullOrEmpty($parent)) {
+                        $moduleRoot = $PSScriptRoot
+                        break
+                    }
+                    $moduleRoot = $parent
                 }
 
-                $Description = $mdDescription
-                $Result = $mdResult
+                # Look for the markdown file corresponding to the caller cmdlet name under public/ folder
+                $searchPath = Join-Path $moduleRoot "public"
+                if (-not (Test-Path $searchPath)) {
+                    $searchPath = $moduleRoot
+                }
+
+                $markdownPath = Get-ChildItem -Path $searchPath -Filter "$callerName.md" -Recurse -ErrorAction SilentlyContinue | Select-Object -ExpandProperty FullName -First 1
+
+                if ($markdownPath -and (Test-Path $markdownPath)) {
+                    # Read the content and split it into description and result with "<!--- Results --->" as the separator
+                    $content = Get-Content $markdownPath -Raw -ErrorAction Stop
+                    $splitContent = $content -split "<!--- Results --->"
+                    $mdDescription = $splitContent[0]
+                    $mdResult = $splitContent[1]
+
+                    if (![string]::IsNullOrEmpty($Result)) {
+                        # If a result was provided in the parameter insert it into the markdown content
+                        try {
+                            if ($mdResult -match "%TestResult%") {
+                                $mdResult = $mdResult -replace "%TestResult%", $Result
+                            } else {
+                                $mdResult = $Result
+                            }
+                        } catch {
+                            Write-Warning "Failed to process markdown result template: $($_.Exception.Message)"
+                            $mdResult = $Result
+                        } # End of try-catch for result replacement in the markdown template.
+                    }
+
+                    $Description = $mdDescription
+                    $Result = $mdResult
+                }
             }
         } catch {
-            Write-Warning "Failed to read markdown file '$markdownPath': $($_.Exception.Message)"
+            Write-Warning "Failed to read markdown file: $($_.Exception.Message)"
             # Continue without markdown content
         } # End of try-catch for markdown file reading
     }
@@ -221,7 +249,7 @@
         }
     }
 
-    if ($SkippedBecause) {
+    if ($SkippedBecause -and $____Pester -and $____Pester.CurrentTest) {
         #This needs to be set at the end.
         Set-ItResult -Skipped -Because $SkippedReason
     }

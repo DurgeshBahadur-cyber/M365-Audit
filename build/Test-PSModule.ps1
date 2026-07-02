@@ -2,7 +2,7 @@ param
 (
     #
     [Parameter(Mandatory = $false)]
-    [string] $ModuleManifestPath = ".\powershell\*.psd1",
+    [string] $ModuleManifestPath = ".\module\*.psd1",
     #
     [Parameter(Mandatory = $false)]
     [string] $PSModuleCacheDirectory = ".\build\TestResults\PSModuleCache",
@@ -34,7 +34,7 @@ Import-Module "$PSScriptRoot\CommonFunctions.psm1" -Force -WarningAction Silentl
 &$PSScriptRoot\Restore-PSModuleDependencies.ps1 -ModuleManifestPath $ModuleManifestPath -PSModuleCacheDirectory $PSModuleCacheDirectoryInfo.FullName | Out-Null
 
 Import-Module Pester -MinimumVersion 5.0.0
-#$PSModule = Import-Module $ModulePath -PassThru -Force
+$PSModule = Import-Module $ModuleManifestFileInfo.FullName -PassThru -Force
 
 $PesterConfiguration = New-PesterConfiguration (Import-PowerShellDataFile $PesterConfigurationFileInfo.FullName)
 $PesterConfiguration.Run.Container = New-PesterContainer -Path $ModuleTestsDirectoryInfo.FullName -Data @{ ModulePath = $ModuleManifestFileInfo.FullName }

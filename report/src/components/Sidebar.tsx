@@ -5,21 +5,12 @@ import {
   FileText,
   Printer,
   Table,
-  Monitor,
-  CircleAlert,
-  Settings,
-  ArrowUpRight,
-  ChevronsUpDown,
   ChevronUp,
   ChevronDown,
-  FileJson,
-  BookOpen,
-  MessageCircle,
   Building2,
 } from "lucide-react"
-import { RiGithubFill } from "@remixicon/react"
 import { Link, useLocation } from "react-router-dom"
-import React, { useState, createContext, useContext, useRef, useEffect } from "react"
+import React, { useState, createContext, useContext } from "react"
 import m365advisorLogo from "@/assets/m365advisor.png"
 import { useTenant } from "@/context/TenantContext"
 import { scrollReportToTop } from "@/lib/reportLinks"
@@ -289,154 +280,6 @@ export function Sidebar() {
         </NavGroup>
       </nav>
 
-      {/* Settings / Tenant info at bottom */}
-      <div className="relative border-t border-gray-200 p-3 dark:border-gray-800">
-        <SettingsMenu
-          isCollapsed={isCollapsed}
-          tenantName={selectedTenant?.TenantName}
-          tenantId={selectedTenant?.TenantId}
-          pathname={pathname}
-        />
-      </div>
-    </div>
-  )
-}
-
-interface SettingsMenuProps {
-  isCollapsed: boolean
-  tenantName?: string
-  tenantId?: string
-  pathname: string
-}
-
-function SettingsMenu({ isCollapsed, tenantName, tenantId, pathname }: SettingsMenuProps) {
-  const [isOpen, setIsOpen] = useState(false)
-  const menuRef = useRef<HTMLDivElement>(null)
-
-  useEffect(() => {
-    function handleClickOutside(event: MouseEvent) {
-      if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
-        setIsOpen(false)
-      }
-    }
-
-    document.addEventListener("mousedown", handleClickOutside)
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside)
-    }
-  }, [])
-
-  const menuItems = [
-    {
-      label: "Config",
-      icon: FileJson,
-      href: "/config",
-      isActive: pathname === "/config",
-    },
-    {
-      label: "System info",
-      icon: Monitor,
-      href: "/system",
-      isActive: pathname === "/system",
-    },
-    { separator: true },
-    {
-      label: "Documentation",
-      icon: BookOpen,
-      href: "https://m365advisor.dev/docs/intro",
-      external: true,
-    },
-    {
-      label: "GitHub",
-      icon: RiGithubFill,
-      href: "https://github.com/m365advisor365/m365advisor",
-      external: true,
-    },
-    {
-      label: "Issues",
-      icon: CircleAlert,
-      href: "https://github.com/m365advisor365/m365advisor/issues",
-      external: true,
-    },
-    {
-      label: "Join Discord",
-      icon: MessageCircle,
-      href: "https://discord.m365advisor.dev/",
-      external: true,
-    },
-  ]
-
-  return (
-    <div ref={menuRef} className="relative">
-      <button
-        onClick={() => setIsOpen(!isOpen)}
-        className={cx(
-          "flex w-full items-center gap-3 rounded-md text-sm font-medium tracking-tight transition-all duration-100",
-          isCollapsed ? "justify-center px-0 py-2" : "px-3 py-2",
-          isOpen
-            ? "bg-orange-50 text-orange-600 dark:bg-orange-950 dark:text-orange-400"
-            : "text-gray-700 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-gray-800 dark:hover:text-gray-100"
-        )}
-      >
-        <div className="shrink-0">
-          <Settings className="h-5 w-5 text-gray-500 dark:text-gray-400" />
-        </div>
-        {!isCollapsed && (
-          <div className="flex flex-1 flex-col overflow-hidden text-left">
-            <span className="truncate font-medium tracking-tight">Settings</span>
-            <span className="truncate text-xs tracking-tight text-gray-500 dark:text-gray-400">
-              {tenantName || tenantId || "Tenant"}
-            </span>
-          </div>
-        )}
-        {!isCollapsed && (
-          <ChevronsUpDown className="h-4 w-4 text-gray-400 dark:text-gray-500" />
-        )}
-      </button>
-
-      {/* Popup Menu */}
-      {isOpen && (
-        <div
-          className={cx(
-            "absolute z-50 rounded-md border border-gray-200 bg-white py-1 shadow-lg dark:border-gray-700 dark:bg-gray-900",
-            isCollapsed ? "bottom-0 left-full ml-2 w-48" : "bottom-full left-0 mb-2 w-full"
-          )}
-        >
-          {menuItems.map((item, index) =>
-            item.separator ? (
-              <div key={`separator-${index}`} className="my-1 border-t border-gray-200 dark:border-gray-700" />
-            ) : item.external ? (
-              <a
-                key={item.label}
-                href={item.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                onClick={() => setIsOpen(false)}
-                className="flex items-center gap-3 px-3 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-800"
-              >
-                {item.icon && <item.icon className="h-4 w-4" />}
-                <span className="flex-1">{item.label}</span>
-                <ArrowUpRight className="h-3 w-3 text-gray-400 dark:text-gray-500" />
-              </a>
-            ) : (
-              <Link
-                key={item.label}
-                to={item.href!}
-                onClick={() => setIsOpen(false)}
-                className={cx(
-                  "flex items-center gap-3 px-3 py-2 text-sm",
-                  item.isActive
-                    ? "bg-orange-50 text-orange-600 dark:bg-orange-950 dark:text-orange-400"
-                    : "text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-800"
-                )}
-              >
-                {item.icon && <item.icon className="h-4 w-4" />}
-                <span>{item.label}</span>
-              </Link>
-            )
-          )}
-        </div>
-      )}
     </div>
   )
 }

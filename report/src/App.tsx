@@ -8,9 +8,6 @@ import { TenantProvider } from "@/context/TenantContext"
 
 // Import pages
 import HomePage from "@/pages/HomePage"
-import SettingsPage from "@/pages/SettingsPage"
-import SystemPage from "@/pages/SystemPage"
-import ConfigPage from "@/pages/ConfigPage"
 import ExcelPage from "@/pages/ExcelPage"
 import MarkdownPage from "@/pages/MarkdownPage"
 import PrintPage from "@/pages/PrintPage"
@@ -49,9 +46,6 @@ function App() {
                 <div className="p-6">
                   <Routes>
                     <Route path="/" element={<HomePage />} />
-                    <Route path="/settings" element={<SettingsPage />} />
-                    <Route path="/system" element={<SystemPage />} />
-                    <Route path="/config" element={<ConfigPage />} />
                     <Route path="/view/excel" element={<ExcelPage />} />
                     <Route path="/view/markdown" element={<MarkdownPage />} />
                     <Route path="/view/print" element={<PrintPage />} />

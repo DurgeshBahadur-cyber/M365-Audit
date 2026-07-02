@@ -1,4 +1,4 @@
-﻿function Test-ORCA116{
+function Test-ORCA116{
     <#
     .SYNOPSIS
     Mailbox intelligence based impersonation protection action set to move message to junk mail folder.
@@ -21,7 +21,7 @@
     Write-Verbose "Test-ORCA116"
     if(!(Test-MtConnection ExchangeOnline)){
         Add-MtTestResultDetail -SkippedBecause NotConnectedExchange
-        return = $null
+        return $null
     }
     if(Test-MtConnection SecurityCompliance){
         $SCC = $true
@@ -54,7 +54,7 @@
         return $null
     }elseif($obj.SCC -and -not $SCC) {
         Add-MtTestResultDetail -SkippedBecause NotConnectedSecurityCompliance
-        return = $null
+        return $null
     }
 
     $testResult = ($obj.ResultStandard -eq "Pass" -or $obj.ResultStandard -eq "Informational")

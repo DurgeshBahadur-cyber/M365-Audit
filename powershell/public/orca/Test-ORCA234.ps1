@@ -1,4 +1,4 @@
-﻿function Test-ORCA234{
+function Test-ORCA234{
     <#
     .SYNOPSIS
     Click through is disabled for Safe Documents.
@@ -21,7 +21,7 @@
     Write-Verbose "Test-ORCA234"
     if(!(Test-MtConnection ExchangeOnline)){
         Add-MtTestResultDetail -SkippedBecause NotConnectedExchange
-        return = $null
+        return $null
     }
     if(Test-MtConnection SecurityCompliance){
         $SCC = $true
@@ -54,7 +54,7 @@
         return $null
     }elseif($obj.SCC -and -not $SCC) {
         Add-MtTestResultDetail -SkippedBecause NotConnectedSecurityCompliance
-        return = $null
+        return $null
     }
 
     $testResult = ($obj.ResultStandard -eq "Pass" -or $obj.ResultStandard -eq "Informational")
