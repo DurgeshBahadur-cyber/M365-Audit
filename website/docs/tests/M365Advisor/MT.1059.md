@@ -1,4 +1,4 @@
-﻿---
+---
 title: "MT.1059 - Microsoft Defender for Identity health issues should be resolved"
 description: "Microsoft Defender for Identity health issues should be resolved"
 slug: /tests/MT.1059
@@ -6,11 +6,12 @@ className: generated-test-doc
 sidebar_class_name: hidden
 hide_table_of_contents: true
 keywords:
-  - "M365Advisor"
+  - "M365 Advisor"
   - "Microsoft 365 security"
   - "MT.1059"
   - "Medium"
   - "Defender"
+  - "M365Advisor"
   - "MDI"
   - "Severity:$($_.Group[0].severity)"
 ---
@@ -29,11 +30,10 @@ Microsoft Defender for Identity health issues should be resolved
 | --- | --- |
 | Test ID | MT.1059 |
 | Severity | Medium |
-| Suite | M365Advisor |
+| Suite | M365 Advisor |
 | Category | Defender |
 | Tags | Defender, M365Advisor, MDI, MT.1059, Severity:$($_.Group[0].severity) |
 
 ## Source
 
-- Pester test: `tests/M365Advisor/Defender/Test-MtMdiHealthIssues.Tests.ps1`
-
+- Pester test: `tests\M365Advisor\Defender\Test-MtMdiHealthIssues.Tests.ps1`

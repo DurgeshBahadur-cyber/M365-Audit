@@ -1,4 +1,4 @@
-﻿---
+---
 title: "MT.1064 - Management group creation should be limited to users with explicit write access"
 description: "By default, all Entra ID security principals can create new management groups. This introduces governance and security risks, as it allows any user to create a new management group and link subscriptions to it without oversight. To prevent this, Azure provides a setting that enforces write permissi…"
 slug: /tests/MT.1064
@@ -6,7 +6,7 @@ className: generated-test-doc
 sidebar_class_name: hidden
 hide_table_of_contents: true
 keywords:
-  - "M365Advisor"
+  - "M365 Advisor"
   - "Microsoft 365 security"
   - "MT.1064"
   - "High"
@@ -42,13 +42,21 @@ To enable the requirement for write permissions:
 | --- | --- |
 | Test ID | MT.1064 |
 | Severity | High |
-| Suite | M365Advisor |
+| Suite | M365 Advisor |
 | Category | Azure |
 | PowerShell test | [Test-MtManagementGroupWriteRequirement](/docs/commands/Test-MtManagementGroupWriteRequirement) |
 | Tags | Azure, MT.1064 |
 
+## Remediation
+
+To enable the requirement for write permissions:
+1. Navigate to the Microsoft Azure Portal: [https://portal.azure.com](https://portal.azure.com).
+2. In the search bar, type **Management groups** and open the blade.
+3. Select **Settings** in the left navigation menu.
+4. Under **Permissions for creating new management groups**, enable the switch:
+   **Require write permissions for creating new management groups**.
+
 ## Source
 
-- Pester test: `tests/M365Advisor/Azure/Test-MtManagementGroupWriteRequirement.Tests.ps1`
-- PowerShell source: `powershell/public/m365advisor/azure/Test-MtManagementGroupWriteRequirement.ps1`
-
+- Pester test: `tests\M365Advisor\Azure\Test-MtManagementGroupWriteRequirement.Tests.ps1`
+- PowerShell source: `powershell\public\M365Advisor\azure\Test-MtManagementGroupWriteRequirement.ps1`

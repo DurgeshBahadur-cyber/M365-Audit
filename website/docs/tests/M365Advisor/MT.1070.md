@@ -1,4 +1,4 @@
-﻿---
+---
 title: "MT.1070 - Restrict device join to selected users/groups or none."
 description: "Description Verifies that device join to Entra ID is restricted to selected users/groups or disabled entirely. Why This Matters Device join should be restricted because: - **Unauthorized Access**: Unrestricted device join allows any user to connect personal or unmanaged devices to corporate resourc…"
 slug: /tests/MT.1070
@@ -6,7 +6,7 @@ className: generated-test-doc
 sidebar_class_name: hidden
 hide_table_of_contents: true
 keywords:
-  - "M365Advisor"
+  - "M365 Advisor"
   - "Microsoft 365 security"
   - "MT.1070"
   - "Medium"
@@ -90,13 +90,60 @@ Update-MgPolicyDeviceRegistrationPolicy -BodyParameter $params
 | --- | --- |
 | Test ID | MT.1070 |
 | Severity | Medium |
-| Suite | M365Advisor |
+| Suite | M365 Advisor |
 | Category | Entra |
 | PowerShell test | [Test-MtEntraDeviceJoinRestricted](/docs/commands/Test-MtEntraDeviceJoinRestricted) |
 | Tags | Device, Entra, MT.1070 |
 
+## Remediation
+
+This setting can be changed via device settings in the Microsoft Entra or Azure portal or via Microsoft Graph API / Graph PowerShell Module.
+
+Admin Portal:
+
+1. Go to [Entra Admin Center](https://entra.microsoft.com)
+2. Navigate to Devices → [Device settings](https://entra.microsoft.com/#view/Microsoft_AAD_Devices/DevicesMenuBlade/~/DeviceSettings/menuId/Overview)
+3. Set **Users may join devices to Microsoft Entra** to **Selected** or **None**
+   - If **Selected**, configure the specific users/groups that can join devices
+   - If **None**, disable device join entirely
+4. Click **Save**
+
+Use the following PowerShell commands to restrict device join:
+
+```powershell
+# Connect to Microsoft Graph with appropriate permissions
+Connect-MgGraph -Scopes "Policy.ReadWrite.DeviceConfiguration"
+
+# Option 1: Disable device join completely
+$params = @{
+    azureADJoin = @{
+        allowedToJoin = @{
+            "@odata.type" = "#microsoft.graph.noDeviceRegistrationMembership"
+        }
+    }
+}
+
+# Option 2: Restrict to selected users/groups
+$params = @{
+    azureADJoin = @{
+        allowedToJoin = @{
+            "@odata.type" = "#microsoft.graph.enumeratedDeviceRegistrationMembership"
+            users = @("user1@domain.com", "user2@domain.com")
+            groups = @("group-id-1", "group-id-2")
+        }
+    }
+}
+
+# Apply the policy
+Update-MgPolicyDeviceRegistrationPolicy -BodyParameter $params
+```
+
+## Related Links
+
+- [Manage device identities in Entra ID](https://learn.microsoft.com/en-us/azure/active-directory/devices/overview)
+- [Device registration policy in Entra ID](https://learn.microsoft.com/en-us/graph/api/resources/deviceregistrationpolicy)
+
 ## Source
 
-- Pester test: `tests/M365Advisor/Entra/Test-MtEntraDeviceRegistrationPolicy.Tests.ps1`
-- PowerShell source: `powershell/public/m365advisor/entra/Test-MtEntraDeviceJoinRestricted.ps1`
-
+- Pester test: `tests\M365Advisor\Entra\Test-MtEntraDeviceRegistrationPolicy.Tests.ps1`
+- PowerShell source: `powershell\public\M365Advisor\entra\Test-MtEntraDeviceJoinRestricted.ps1`

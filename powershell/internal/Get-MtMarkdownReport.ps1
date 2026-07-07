@@ -1,4 +1,4 @@
-﻿function Get-MtMarkdownReport {
+function Get-MtMarkdownReport {
     <#
     .Synopsis
      Generates a markdown report using the M365Advisor test results format.
@@ -57,59 +57,61 @@
     }
 
     function GetTestSummary() {
-        $summary = @'
+        $sb = [System.Text.StringBuilder]::new()
+        [void]$sb.Append(@'
 |Test|Severity|Status|
 |-|:-:|:-:|
 
-'@
+'@)
         foreach ($test in $M365AdvisorResults.Tests) {
             $severityText = GetSeverityText $test.Severity
-            $summary += "| $($test.Name) | $severityText | $($StatusIcon[$test.Result]) |`n"
+            [void]$sb.Append("| $($test.Name) | $severityText | $($StatusIcon[$test.Result]) |`n")
         }
-        return $summary
+        return $sb.ToString()
     }
 
     function GetTestDetails() {
+        $sb = [System.Text.StringBuilder]::new()
 
         foreach ($test in $M365AdvisorResults.Tests) {
 
-            $details += "### $($StatusIconSm[$test.Result]) $($test.Name)`n`n"
+            [void]$sb.Append("### $($StatusIconSm[$test.Result]) $($test.Name)`n`n")
 
             $severityText = GetSeverityText $test.Severity
             $resultName = if ($ResultDisplayName.ContainsKey($test.Result)) { $ResultDisplayName[$test.Result] } else { $test.Result }
-            $details += "**Severity:** $severityText &nbsp;&nbsp;&nbsp;&nbsp; **Status:** $($StatusIconSm[$test.Result]) $resultName`n`n"
+            [void]$sb.Append("**Severity:** $severityText &nbsp;&nbsp;&nbsp;&nbsp; **Status:** $($StatusIconSm[$test.Result]) $resultName`n`n")
 
             if (![string]::IsNullOrEmpty($test.ResultDetail)) {
                 # Test author has provided details
-                $details += "#### Overview`n`n$($test.ResultDetail.TestDescription)`n`n"
-                $details += "#### Test Results`n`n$($test.ResultDetail.TestResult)`n`n"
+                [void]$sb.Append("#### Overview`n`n$($test.ResultDetail.TestDescription)`n`n")
+                [void]$sb.Append("#### Test Results`n`n$($test.ResultDetail.TestResult)`n`n")
             } elseif (![string]::IsNullOrEmpty($test.ScriptBlock)) {
                 # Test author has not provided details, use default code in script
                 # make sure we do not execute the code in the script block!
                 $cleanedScriptBlock = $test.ScriptBlock.ToString() -replace '%\w+%', '' -replace '\$_', '€_' # or show me how I can make it not execute the $_ thing
-                $details += "#### Overview`n`n``````ps1`n$cleanedScriptBlock`n```````n`n"
+                [void]$sb.Append("#### Overview`n`n``````ps1`n$cleanedScriptBlock`n```````n`n")
                 if (![string]::IsNullOrEmpty($test.ErrorRecord)) {
-                    $details += "#### Reason for failure`n`n$($test.ErrorRecord)`n`n"
+                    [void]$sb.Append("#### Reason for failure`n`n$($test.ErrorRecord)`n`n")
                 }
             }
 
-            if (![string]::IsNullOrEmpty($test.HelpUrl)) { $details += "**Learn more**: [$($test.HelpUrl)]($($test.HelpUrl))`n`n" }
+            if (![string]::IsNullOrEmpty($test.HelpUrl)) { [void]$sb.Append("**Learn more**: [$($test.HelpUrl)]($($test.HelpUrl))`n`n") }
             if (![string]::IsNullOrEmpty($test.Tag)) {
                 $tags = '`{0}`' -f ($test.Tag -join '` `')
-                $details += "**Tag**: $tags`n`n"
+                [void]$sb.Append("**Tag**: $tags`n`n")
             }
 
             if (![string]::IsNullOrEmpty($test.Block)) {
                 $category = '`{0}`' -f ($test.Block -join '` `')
-                $details += "**Category**: $category`n`n"
+                [void]$sb.Append("**Category**: $category`n`n")
             }
 
-            if (![string]::IsNullOrEmpty($test.ScriptBlockFile)) { $details += "**Source**: ``$($test.ScriptBlockFile)```n`n" }
+            if (![string]::IsNullOrEmpty($test.ScriptBlockFile)) { [void]$sb.Append("**Source**: ``$($test.ScriptBlockFile)```n`n") }
 
-            $details += "---`n`n"
+            [void]$sb.Append("---`n`n")
         }
 
-        return $details
+        return $sb.ToString()
     }
 
     $markdownFilePath = Join-Path -Path $PSScriptRoot -ChildPath '../assets/ReportTemplate.md'

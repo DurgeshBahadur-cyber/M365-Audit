@@ -1,4 +1,4 @@
-﻿---
+---
 title: "MT.1079 - Privileged API permissions on service principals should not remain unused"
 description: "Unused privileged permissions should not remain assigned to a service principal because they increase the attack surface and risk of unauthorized access. If these permissions are not required for the application's functionality, they can be exploited by attackers or misused, leading to potential pr…"
 slug: /tests/MT.1079
@@ -6,7 +6,7 @@ className: generated-test-doc
 sidebar_class_name: hidden
 hide_table_of_contents: true
 keywords:
-  - "M365Advisor"
+  - "M365 Advisor"
   - "Microsoft 365 security"
   - "MT.1079"
   - "Medium"
@@ -35,13 +35,12 @@ Review the findings in the [Applications inventory](https://learn.microsoft.com/
 | --- | --- |
 | Test ID | MT.1079 |
 | Severity | Medium |
-| Suite | M365Advisor |
+| Suite | M365 Advisor |
 | Category | Privileged |
 | PowerShell test | [Test-MtXspmAppRegWithPrivilegedUnusedPermissions](/docs/commands/Test-MtXspmAppRegWithPrivilegedUnusedPermissions) |
 | Tags | Entra, EntraOps, Graph, LongRunning, MT.1079, Privileged, XSPM |
 
 ## Source
 
-- Pester test: `tests/XSPM/Test-XspmPrivilegedIdentities.Tests.ps1`
-- PowerShell source: `powershell/public/xspm/Test-MtXspmAppRegWithPrivilegedUnusedPermissions.ps1`
-
+- Pester test: `tests\XSPM\Test-XspmPrivilegedIdentities.Tests.ps1`
+- PowerShell source: `powershell\public\xspm\Test-MtXspmAppRegWithPrivilegedUnusedPermissions.ps1`

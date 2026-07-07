@@ -1,4 +1,4 @@
-﻿---
+---
 title: "MT.1051 - Apps with high-risk permissions having an indirect path to Global Admin"
 description: "Ensure no Microsoft Entra ID applications or service principals have Graph permissions with a risk of having a direct or indirect path to a Global Admin or a full tenant takeover. The tested permissions are based on the research published at Microsoft Application permissions tiering by Emilien Socc…"
 slug: /tests/MT.1051
@@ -6,7 +6,7 @@ className: generated-test-doc
 sidebar_class_name: hidden
 hide_table_of_contents: true
 keywords:
-  - "M365Advisor"
+  - "M365 Advisor"
   - "Microsoft 365 security"
   - "MT.1051"
   - "High"
@@ -88,13 +88,30 @@ To check the applications permissions:
 | --- | --- |
 | Test ID | MT.1051 |
 | Severity | High |
-| Suite | M365Advisor |
+| Suite | M365 Advisor |
 | Category | App |
 | PowerShell test | [Test-MtHighRiskAppPermissions](/docs/commands/Test-MtHighRiskAppPermissions) |
 | Tags | App, Entra, Graph, LongRunning, MT.1051, Preview |
 
+## Remediation
+
+To check the applications permissions:
+1. Navigate to Microsoft Entra admin center [https://entra.microsoft.com/](https://entra.microsoft.com/).
+2. Click to expand **Applications** then select **App registrations**.
+3. Select **All applications**.
+4. Search for the application that you want to check and select the application.
+5. Select **API permissions**.
+6. Check the **Microsoft Graph** permissions.
+7. Verify that **only authorized users** have access to this application and its secrets.
+
+## Related Links
+
+* [Microsoft 365 Admin Center](https://admin.microsoft.com)
+* [Microsft Entra - App registrations](https://enappreg.cmd.ms/)
+* [Application permissions - Tier 0: Family of Global Admins](https://github.com/emiliensocchi/azure-tiering/tree/main/Microsoft%20Graph%20application%20permissions#tier-0)
+* [Microsoft Learn - Graph permissions](https://learn.microsoft.com/en-us/graph/permissions-reference)
+
 ## Source
 
-- Pester test: `tests/M365Advisor/Entra/Test-MtHighRiskAppPermissions.Tests.ps1`
-- PowerShell source: `powershell/public/m365advisor/entra/Test-MtHighRiskAppPermissions.ps1`
-
+- Pester test: `tests\M365Advisor\Entra\Test-MtHighRiskAppPermissions.Tests.ps1`
+- PowerShell source: `powershell\public\M365Advisor\entra\Test-MtHighRiskAppPermissions.ps1`

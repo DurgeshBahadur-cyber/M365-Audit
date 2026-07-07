@@ -1,4 +1,4 @@
-﻿function Invoke-M365Advisor {
+function Invoke-M365Advisor {
     <#
     .SYNOPSIS
     This is the main M365Advisor command that runs the tests and generates a report of the results.
@@ -303,6 +303,13 @@
 
         return $PesterConfiguration
     }
+
+    # Suppress script execution security prompts for Invoke-WebRequest and Invoke-RestMethod
+    if ($null -eq $global:PSDefaultParameterValues) {
+        $global:PSDefaultParameterValues = @{}
+    }
+    $global:PSDefaultParameterValues['Invoke-WebRequest:UseBasicParsing'] = $true
+    $global:PSDefaultParameterValues['Invoke-RestMethod:UseBasicParsing'] = $true
 
     $version = Get-MtModuleVersion
 

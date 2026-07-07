@@ -1,4 +1,4 @@
-﻿---
+---
 title: "MT.1087 - Devices should not be publicly exposed with remotely exploitable, highly likely to be exploited, high or critical severity CVE's."
 description: "The query behind this test searches for devices that comply with the following criteria: - Incoming connections from public IP addresses in last 7 days (internet exposed) - High or Critical severity CVE's - CVE's must have known exploits - CVE's are remotely exploitable over the network - No user i…"
 slug: /tests/MT.1087
@@ -6,7 +6,7 @@ className: generated-test-doc
 sidebar_class_name: hidden
 hide_table_of_contents: true
 keywords:
-  - "M365Advisor"
+  - "M365 Advisor"
   - "Microsoft 365 security"
   - "MT.1087"
   - "High"
@@ -43,13 +43,12 @@ Review the devices in the list and either patch the severities, or make sure to 
 | --- | --- |
 | Test ID | MT.1087 |
 | Severity | High |
-| Suite | M365Advisor |
+| Suite | M365 Advisor |
 | Category | XSPM |
 | PowerShell test | [Test-MtXspmPublicRemotelyExploitableHighExposureDevices](/docs/commands/Test-MtXspmPublicRemotelyExploitableHighExposureDevices) |
 | Tags | Device, LongRunning, MT.1087, XSPM |
 
 ## Source
 
-- Pester test: `tests/XSPM/Test-XspmDevices.Tests.ps1`
-- PowerShell source: `powershell/public/xspm/Test-MtXspmPublicRemotelyExploitableHighExposureDevices.ps1`
-
+- Pester test: `tests\XSPM\Test-XspmDevices.Tests.ps1`
+- PowerShell source: `powershell\public\xspm\Test-MtXspmPublicRemotelyExploitableHighExposureDevices.ps1`

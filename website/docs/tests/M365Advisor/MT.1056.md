@@ -1,4 +1,4 @@
-﻿---
+---
 title: "MT.1056 - Ensure that no person has permanent access to all Azure subscriptions at the root scope"
 description: "Ensure that no person has permanent access to Azure Subscriptions. User Access Administrator is a role that allows an Administrator to perform everything on an Azure Subscription. Global Administrators can gain this permission on the Root Scope in Entra ID, in the properties of the Entra ID tenant.…"
 slug: /tests/MT.1056
@@ -6,7 +6,7 @@ className: generated-test-doc
 sidebar_class_name: hidden
 hide_table_of_contents: true
 keywords:
-  - "M365Advisor"
+  - "M365 Advisor"
   - "Microsoft 365 security"
   - "MT.1056"
   - "High"
@@ -52,13 +52,28 @@ az role assignment delete --role "User Access Administrator" --assignee adminnam
 | --- | --- |
 | Test ID | MT.1056 |
 | Severity | High |
-| Suite | M365Advisor |
+| Suite | M365 Advisor |
 | Category | Privileged |
 | PowerShell test | [Test-MtUserAccessAdmin](/docs/commands/Test-MtUserAccessAdmin) |
 | Tags | Azure, MT.1056, Privileged |
 
+## Remediation
+
+To remove all Admins with Root Scope permissions, as a Global Admin:
+1. Navigate to Microsoft Azure Portal [https://portal.azure.com](https://portal.azure.com).
+2. Search for **Microsoft Entra ID** and select **Microsoft Entra ID**.
+3. Expand the **Manage** menu and select **Properties**.
+3. On the **Properties** page, go to the **Access management for Azure resources** section.
+4. In the information bar, click **Manage elevated access users**.
+5. Select all User Access Administrators and click **Remove**.
+6. Also check other role assignments, as they need to be removed to pass the tests.
+
+To remove the admins through CLI:
+```powershell
+az role assignment delete --role "User Access Administrator" --assignee adminname@yourdomain.com --scope "/"
+```
+
 ## Source
 
-- Pester test: `tests/M365Advisor/Azure/UserAccessAdmin.Tests.ps1`
-- PowerShell source: `powershell/public/m365advisor/azure/Test-MtUserAccessAdmin.ps1`
-
+- Pester test: `tests\M365Advisor\Azure\UserAccessAdmin.Tests.ps1`
+- PowerShell source: `powershell\public\M365Advisor\azure\Test-MtUserAccessAdmin.ps1`

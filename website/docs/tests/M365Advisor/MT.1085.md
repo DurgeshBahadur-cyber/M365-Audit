@@ -1,4 +1,4 @@
-﻿---
+---
 title: "MT.1085 - Pending approvals for Critical Asset Management should not be present"
 description: "Microsoft provides an approval step for assets that do not meet the automatic classification threshold. Assets with a lower classification confidence score must be approved by a security administrator. Stale pending approvals can lead to limited visibility in Microsoft Defender XDR and potential se…"
 slug: /tests/MT.1085
@@ -6,7 +6,7 @@ className: generated-test-doc
 sidebar_class_name: hidden
 hide_table_of_contents: true
 keywords:
-  - "M365Advisor"
+  - "M365 Advisor"
   - "Microsoft 365 security"
   - "MT.1085"
   - "Medium"
@@ -37,13 +37,12 @@ More details are available in the Microsoft Learn article: "[Add assets to prede
 | --- | --- |
 | Test ID | MT.1085 |
 | Severity | Medium |
-| Suite | M365Advisor |
+| Suite | M365 Advisor |
 | Category | Entra |
 | PowerShell test | [Test-MtXspmPendingApprovalCriticalAssetManagement](/docs/commands/Test-MtXspmPendingApprovalCriticalAssetManagement) |
 | Tags | Entra, Graph, MT.1085, XSPM |
 
 ## Source
 
-- Pester test: `tests/XSPM/Test-XspmCriticalAssetManagement.Tests.ps1`
-- PowerShell source: `powershell/public/xspm/Test-MtXspmPendingApprovalCriticalAssetManagement.ps1`
-
+- Pester test: `tests\XSPM\Test-XspmCriticalAssetManagement.Tests.ps1`
+- PowerShell source: `powershell\public\xspm\Test-MtXspmPendingApprovalCriticalAssetManagement.ps1`

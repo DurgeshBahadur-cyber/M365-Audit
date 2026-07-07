@@ -1,4 +1,4 @@
-﻿<#
+<#
 .DISCLAIMER
 	THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY OF
 	ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO
@@ -28,6 +28,13 @@ $__MtSession = @{
 	SpoCache               = @{}                 # Cache for SharePoint Online tenant settings retrieved via PnP
 }
 New-Variable -Name __MtSession -Value $__MtSession -Scope Script -Force
+
+# Suppress script execution security prompts for Invoke-WebRequest and Invoke-RestMethod
+if ($null -eq $global:PSDefaultParameterValues) {
+	$global:PSDefaultParameterValues = @{}
+}
+$global:PSDefaultParameterValues['Invoke-WebRequest:UseBasicParsing'] = $true
+$global:PSDefaultParameterValues['Invoke-RestMethod:UseBasicParsing'] = $true
 
 # Import private and public scripts and expose the public ones
 $privateScripts = @(Get-ChildItem -Path "$PSScriptRoot\internal" -Recurse -Filter "*.ps1" -ErrorAction SilentlyContinue)

@@ -1,4 +1,4 @@
-﻿---
+---
 title: "MT.1078 - App registrations with highly privileged directory roles should not have owners"
 description: "Owners with lower privilege than the application should be removed from ownership. Microsoft also mentions this risk of elevation of privilege over what the owner has access to as a user. Those delegations can be identified by the `Tier breach` flag in the test results. But even owners with the sam…"
 slug: /tests/MT.1078
@@ -6,7 +6,7 @@ className: generated-test-doc
 sidebar_class_name: hidden
 hide_table_of_contents: true
 keywords:
-  - "M365Advisor"
+  - "M365 Advisor"
   - "Microsoft 365 security"
   - "MT.1078"
   - "Medium"
@@ -41,13 +41,12 @@ Remove ownership and replace it (if necessary) by using [object-level role assig
 | --- | --- |
 | Test ID | MT.1078 |
 | Severity | Medium |
-| Suite | M365Advisor |
+| Suite | M365 Advisor |
 | Category | Privileged |
 | PowerShell test | [Test-MtXspmAppRegWithPrivilegedRolesAndOwners](/docs/commands/Test-MtXspmAppRegWithPrivilegedRolesAndOwners) |
 | Tags | Entra, EntraOps, Graph, LongRunning, MT.1078, Privileged, XSPM |
 
 ## Source
 
-- Pester test: `tests/XSPM/Test-XspmPrivilegedIdentities.Tests.ps1`
-- PowerShell source: `powershell/public/xspm/Test-MtXspmAppRegWithPrivilegedRolesAndOwners.ps1`
-
+- Pester test: `tests\XSPM\Test-XspmPrivilegedIdentities.Tests.ps1`
+- PowerShell source: `powershell\public\xspm\Test-MtXspmAppRegWithPrivilegedRolesAndOwners.ps1`

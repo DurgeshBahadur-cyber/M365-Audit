@@ -70,8 +70,9 @@ const config = {
                   var link = e.target.closest('a');
                   if (link) {
                     var href = link.getAttribute('href');
-                    if (href && !href.startsWith('#') && href !== '/' && href !== '#') {
-                      var allowedPaths = ['/get-started'];
+                    var isDownload = link.hasAttribute('download');
+                    if (href && !href.startsWith('#') && href !== '/' && href !== '#' && !isDownload) {
+                      var allowedPaths = ['/get-started', '/download'];
                       var isAllowed = allowedPaths.some(function(path) {
                         return href.startsWith(path);
                       });

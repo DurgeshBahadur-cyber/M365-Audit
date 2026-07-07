@@ -45,7 +45,7 @@ function Test-MtPrivPermanentDirectoryRole {
         if ($PSVersionTable.PSVersion.Major -ge 6) {
             $convertParams['Depth'] = 10
         }
-        $EamClassification = Invoke-WebRequest -Uri 'https://raw.githubusercontent.com/Cloud-Architekt/AzurePrivilegedIAM/main/Classification/Classification_EntraIdDirectoryRoles.json' | ConvertFrom-Json @convertParams
+        $EamClassification = Invoke-WebRequest -UseBasicParsing -Uri 'https://raw.githubusercontent.com/Cloud-Architekt/AzurePrivilegedIAM/main/Classification/Classification_EntraIdDirectoryRoles.json' | ConvertFrom-Json @convertParams
         $FilteredClassification = ($EamClassification | Where-Object { $_.Classification.EAMTierLevelName -eq $FilteredAccessLevel }).RoleId
         $DirectAssignments = $DirectAssignments | Where-Object { $_.roleDefinitionId -in $FilteredClassification }
       }

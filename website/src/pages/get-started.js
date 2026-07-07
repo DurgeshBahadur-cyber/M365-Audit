@@ -104,8 +104,31 @@ function CopyButton({ text }) {
 export default function GetStarted() {
   const [selectedId, setSelectedId] = useState("m365"); // default select first
   const [step, setStep] = useState(1); // 1 = select, 2 = commands
+  const [showManual, setShowManual] = useState(false);
 
   const selectedFramework = frameworks.find(f => f.id === selectedId);
+  const baseUrl = useBaseUrl('/');
+
+  const handleDownloadCmd = (fw) => {
+    if (!fw) return;
+
+    const cleanBaseUrl = baseUrl.endsWith('/') ? baseUrl : `${baseUrl}/`;
+    const downloadUrl = `${cleanBaseUrl}download/run-m365advisor-${fw.id}.cmd`;
+
+    const link = document.createElement('a');
+    link.href = downloadUrl;
+    link.download = `run-m365advisor-${fw.id}.cmd`;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
+  const handleContinue = () => {
+    setStep(2);
+    setTimeout(() => {
+      handleDownloadCmd(selectedFramework);
+    }, 300);
+  };
 
   return (
     <Layout
@@ -171,7 +194,7 @@ export default function GetStarted() {
                 <button
                   className={styles.btnPrimary}
                   disabled={!selectedId}
-                  onClick={() => setStep(2)}
+                  onClick={handleContinue}
                   type="button"
                 >
                   Continue to Commands →
@@ -194,79 +217,136 @@ export default function GetStarted() {
                   <span>Targeting: <span className={styles.selectedText}>{selectedFramework.title}</span></span>
                 </div>
 
-                {/* Step 2.1: Install */}
-                <div className={styles.commandStep}>
-                  <div className={styles.commandStepHeader}>
-                    <div className={styles.commandStepTitle}>
-                      <span className={styles.commandStepNum}>1</span>
-                      Install PowerShell Module
+                {/* Automated Launcher Card */}
+                <div className={styles.launcherCard} style={{
+                  '--card-accent': selectedFramework.accent,
+                  '--card-glow': selectedFramework.glow
+                }}>
+                  <div className={styles.launcherHeader}>
+                    <div className={styles.launcherIconWrapper}>
+                      <div className={styles.launcherIconPulse} />
+                      <span className={styles.launcherIcon}>🚀</span>
                     </div>
-                    <CopyButton text={selectedFramework.setupCmd} />
+                    <div className={styles.launcherTitleSection}>
+                      <h3 className={styles.launcherCardTitle}>One-Click Automated Assessment</h3>
+                      <p className={styles.launcherCardStatus}>📥 Launcher script generated & downloaded!</p>
+                    </div>
                   </div>
-                  <p className={styles.commandStepDesc}>
-                    Run this command in administrative PowerShell to install the M365Advisor module, Pester utility, and default tests directory.
+                  
+                  <p className={styles.launcherCardDesc}>
+                    A customized Windows runner script (<strong>run-m365advisor-{selectedFramework.id}.cmd</strong>) has been generated and downloaded to your computer.
+                    Opening it will automatically launch PowerShell, install dependencies, establish connection, and execute the audit.
                   </p>
-                  <div className={styles.terminalWrapper}>
-                    <div className={styles.terminalHeader}>
-                      <div className={styles.terminalDots}>
-                        <div className={styles.terminalDot} />
-                        <div className={styles.terminalDot} />
-                        <div className={styles.terminalDot} />
-                      </div>
-                      <div className={styles.terminalTitle}>PowerShell</div>
-                    </div>
-                    <pre className={styles.terminalBody}>{selectedFramework.setupCmd}</pre>
+
+                  <div className={styles.launcherActions}>
+                    <button
+                      className={styles.btnLaunch}
+                      onClick={() => handleDownloadCmd(selectedFramework)}
+                      type="button"
+                    >
+                      📥 Download Launcher Again
+                    </button>
+                  </div>
+
+                  <div className={styles.launcherGuide}>
+                    <h4 className={styles.guideTitle}>How to run:</h4>
+                    <ol className={styles.guideList}>
+                      <li>Open your <strong>Downloads</strong> folder (or browser downloads list).</li>
+                      <li>Double-click the downloaded <code>run-m365advisor-{selectedFramework.id}.cmd</code> file.</li>
+                      <li>PowerShell will open and configure automatically. Sign in when prompted!</li>
+                    </ol>
                   </div>
                 </div>
 
-                {/* Step 2.2: Connect */}
-                <div className={styles.commandStep}>
-                  <div className={styles.commandStepHeader}>
-                    <div className={styles.commandStepTitle}>
-                      <span className={styles.commandStepNum}>2</span>
-                      Establish M365 Connection
-                    </div>
-                    <CopyButton text={selectedFramework.connectCmd} />
-                  </div>
-                  <p className={styles.commandStepDesc}>
-                    Authenticate to your Microsoft 365 tenant. A web login window will prompt you to approve access to Microsoft Graph API.
-                  </p>
-                  <div className={styles.terminalWrapper}>
-                    <div className={styles.terminalHeader}>
-                      <div className={styles.terminalDots}>
-                        <div className={styles.terminalDot} />
-                        <div className={styles.terminalDot} />
-                        <div className={styles.terminalDot} />
-                      </div>
-                      <div className={styles.terminalTitle}>PowerShell</div>
-                    </div>
-                    <pre className={styles.terminalBody}>{selectedFramework.connectCmd}</pre>
-                  </div>
-                </div>
+                {/* Collapsible Manual Setup */}
+                <div className={styles.manualAccordion}>
+                  <button
+                    className={clsx(styles.manualAccordionHeader, showManual && styles.manualAccordionHeaderOpen)}
+                    onClick={() => setShowManual(!showManual)}
+                    type="button"
+                  >
+                    <span>{showManual ? '▼' : '▶'}</span>
+                    <span>Alternative: Manual Execution (Copy & Paste)</span>
+                  </button>
 
-                {/* Step 2.3: Run */}
-                <div className={styles.commandStep}>
-                  <div className={styles.commandStepHeader}>
-                    <div className={styles.commandStepTitle}>
-                      <span className={styles.commandStepNum}>3</span>
-                      Run Framework Assessment
-                    </div>
-                    <CopyButton text={selectedFramework.runCmd} />
-                  </div>
-                  <p className={styles.commandStepDesc}>
-                    Initiate the automated compliance check. When complete, test results are automatically rendered as an HTML dashboard under your local output folder.
-                  </p>
-                  <div className={styles.terminalWrapper}>
-                    <div className={styles.terminalHeader}>
-                      <div className={styles.terminalDots}>
-                        <div className={styles.terminalDot} />
-                        <div className={styles.terminalDot} />
-                        <div className={styles.terminalDot} />
+                  {showManual && (
+                    <div className={styles.manualAccordionBody}>
+                      {/* Step 2.1: Install */}
+                      <div className={styles.commandStep}>
+                        <div className={styles.commandStepHeader}>
+                          <div className={styles.commandStepTitle}>
+                            <span className={styles.commandStepNum}>1</span>
+                            Install PowerShell Module
+                          </div>
+                          <CopyButton text={selectedFramework.setupCmd} />
+                        </div>
+                        <p className={styles.commandStepDesc}>
+                          Run this command in administrative PowerShell to install the M365Advisor module, Pester utility, and default tests directory.
+                        </p>
+                        <div className={styles.terminalWrapper}>
+                          <div className={styles.terminalHeader}>
+                            <div className={styles.terminalDots}>
+                              <div className={styles.terminalDot} />
+                              <div className={styles.terminalDot} />
+                              <div className={styles.terminalDot} />
+                            </div>
+                            <div className={styles.terminalTitle}>PowerShell</div>
+                          </div>
+                          <pre className={styles.terminalBody}>{selectedFramework.setupCmd}</pre>
+                        </div>
                       </div>
-                      <div className={styles.terminalTitle}>PowerShell</div>
+
+                      {/* Step 2.2: Connect */}
+                      <div className={styles.commandStep}>
+                        <div className={styles.commandStepHeader}>
+                          <div className={styles.commandStepTitle}>
+                            <span className={styles.commandStepNum}>2</span>
+                            Establish M365 Connection
+                          </div>
+                          <CopyButton text={selectedFramework.connectCmd} />
+                        </div>
+                        <p className={styles.commandStepDesc}>
+                          Authenticate to your Microsoft 365 tenant. A web login window will prompt you to approve access to Microsoft Graph API.
+                        </p>
+                        <div className={styles.terminalWrapper}>
+                          <div className={styles.terminalHeader}>
+                            <div className={styles.terminalDots}>
+                              <div className={styles.terminalDot} />
+                              <div className={styles.terminalDot} />
+                              <div className={styles.terminalDot} />
+                            </div>
+                            <div className={styles.terminalTitle}>PowerShell</div>
+                          </div>
+                          <pre className={styles.terminalBody}>{selectedFramework.connectCmd}</pre>
+                        </div>
+                      </div>
+
+                      {/* Step 2.3: Run */}
+                      <div className={styles.commandStep}>
+                        <div className={styles.commandStepHeader}>
+                          <div className={styles.commandStepTitle}>
+                            <span className={styles.commandStepNum}>3</span>
+                            Run Framework Assessment
+                          </div>
+                          <CopyButton text={selectedFramework.runCmd} />
+                        </div>
+                        <p className={styles.commandStepDesc}>
+                          Initiate the automated compliance check. When complete, test results are automatically rendered as an HTML dashboard under your local output folder.
+                        </p>
+                        <div className={styles.terminalWrapper}>
+                          <div className={styles.terminalHeader}>
+                            <div className={styles.terminalDots}>
+                              <div className={styles.terminalDot} />
+                              <div className={styles.terminalDot} />
+                              <div className={styles.terminalDot} />
+                            </div>
+                            <div className={styles.terminalTitle}>PowerShell</div>
+                          </div>
+                          <pre className={styles.terminalBody}>{selectedFramework.runCmd}</pre>
+                        </div>
+                      </div>
                     </div>
-                    <pre className={styles.terminalBody}>{selectedFramework.runCmd}</pre>
-                  </div>
+                  )}
                 </div>
 
               </div>

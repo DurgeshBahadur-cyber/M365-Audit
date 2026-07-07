@@ -1,4 +1,4 @@
-﻿---
+---
 title: "MT.1080 - Credentials, tokens, or cookies from highly privileged users should not be exposed on vulnerable endpoints"
 description: "Exfiltration of authentication artifacts on vulnerable device poses a significant security risk. Attackers who gain access to these credentials (e.g., by infostealer) can impersonate privileged users, bypass Conditional Access, and access sensitive the assigned sensitive roles. Protecting endpoints…"
 slug: /tests/MT.1080
@@ -6,7 +6,7 @@ className: generated-test-doc
 sidebar_class_name: hidden
 hide_table_of_contents: true
 keywords:
-  - "M365Advisor"
+  - "M365 Advisor"
   - "Microsoft 365 security"
   - "MT.1080"
   - "Medium"
@@ -35,13 +35,12 @@ Review the details of risk and exposure score on the related [device page from t
 | --- | --- |
 | Test ID | MT.1080 |
 | Severity | Medium |
-| Suite | M365Advisor |
+| Suite | M365 Advisor |
 | Category | Privileged |
 | PowerShell test | [Test-MtXspmExposedCredentialsForPrivilegedUsers](/docs/commands/Test-MtXspmExposedCredentialsForPrivilegedUsers) |
 | Tags | Entra, EntraOps, Graph, LongRunning, MT.1080, Privileged, XSPM |
 
 ## Source
 
-- Pester test: `tests/XSPM/Test-XspmPrivilegedIdentities.Tests.ps1`
-- PowerShell source: `powershell/public/xspm/Test-MtXspmExposedCredentialsForPrivilegedUsers.ps1`
-
+- Pester test: `tests\XSPM\Test-XspmPrivilegedIdentities.Tests.ps1`
+- PowerShell source: `powershell\public\xspm\Test-MtXspmExposedCredentialsForPrivilegedUsers.ps1`

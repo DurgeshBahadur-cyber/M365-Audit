@@ -6,7 +6,7 @@ title: Installation guide
 
 ```powershell
 Install-Module Pester -SkipPublisherCheck -Force -Scope CurrentUser
-Install-Module M365Advisor -Scope CurrentUser
+Install-Module M365Advisor -Scope CurrentUser -Force
 
 md M365Advisor-tests
 cd M365Advisor-tests

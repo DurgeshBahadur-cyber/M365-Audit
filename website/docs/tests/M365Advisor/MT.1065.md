@@ -1,4 +1,4 @@
-﻿---
+---
 title: "MT.1065 - Soft Delete should be enabled on all Recovery Services Vaults"
 description: "Soft delete ensures that backup items and recovery points are retained for a period after deletion. This protects against accidental or malicious deletion of backups. Ensure that all Recovery Services Vaults across all subscriptions have soft delete enabled. Remediation action: To enable soft delet…"
 slug: /tests/MT.1065
@@ -6,7 +6,7 @@ className: generated-test-doc
 sidebar_class_name: hidden
 hide_table_of_contents: true
 keywords:
-  - "M365Advisor"
+  - "M365 Advisor"
   - "Microsoft 365 security"
   - "MT.1065"
   - "High"
@@ -44,13 +44,22 @@ Note: New vaults typically have soft delete enabled by default.
 | --- | --- |
 | Test ID | MT.1065 |
 | Severity | High |
-| Suite | M365Advisor |
+| Suite | M365 Advisor |
 | Category | Backup |
 | PowerShell test | [Test-MtVaultSoftDelete](/docs/commands/Test-MtVaultSoftDelete) |
 | Tags | Azure, Backup, MT.1065 |
 
+## Remediation
+
+To enable soft delete on a Recovery Services Vault:
+1. Go to the Azure portal: https://portal.azure.com
+2. Navigate to **Recovery Services Vaults**
+3. Select the vault and go to **Properties**
+4. Under **Soft Delete**, ensure it is set to **Enabled**
+
+Note: New vaults typically have soft delete enabled by default.
+
 ## Source
 
-- Pester test: `tests/M365Advisor/Azure/Test-MtVaultSoftDelete.Tests.ps1`
-- PowerShell source: `powershell/public/m365advisor/azure/Test-MtVaultSoftDelete.ps1`
-
+- Pester test: `tests\M365Advisor\Azure\Test-MtVaultSoftDelete.Tests.ps1`
+- PowerShell source: `powershell\public\M365Advisor\azure\Test-MtVaultSoftDelete.ps1`

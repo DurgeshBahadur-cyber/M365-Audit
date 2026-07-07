@@ -1,4 +1,4 @@
-﻿---
+---
 title: "MT.1063 - All app registration owners should have MFA registered"
 description: "This test checks if all owners of app registrations have Multi-Factor Authentication (MFA) registered. App registration owners without MFA pose a significant security risk as credential stuffing attacks can lead to privileged access and potential privilege escalation or data loss. Why This Matters…"
 slug: /tests/MT.1063
@@ -6,7 +6,7 @@ className: generated-test-doc
 sidebar_class_name: hidden
 hide_table_of_contents: true
 keywords:
-  - "M365Advisor"
+  - "M365 Advisor"
   - "Microsoft 365 security"
   - "MT.1063"
   - "High"
@@ -47,13 +47,12 @@ Register MFA for all app registration owners listed. Use conditional access poli
 | --- | --- |
 | Test ID | MT.1063 |
 | Severity | High |
-| Suite | M365Advisor |
+| Suite | M365 Advisor |
 | Category | App |
 | PowerShell test | [Test-MtAppRegistrationOwnersWithoutMFA](/docs/commands/Test-MtAppRegistrationOwnersWithoutMFA) |
 | Tags | App, Entra, LongRunning, MT.1063 |
 
 ## Source
 
-- Pester test: `tests/M365Advisor/Entra/Test-MtAppRegistrationOwnersWithoutMFA.Tests.ps1`
-- PowerShell source: `powershell/public/m365advisor/entra/Test-MtAppRegistrationOwnersWithoutMFA.ps1`
-
+- Pester test: `tests\M365Advisor\Entra\Test-MtAppRegistrationOwnersWithoutMFA.Tests.ps1`
+- PowerShell source: `powershell\public\M365Advisor\entra\Test-MtAppRegistrationOwnersWithoutMFA.ps1`

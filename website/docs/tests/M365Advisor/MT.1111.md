@@ -1,4 +1,4 @@
-﻿---
+---
 title: "MT.1111 - High privileged user should be linked to an identity"
 description: "Linking a privileged user account to the primary work account in Microsoft Defender XDR makes it easier to detect, prioritize, and contain attacks that target highly sensitive identities. It also improves incident response because all relevant activity and risk signals are correlated to the real pe…"
 slug: /tests/MT.1111
@@ -6,7 +6,7 @@ className: generated-test-doc
 sidebar_class_name: hidden
 hide_table_of_contents: true
 keywords:
-  - "M365Advisor"
+  - "M365 Advisor"
   - "Microsoft 365 security"
   - "MT.1111"
   - "Low"
@@ -43,13 +43,12 @@ Review the accounts in the Identity inventory of Microsoft Defender portal and a
 | --- | --- |
 | Test ID | MT.1111 |
 | Severity | Low |
-| Suite | M365Advisor |
+| Suite | M365 Advisor |
 | Category | Privileged |
 | PowerShell test | [Test-MtXspmPrivilegedUsersLinkedToIdentity](/docs/commands/Test-MtXspmPrivilegedUsersLinkedToIdentity) |
 | Tags | Entra, EntraOps, Graph, LongRunning, MT.1111, Preview, Privileged, XSPM |
 
 ## Source
 
-- Pester test: `tests/XSPM/Test-XspmPrivilegedIdentities.Tests.ps1`
-- PowerShell source: `powershell/public/xspm/Test-MtXspmPrivilegedUsersLinkedToIdentity.ps1`
-
+- Pester test: `tests\XSPM\Test-XspmPrivilegedIdentities.Tests.ps1`
+- PowerShell source: `powershell\public\xspm\Test-MtXspmPrivilegedUsersLinkedToIdentity.ps1`

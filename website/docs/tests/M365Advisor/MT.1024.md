@@ -1,4 +1,4 @@
-﻿---
+---
 title: "MT.1024 - MT.1024.$($RecommendationId -replace"
 description: "MT.1024.$($RecommendationId -replace"
 slug: /tests/MT.1024
@@ -6,12 +6,13 @@ className: generated-test-doc
 sidebar_class_name: hidden
 hide_table_of_contents: true
 keywords:
-  - "M365Advisor"
+  - "M365 Advisor"
   - "Microsoft 365 security"
   - "MT.1024"
   - "Unknown"
   - "Entra"
   - "$($_.recommendationType)"
+  - "M365Advisor"
   - "Recommendation"
 ---
 
@@ -29,11 +30,10 @@ MT.1024.$($RecommendationId -replace
 | --- | --- |
 | Test ID | MT.1024 |
 | Severity | Unknown |
-| Suite | M365Advisor |
+| Suite | M365 Advisor |
 | Category | Entra |
 | Tags | $($_.recommendationType), Entra, M365Advisor, MT.1024, Recommendation |
 
 ## Source
 
-- Pester test: `tests/M365Advisor/Entra/Test-EntraRecommendations.Tests.ps1`
-
+- Pester test: `tests\M365Advisor\Entra\Test-EntraRecommendations.Tests.ps1`

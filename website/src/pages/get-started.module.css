@@ -520,3 +520,224 @@
     background: linear-gradient(180deg, #00f2fe, rgba(255, 255, 255, 0.08));
   }
 }
+
+/* Automated Launcher Card styling */
+.launcherCard {
+  background: rgba(10, 12, 16, 0.6);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-left: 4px solid var(--card-accent);
+  border-radius: 16px;
+  padding: 2.5rem;
+  margin-bottom: 2.5rem;
+  box-shadow: 
+    0 10px 30px rgba(0, 0, 0, 0.4),
+    0 0 15px var(--card-glow);
+  position: relative;
+  overflow: hidden;
+}
+
+.launcherHeader {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.launcherIconWrapper {
+  position: relative;
+  width: 54px;
+  height: 54px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.launcherIconPulse {
+  position: absolute;
+  inset: -4px;
+  border-radius: 16px;
+  border: 2px solid var(--card-accent);
+  animation: launcherPulse 2s infinite;
+  opacity: 0;
+}
+
+@keyframes launcherPulse {
+  0% {
+    transform: scale(0.9);
+    opacity: 0.8;
+  }
+  100% {
+    transform: scale(1.15);
+    opacity: 0;
+  }
+}
+
+.launcherIcon {
+  font-size: 1.8rem;
+}
+
+.launcherTitleSection {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.launcherCardTitle {
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: #ffffff;
+  margin: 0;
+}
+
+.launcherCardStatus {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--card-accent);
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.launcherCardDesc {
+  color: #8a8f98;
+  font-size: 1.05rem;
+  line-height: 1.6;
+  margin-bottom: 2rem;
+}
+
+.launcherActions {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.btnLaunch {
+  background: linear-gradient(135deg, var(--card-accent) 0%, rgba(255, 255, 255, 0.8) 100%);
+  color: #050608 !important;
+  font-weight: 700;
+  padding: 0.9rem 2rem;
+  border-radius: 30px;
+  border: none;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  box-shadow: 0 4px 15px var(--card-glow);
+}
+
+.btnLaunch:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px var(--card-glow);
+  opacity: 0.95;
+}
+
+.launcherGuide {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  border-radius: 10px;
+  padding: 1.5rem;
+}
+
+.guideTitle {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin-top: 0;
+  margin-bottom: 0.8rem;
+  text-transform: uppercase;
+  font-size: 0.85rem;
+  letter-spacing: 0.05em;
+  color: #8a8f98;
+}
+
+.guideList {
+  margin: 0;
+  padding-left: 1.2rem;
+  color: #cbd5e1;
+  font-size: 0.95rem;
+}
+
+.guideList li {
+  margin-bottom: 0.6rem;
+  line-height: 1.5;
+}
+
+.guideList li:last-child {
+  margin-bottom: 0;
+}
+
+/* Collapsible Manual Setup styling */
+.manualAccordion {
+  margin-top: 2rem;
+  margin-bottom: 2.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.01);
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.manualAccordionHeader {
+  width: 100%;
+  padding: 1.2rem 1.5rem;
+  background: transparent;
+  border: none;
+  color: #8a8f98;
+  font-size: 1rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  cursor: pointer;
+  text-align: left;
+  transition: all 0.3s ease;
+}
+
+.manualAccordionHeader:hover {
+  background: rgba(255, 255, 255, 0.02);
+  color: #ffffff;
+}
+
+.manualAccordionHeaderOpen {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+  background: rgba(255, 255, 255, 0.02);
+  color: #ffffff;
+}
+
+.manualAccordionBody {
+  padding: 1.5rem;
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 768px) {
+  .launcherCard {
+    padding: 1.5rem;
+  }
+  
+  .launcherHeader {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+  
+  .launcherActions {
+    flex-direction: column;
+  }
+  
+  .btnLaunch {
+    width: 100%;
+    justify-content: center;
+  }
+}

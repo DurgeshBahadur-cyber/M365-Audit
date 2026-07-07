@@ -1,4 +1,4 @@
-﻿---
+---
 title: "MT.1081 - Hybrid users should not be assigned Entra ID role assignments"
 description: "Microsoft strongly recommends avoiding the use of synchronized identities to manage Microsoft 365 or Microsoft Entra environments for protecting against on-premises attacks. How to fix Create dedicated privileged users to assign and use Entra ID roles, and remove the previous role assignments for t…"
 slug: /tests/MT.1081
@@ -6,7 +6,7 @@ className: generated-test-doc
 sidebar_class_name: hidden
 hide_table_of_contents: true
 keywords:
-  - "M365Advisor"
+  - "M365 Advisor"
   - "Microsoft 365 security"
   - "MT.1081"
   - "Medium"
@@ -35,13 +35,12 @@ Create [dedicated privileged users](https://learn.microsoft.com/en-us/microsoft-
 | --- | --- |
 | Test ID | MT.1081 |
 | Severity | Medium |
-| Suite | M365Advisor |
+| Suite | M365 Advisor |
 | Category | Privileged |
 | PowerShell test | [Test-MtXspmHybridUsersWithAssignedEntraIdRoles](/docs/commands/Test-MtXspmHybridUsersWithAssignedEntraIdRoles) |
 | Tags | Entra, EntraOps, Graph, LongRunning, MT.1081, Privileged, XSPM |
 
 ## Source
 
-- Pester test: `tests/XSPM/Test-XspmPrivilegedIdentities.Tests.ps1`
-- PowerShell source: `powershell/public/xspm/Test-MtXspmHybridUsersWithAssignedEntraIdRoles.ps1`
-
+- Pester test: `tests\XSPM\Test-XspmPrivilegedIdentities.Tests.ps1`
+- PowerShell source: `powershell\public\xspm\Test-MtXspmHybridUsersWithAssignedEntraIdRoles.ps1`

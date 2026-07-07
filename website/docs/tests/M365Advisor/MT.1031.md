@@ -1,4 +1,4 @@
-﻿---
+---
 title: "MT.1031 - Privileged role on Control Plane are managed by PIM only."
 description: "GET /beta/privilegedAccess/aadRoles/resources/$tenantId/alerts"
 slug: /tests/MT.1031
@@ -6,7 +6,7 @@ className: generated-test-doc
 sidebar_class_name: hidden
 hide_table_of_contents: true
 keywords:
-  - "M365Advisor"
+  - "M365 Advisor"
   - "Microsoft 365 security"
   - "MT.1031"
   - "High"
@@ -28,13 +28,12 @@ GET /beta/privilegedAccess/aadRoles/resources/$tenantId/alerts
 | --- | --- |
 | Test ID | MT.1031 |
 | Severity | High |
-| Suite | M365Advisor |
+| Suite | M365 Advisor |
 | Category | Privileged |
 | PowerShell test | [Test-MtPimAlertsExists](/docs/commands/Test-MtPimAlertsExists) |
 | Tags | MT.1031, PIM, Privileged |
 
 ## Source
 
-- Pester test: `tests/M365Advisor/Entra/Test-PrivilegedAssignments.Tests.ps1`
-- PowerShell source: `powershell/public/m365advisor/entra/Test-MtPimAlertsExists.ps1`
-
+- Pester test: `tests\M365Advisor\Entra\Test-PrivilegedAssignments.Tests.ps1`
+- PowerShell source: `powershell\public\M365Advisor\entra\Test-MtPimAlertsExists.ps1`

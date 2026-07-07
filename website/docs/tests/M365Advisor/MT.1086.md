@@ -1,4 +1,4 @@
-﻿---
+---
 title: "MT.1086 - Devices should not share both critical and non-critical user credentials."
 description: "Normal user account (or non-critical user account) credentials should not live on devices that also have credentials of critical users. This makes the related devices an interesting target for attackers to exploit to eventually perform privilege escalation and lateral movement. How to fix Analyze t…"
 slug: /tests/MT.1086
@@ -6,7 +6,7 @@ className: generated-test-doc
 sidebar_class_name: hidden
 hide_table_of_contents: true
 keywords:
-  - "M365Advisor"
+  - "M365 Advisor"
   - "Microsoft 365 security"
   - "MT.1086"
   - "Low"
@@ -33,13 +33,12 @@ Analyze the devices shown in the output, and investigate the accounts present on
 | --- | --- |
 | Test ID | MT.1086 |
 | Severity | Low |
-| Suite | M365Advisor |
+| Suite | M365 Advisor |
 | Category | XSPM |
 | PowerShell test | [Test-MtXspmCriticalCredsOnDevicesWithNonCriticalAccounts](/docs/commands/Test-MtXspmCriticalCredsOnDevicesWithNonCriticalAccounts) |
 | Tags | Device, LongRunning, MT.1086, XSPM |
 
 ## Source
 
-- Pester test: `tests/XSPM/Test-XspmDevices.Tests.ps1`
-- PowerShell source: `powershell/public/xspm/Test-MtXspmCriticalCredsOnDevicesWithNonCriticalAccounts.ps1`
-
+- Pester test: `tests\XSPM\Test-XspmDevices.Tests.ps1`
+- PowerShell source: `powershell\public\xspm\Test-MtXspmCriticalCredsOnDevicesWithNonCriticalAccounts.ps1`

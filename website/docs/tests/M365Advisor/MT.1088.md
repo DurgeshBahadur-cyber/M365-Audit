@@ -1,4 +1,4 @@
-﻿---
+---
 title: "MT.1088 - Devices with critical credentials should be protected by TPM."
 description: "Devices shown in the output are devices where a TPM (Trusted Platform Module) is not enabled, but contains credentials of critical accounts. When critical credentials are stored on devices without a TPM enabled, it is more easy for adversaries to steal those credentials when the device is compromis…"
 slug: /tests/MT.1088
@@ -6,7 +6,7 @@ className: generated-test-doc
 sidebar_class_name: hidden
 hide_table_of_contents: true
 keywords:
-  - "M365Advisor"
+  - "M365 Advisor"
   - "Microsoft 365 security"
   - "MT.1088"
   - "Medium"
@@ -32,13 +32,12 @@ Investigate the related devices and the steps that need to be taken in order to 
 | --- | --- |
 | Test ID | MT.1088 |
 | Severity | Medium |
-| Suite | M365Advisor |
+| Suite | M365 Advisor |
 | Category | XSPM |
 | PowerShell test | [Test-MtXspmCriticalCredentialsOnNonTpmProtectedDevices](/docs/commands/Test-MtXspmCriticalCredentialsOnNonTpmProtectedDevices) |
 | Tags | Device, LongRunning, MT.1088, XSPM |
 
 ## Source
 
-- Pester test: `tests/XSPM/Test-XspmDevices.Tests.ps1`
-- PowerShell source: `powershell/public/xspm/Test-MtXspmCriticalCredentialsOnNonTpmProtectedDevices.ps1`
-
+- Pester test: `tests\XSPM\Test-XspmDevices.Tests.ps1`
+- PowerShell source: `powershell\public\xspm\Test-MtXspmCriticalCredentialsOnNonTpmProtectedDevices.ps1`

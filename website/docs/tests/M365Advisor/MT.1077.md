@@ -1,4 +1,4 @@
-﻿---
+---
 title: "MT.1077 - App registrations with privileged API permissions should not have owners"
 description: "Especially, owners with lower privilege than the application should be removed from ownership. Microsoft also mentions this risk of elevation of privilege over what the owner has access to as a user. Those delegations can be identified by the `Tier breach` flag in the test results. But even owners…"
 slug: /tests/MT.1077
@@ -6,7 +6,7 @@ className: generated-test-doc
 sidebar_class_name: hidden
 hide_table_of_contents: true
 keywords:
-  - "M365Advisor"
+  - "M365 Advisor"
   - "Microsoft 365 security"
   - "MT.1077"
   - "Medium"
@@ -41,13 +41,12 @@ Remove ownership and replace it (if necessary) by using [object-level role assig
 | --- | --- |
 | Test ID | MT.1077 |
 | Severity | Medium |
-| Suite | M365Advisor |
+| Suite | M365 Advisor |
 | Category | Privileged |
 | PowerShell test | [Test-MtXspmAppRegWithPrivilegedApiAndOwners](/docs/commands/Test-MtXspmAppRegWithPrivilegedApiAndOwners) |
 | Tags | Entra, EntraOps, Graph, LongRunning, MT.1077, Privileged, XSPM |
 
 ## Source
 
-- Pester test: `tests/XSPM/Test-XspmPrivilegedIdentities.Tests.ps1`
-- PowerShell source: `powershell/public/xspm/Test-MtXspmAppRegWithPrivilegedApiAndOwners.ps1`
-
+- Pester test: `tests\XSPM\Test-XspmPrivilegedIdentities.Tests.ps1`
+- PowerShell source: `powershell\public\xspm\Test-MtXspmAppRegWithPrivilegedApiAndOwners.ps1`

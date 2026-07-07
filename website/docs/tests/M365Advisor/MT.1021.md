@@ -1,4 +1,4 @@
-﻿---
+---
 title: "MT.1021 - Security Defaults are enabled."
 description: "Security Defaults are enabled."
 slug: /tests/MT.1021
@@ -6,7 +6,7 @@ className: generated-test-doc
 sidebar_class_name: hidden
 hide_table_of_contents: true
 keywords:
-  - "M365Advisor"
+  - "M365 Advisor"
   - "Microsoft 365 security"
   - "MT.1021"
   - "High"
@@ -27,11 +27,10 @@ Security Defaults are enabled.
 | --- | --- |
 | Test ID | MT.1021 |
 | Severity | High |
-| Suite | M365Advisor |
+| Suite | M365 Advisor |
 | Category | CA |
 | Tags | CA, MT.1021 |
 
 ## Source
 
-- Pester test: `tests/M365Advisor/Entra/Test-ConditionalAccessBaseline.Tests.ps1`
-
+- Pester test: `tests\M365Advisor\Entra\Test-ConditionalAccessBaseline.Tests.ps1`

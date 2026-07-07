@@ -1,4 +1,4 @@
-﻿---
+---
 title: "MT.1112 - Privileged user accounts should not remain enabled when the linked primary account is disabled"
 description: "Reviewing the enabled status of a privileged account when the linked user identity has been disabled is critical to prevent orphaned high‑risk access. If a normal work account is deactivated (for example, because the user left the organization) but the related privileged account remains enabled, an…"
 slug: /tests/MT.1112
@@ -6,7 +6,7 @@ className: generated-test-doc
 sidebar_class_name: hidden
 hide_table_of_contents: true
 keywords:
-  - "M365Advisor"
+  - "M365 Advisor"
   - "Microsoft 365 security"
   - "MT.1112"
   - "Medium"
@@ -36,13 +36,12 @@ Review the results from this check and verify whether it is legitimate for the p
 | --- | --- |
 | Test ID | MT.1112 |
 | Severity | Medium |
-| Suite | M365Advisor |
+| Suite | M365 Advisor |
 | Category | Privileged |
 | PowerShell test | [Test-MtXspmEnabledPrivilegedUsersLinkedToDisabledIdentity](/docs/commands/Test-MtXspmEnabledPrivilegedUsersLinkedToDisabledIdentity) |
 | Tags | Entra, EntraOps, Graph, LongRunning, MT.1112, Preview, Privileged, XSPM |
 
 ## Source
 
-- Pester test: `tests/XSPM/Test-XspmPrivilegedIdentities.Tests.ps1`
-- PowerShell source: `powershell/public/xspm/Test-MtXspmEnabledPrivilegedUsersLinkedToDisabledIdentity.ps1`
-
+- Pester test: `tests\XSPM\Test-XspmPrivilegedIdentities.Tests.ps1`
+- PowerShell source: `powershell\public\xspm\Test-MtXspmEnabledPrivilegedUsersLinkedToDisabledIdentity.ps1`

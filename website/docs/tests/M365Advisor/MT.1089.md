@@ -1,4 +1,4 @@
-﻿---
+---
 title: "MT.1089 - Devices with critical credentials should be protected by Credential Guard."
 description: "Devices shown in the output are devices where Credential Guard is not enabled or misconfigured, but contains credentials of critical accounts. When critical credentials are stored on devices without Credential Guard enabled, it is easy for adversaries to steal those credentials when the device is c…"
 slug: /tests/MT.1089
@@ -6,7 +6,7 @@ className: generated-test-doc
 sidebar_class_name: hidden
 hide_table_of_contents: true
 keywords:
-  - "M365Advisor"
+  - "M365 Advisor"
   - "Microsoft 365 security"
   - "MT.1089"
   - "Medium"
@@ -32,13 +32,12 @@ Investigate the related devices and the steps that need to be taken in order to 
 | --- | --- |
 | Test ID | MT.1089 |
 | Severity | Medium |
-| Suite | M365Advisor |
+| Suite | M365 Advisor |
 | Category | XSPM |
 | PowerShell test | [Test-MtXspmCriticalCredentialsOnNonCredGuardProtectedDevices](/docs/commands/Test-MtXspmCriticalCredentialsOnNonCredGuardProtectedDevices) |
 | Tags | Device, LongRunning, MT.1089, XSPM |
 
 ## Source
 
-- Pester test: `tests/XSPM/Test-XspmDevices.Tests.ps1`
-- PowerShell source: `powershell/public/xspm/Test-MtXspmCriticalCredentialsOnNonCredGuardProtectedDevices.ps1`
-
+- Pester test: `tests\XSPM\Test-XspmDevices.Tests.ps1`
+- PowerShell source: `powershell\public\xspm\Test-MtXspmCriticalCredentialsOnNonCredGuardProtectedDevices.ps1`
