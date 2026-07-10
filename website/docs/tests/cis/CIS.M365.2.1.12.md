@@ -14,6 +14,12 @@ keywords:
   - "CIS E3 Level 1"
   - "CIS E3"
   - "CIS M365 v6.0.1"
+  - "ISO 27001"
+  - "ISO 27002"
+  - "ISO27001:8.20"
+  - "ISO27001:8.7"
+  - "ISO27002:8.20"
+  - "ISO27002:8.7"
   - "L1"
 ---
 
@@ -72,7 +78,7 @@ Set-HostedConnectionFilterPolicy -Identity Default -IPAllowList @{}
 | Suite | CIS |
 | Category | CIS E3 Level 1 |
 | PowerShell test | [Test-MtCisHostedConnectionFilterPolicy](/docs/commands/Test-MtCisHostedConnectionFilterPolicy) |
-| Tags | CIS, CIS E3, CIS E3 Level 1, CIS M365 v6.0.1, CIS.M365.2.1.12, L1 |
+| Tags | CIS, CIS E3, CIS E3 Level 1, CIS M365 v6.0.1, CIS.M365.2.1.12, ISO 27001, ISO 27002, ISO27001:8.20, ISO27001:8.7, ISO27002:8.20, ISO27002:8.7, L1 |
 
 ## Remediation
 

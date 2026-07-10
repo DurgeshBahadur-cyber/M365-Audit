@@ -14,6 +14,12 @@ keywords:
   - "CIS E3 Level 1"
   - "CIS E3"
   - "CIS M365 v6.0.1"
+  - "ISO 27001"
+  - "ISO 27002"
+  - "ISO27001:5.24"
+  - "ISO27001:5.26"
+  - "ISO27002:5.24"
+  - "ISO27002:5.26"
   - "L1"
 ---
 
@@ -102,7 +108,7 @@ New-ReportSubmissionRule -Name DefaultReportSubmissionRule -ReportSubmissionPoli
 | Suite | CIS |
 | Category | CIS E3 Level 1 |
 | PowerShell test | [Test-MtCisTeamsReportSecurityConcerns](/docs/commands/Test-MtCisTeamsReportSecurityConcerns) |
-| Tags | CIS, CIS E3, CIS E3 Level 1, CIS M365 v6.0.1, CIS.M365.8.6.1, L1 |
+| Tags | CIS, CIS E3, CIS E3 Level 1, CIS M365 v6.0.1, CIS.M365.8.6.1, ISO 27001, ISO 27002, ISO27001:5.24, ISO27001:5.26, ISO27002:5.24, ISO27002:5.26, L1 |
 
 ## Remediation
 

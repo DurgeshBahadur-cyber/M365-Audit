@@ -28,6 +28,7 @@ export default function TestResultsTable(props) {
   const setSelectedStatus = props.onStatusChange ?? setInternalSelectedStatus;
   const [selectedBlock, setSelectedBlock] = useState([]);
   const [selectedTag, setSelectedTag] = useState([]);
+  const [selectedFramework, setSelectedFramework] = useState([]);
   const [selectedSeverity, setSelectedSeverity] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
   const [sortColumn, setSortColumn] = useState("Id");
@@ -66,6 +67,9 @@ export default function TestResultsTable(props) {
     // Don't clear selectedItem immediately - let the animation complete
   }, []);
 
+  // Known framework-level tags — used to power the Compliance Framework dropdown
+  const FRAMEWORK_TAGS = ["CIS", "CISA", "ISO 27001", "ISO 27002", "EIDSCA"];
+
   const isStatusSelected = useCallback((item) => {
     const matchesSearch = testMatchesSearch(item, searchQuery);
 
@@ -73,12 +77,17 @@ export default function TestResultsTable(props) {
       selectedSeverity.includes(item.Severity) ||
       (selectedSeverity.includes("None") && !item.Severity);
 
+    // Framework filter: check if item has at least one of the selected framework tags
+    const matchesFramework = selectedFramework.length === 0 ||
+      (item.Tag || []).some(tag => selectedFramework.includes(tag));
+
     return (selectedStatus.length === 0 || selectedStatus.includes(item.Result)) &&
       (selectedBlock.length === 0 || selectedBlock.includes(item.Block)) &&
       (selectedTag.length === 0 || (item.Tag || []).some(tag => selectedTag.includes(tag))) &&
+      matchesFramework &&
       matchesSeverity &&
       matchesSearch;
-  }, [searchQuery, selectedStatus, selectedBlock, selectedTag, selectedSeverity]);
+  }, [searchQuery, selectedStatus, selectedBlock, selectedTag, selectedFramework, selectedSeverity]);
 
   useEffect(() => {
     if (!linkedTestResult || props.isPrintView) return;
@@ -111,6 +120,10 @@ export default function TestResultsTable(props) {
       setSelectedTag([]);
     }
 
+    if (selectedFramework.length > 0 && !linkedTags.some((tag) => selectedFramework.includes(tag))) {
+      setSelectedFramework([]);
+    }
+
     const linkedSeverity = linkedTestResult.Severity || "None";
     if (selectedSeverity.length > 0 && !selectedSeverity.includes(linkedSeverity)) {
       setSelectedSeverity([]);
@@ -126,6 +139,7 @@ export default function TestResultsTable(props) {
     props.isPrintView,
     searchQuery,
     selectedBlock,
+    selectedFramework,
     selectedSeverity,
     selectedStatus,
     selectedTag,
@@ -246,6 +260,9 @@ export default function TestResultsTable(props) {
   const severities = ['Critical', 'High', 'Medium', 'Low', 'Info', 'None'];
   const uniqueTags = [...new Set(testResults.Tests.flatMap((t) => t.Tag || []))];
 
+  // Only show known framework-level tags that actually exist in this report's data
+  const availableFrameworks = FRAMEWORK_TAGS.filter(fw => uniqueTags.includes(fw));
+
   // Create a sortable header cell
   const SortableHeader = ({ column, label, className }) => {
     const isSorted = sortColumn === column;
@@ -298,7 +315,7 @@ export default function TestResultsTable(props) {
             </MultiSelect>
           </Flex>
 
-          {/* Second row: Category and Tag in one row */}
+          {/* Second row: Category and Compliance Framework */}
           <Flex justifyContent="between" className="gap-2 mb-4">
             <MultiSelect
               value={selectedBlock}
@@ -316,18 +333,16 @@ export default function TestResultsTable(props) {
             </MultiSelect>
 
             <MultiSelect
-              value={selectedTag}
-              onValueChange={setSelectedTag}
-              placeholder="Tag"
+              value={selectedFramework}
+              onValueChange={setSelectedFramework}
+              placeholder="Compliance Framework"
               className="w-1/2"
             >
-              {uniqueTags
-                .sort((a, b) => a > b ? 1 : -1)
-                .map((tag) => (
-                  <MultiSelectItem key={tag} value={tag}>
-                    {tag}
-                  </MultiSelectItem>
-                ))}
+              {availableFrameworks.map((fw) => (
+                <MultiSelectItem key={fw} value={fw}>
+                  {fw}
+                </MultiSelectItem>
+              ))}
             </MultiSelect>
           </Flex>
         </>

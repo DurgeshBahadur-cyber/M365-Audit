@@ -14,6 +14,12 @@ keywords:
   - "CIS E3 Level 1"
   - "CIS E3"
   - "CIS M365 v6.0.1"
+  - "ISO 27001"
+  - "ISO 27002"
+  - "ISO27001:5.14"
+  - "ISO27001:8.20"
+  - "ISO27002:5.14"
+  - "ISO27002:8.20"
   - "L1"
 ---
 
@@ -72,7 +78,7 @@ Set-CsTeamsMeetingPolicy -Identity Global -AutoAdmittedUsers "InvitedUsers"
 | Suite | CIS |
 | Category | CIS E3 Level 1 |
 | PowerShell test | [Test-MtCisTeamsLobbyBypass](/docs/commands/Test-MtCisTeamsLobbyBypass) |
-| Tags | CIS, CIS E3, CIS E3 Level 1, CIS M365 v6.0.1, CIS.M365.8.5.3, L1 |
+| Tags | CIS, CIS E3, CIS E3 Level 1, CIS M365 v6.0.1, CIS.M365.8.5.3, ISO 27001, ISO 27002, ISO27001:5.14, ISO27001:8.20, ISO27002:5.14, ISO27002:8.20, L1 |
 
 ## Remediation
 

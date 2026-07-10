@@ -730,6 +730,7 @@ function HowItWorks() {
 
 function OurServices() {
   const assessments = [
+    /*
     {
       id: "m365",
       title: "M365 Advisor Baselines",
@@ -760,6 +761,7 @@ function OurServices() {
       icon: "🦅",
       count: "SCuBA Rules",
     },
+    */
     {
       id: "cis",
       title: "CIS Benchmarks",
@@ -771,6 +773,27 @@ function OurServices() {
       count: "CIS L1/L2",
     },
     {
+      id: "iso27001",
+      title: "ISO/IEC 27001:2022",
+      subtitle: "Information Security Management System",
+      desc: "44 controls mapped to the international standard for information security (ISMS).",
+      accent: "#059669", // Emerald Green
+      glow: "rgba(5, 150, 105, 0.15)",
+      icon: "🌐",
+      count: "44 Controls",
+    },
+    {
+      id: "iso27002",
+      title: "ISO/IEC 27002:2022",
+      subtitle: "Security Controls Guidance",
+      desc: "44 controls mapped to ISO 27002 implementation guidelines for security controls.",
+      accent: "#0d9488", // Teal
+      glow: "rgba(13, 148, 136, 0.15)",
+      icon: "📋",
+      count: "44 Controls",
+    },
+    /*
+    {
       id: "orca",
       title: "ORCA Exchange Hygiene",
       subtitle: "Exchange Online analyzer baseline",
@@ -780,6 +803,7 @@ function OurServices() {
       icon: "🐋",
       count: "60+ Rules",
     }
+    */
   ];
 
   return (

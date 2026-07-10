@@ -16,6 +16,10 @@ keywords:
   - "CIS E5"
   - "CIS E5 Level 2"
   - "CIS M365 v6.0.1"
+  - "ISO 27001"
+  - "ISO 27002"
+  - "ISO27001:8.1"
+  - "ISO27002:8.1"
   - "L2"
   - "Security"
 ---
@@ -81,7 +85,7 @@ Invoke-MgGraphRequest -Uri $Uri -Method PATCH -Body $Body
 | Suite | CIS |
 | Category | CIS E3 Level 2 |
 | PowerShell test | [Test-MtCisDevicesWithoutCompliancePolicyMarked](/docs/commands/Test-MtCisDevicesWithoutCompliancePolicyMarked) |
-| Tags | CIS, CIS E3, CIS E3 Level 2, CIS E5, CIS E5 Level 2, CIS M365 v6.0.1, CIS.M365.4.1, L2, Security |
+| Tags | CIS, CIS E3, CIS E3 Level 2, CIS E5, CIS E5 Level 2, CIS M365 v6.0.1, CIS.M365.4.1, ISO 27001, ISO 27002, ISO27001:8.1, ISO27002:8.1, L2, Security |
 
 ## Remediation
 

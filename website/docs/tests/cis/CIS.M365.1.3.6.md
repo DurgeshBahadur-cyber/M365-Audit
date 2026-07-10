@@ -14,6 +14,12 @@ keywords:
   - "CIS E5 Level 2"
   - "CIS E5"
   - "CIS M365 v6.0.1"
+  - "ISO 27001"
+  - "ISO 27002"
+  - "ISO27001:5.30"
+  - "ISO27001:5.31"
+  - "ISO27002:5.30"
+  - "ISO27002:5.31"
   - "L2"
 ---
 
@@ -68,7 +74,7 @@ Set-OrganizationConfig -CustomerLockBoxEnabled $true
 | Suite | CIS |
 | Category | CIS E5 Level 2 |
 | PowerShell test | [Test-MtCisCustomerLockBox](/docs/commands/Test-MtCisCustomerLockBox) |
-| Tags | CIS, CIS E5, CIS E5 Level 2, CIS M365 v6.0.1, CIS.M365.1.3.6, L2 |
+| Tags | CIS, CIS E5, CIS E5 Level 2, CIS M365 v6.0.1, CIS.M365.1.3.6, ISO 27001, ISO 27002, ISO27001:5.30, ISO27001:5.31, ISO27002:5.30, ISO27002:5.31, L2 |
 
 ## Remediation
 

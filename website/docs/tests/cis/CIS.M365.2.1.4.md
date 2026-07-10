@@ -14,6 +14,10 @@ keywords:
   - "CIS E5 Level 2"
   - "CIS E5"
   - "CIS M365 v6.0.1"
+  - "ISO 27001"
+  - "ISO 27002"
+  - "ISO27001:8.7"
+  - "ISO27002:8.7"
   - "L2"
 ---
 
@@ -82,7 +86,7 @@ New-SafeAttachmentRule -Name "CIS 2.1.4 Rule" -SafeAttachmentPolicy "CIS 2.1.4" 
 | Suite | CIS |
 | Category | CIS E5 Level 2 |
 | PowerShell test | [Test-MtCisSafeAttachment](/docs/commands/Test-MtCisSafeAttachment) |
-| Tags | CIS, CIS E5, CIS E5 Level 2, CIS M365 v6.0.1, CIS.M365.2.1.4, L2 |
+| Tags | CIS, CIS E5, CIS E5 Level 2, CIS M365 v6.0.1, CIS.M365.2.1.4, ISO 27001, ISO 27002, ISO27001:8.7, ISO27002:8.7, L2 |
 
 ## Remediation
 

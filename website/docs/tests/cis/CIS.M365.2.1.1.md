@@ -14,6 +14,12 @@ keywords:
   - "CIS E5 Level 2"
   - "CIS E5"
   - "CIS M365 v6.0.1"
+  - "ISO 27001"
+  - "ISO 27002"
+  - "ISO27001:8.23"
+  - "ISO27001:8.7"
+  - "ISO27002:8.23"
+  - "ISO27002:8.7"
   - "L2"
 ---
 
@@ -112,7 +118,7 @@ New-SafeLinksRule -Name "CIS SafeLinks" -SafeLinksPolicy "CIS SafeLinks Policy" 
 | Suite | CIS |
 | Category | CIS E5 Level 2 |
 | PowerShell test | [Test-MtCisSafeLink](/docs/commands/Test-MtCisSafeLink) |
-| Tags | CIS, CIS E5, CIS E5 Level 2, CIS M365 v6.0.1, CIS.M365.2.1.1, L2 |
+| Tags | CIS, CIS E5, CIS E5 Level 2, CIS M365 v6.0.1, CIS.M365.2.1.1, ISO 27001, ISO 27002, ISO27001:8.23, ISO27001:8.7, ISO27002:8.23, ISO27002:8.7, L2 |
 
 ## Remediation
 

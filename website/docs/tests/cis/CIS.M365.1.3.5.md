@@ -16,6 +16,10 @@ keywords:
   - "CIS E5"
   - "CIS E5 Level 1"
   - "CIS M365 v6.0.1"
+  - "ISO 27001"
+  - "ISO 27002"
+  - "ISO27001:8.7"
+  - "ISO27002:8.7"
   - "L1"
   - "Security"
 ---
@@ -72,7 +76,7 @@ Invoke-MgGraphRequest -Method PATCH -Uri $uri -Body $body
 | Suite | CIS |
 | Category | CIS E3 Level 1 |
 | PowerShell test | [Test-MtCisFormsPhishingProtectionEnabled](/docs/commands/Test-MtCisFormsPhishingProtectionEnabled) |
-| Tags | CIS, CIS E3, CIS E3 Level 1, CIS E5, CIS E5 Level 1, CIS M365 v6.0.1, CIS.M365.1.3.5, L1, Security |
+| Tags | CIS, CIS E3, CIS E3 Level 1, CIS E5, CIS E5 Level 1, CIS M365 v6.0.1, CIS.M365.1.3.5, ISO 27001, ISO 27002, ISO27001:8.7, ISO27002:8.7, L1, Security |
 
 ## Remediation
 

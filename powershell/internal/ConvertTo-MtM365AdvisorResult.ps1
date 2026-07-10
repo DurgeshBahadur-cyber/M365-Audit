@@ -1,4 +1,4 @@
-﻿function ConvertTo-MtM365AdvisorResult {
+function ConvertTo-MtM365AdvisorResult {
     <#
     .SYNOPSIS
     Converts Pester results to the M365Advisor test results format which includes additional information.
@@ -59,9 +59,12 @@
     }
 
     function GetTestsSorted() {
-        # Show passed and failed tests first by name then show not run tests
-        $activeTests = $PesterResults.Tests | Where-Object { $_.Result -eq 'Passed' -or $_.Result -eq 'Failed' } | Sort-Object -Property Name
-        $inactiveTests = $PesterResults.Tests | Where-Object { $_.Result -ne 'Passed' -and $_.Result -ne 'Failed' } | Sort-Object -Property Name
+        # Filter out tests that were not run (filtered out by Pester tags/filters)
+        $testsToProcess = $PesterResults.Tests | Where-Object { $_.Result -ne 'NotRun' }
+
+        # Show passed and failed tests first by name then show other results
+        $activeTests = $testsToProcess | Where-Object { $_.Result -eq 'Passed' -or $_.Result -eq 'Failed' } | Sort-Object -Property Name
+        $inactiveTests = $testsToProcess | Where-Object { $_.Result -ne 'Passed' -and $_.Result -ne 'Failed' } | Sort-Object -Property Name
 
         # Convert to array and add, if not when only one object is returned it doesn't create an array with all items.
         return @($activeTests) + @($inactiveTests)
@@ -363,19 +366,22 @@
             $mtBlockInfo = $mtBlocks | Where-Object { $_.Name -eq $block.Name }
             if ($null -eq $mtBlockInfo) {
                 Write-Verbose "Recalculating block: $($block.Name)"
-                $mtBlockInfo = [PSCustomObject]@{
-                    Name             = $block.Name
-                    Result           = $block.Result
-                    FailedCount      = @($mtTests | Where-Object { $_.Result -eq 'Failed' -and $_.Block -eq $block.name }).Count
-                    PassedCount      = @($mtTests | Where-Object { $_.Result -eq 'Passed' -and $_.Block -eq $block.name }).Count
-                    ErrorCount       = @($mtTests | Where-Object { $_.Result -eq 'Error' -and $_.Block -eq $block.name }).Count
-                    InvestigateCount = @($mtTests | Where-Object { $_.Result -eq 'Investigate' -and $_.Block -eq $block.name }).Count
-                    SkippedCount     = @($mtTests | Where-Object { $_.Result -eq 'Skipped' -and $_.Block -eq $block.name }).Count
-                    NotRunCount      = @($mtTests | Where-Object { $_.Result -eq 'NotRun' -and $_.Block -eq $block.name }).Count
-                    TotalCount       = @($mtTests | Where-Object { $_.Block -eq $block.name }).Count
-                    Tag              = $block.Tag
+                $blockTotal = @($mtTests | Where-Object { $_.Block -eq $block.name }).Count
+                if ($blockTotal -gt 0) {
+                    $mtBlockInfo = [PSCustomObject]@{
+                        Name             = $block.Name
+                        Result           = $block.Result
+                        FailedCount      = @($mtTests | Where-Object { $_.Result -eq 'Failed' -and $_.Block -eq $block.name }).Count
+                        PassedCount      = @($mtTests | Where-Object { $_.Result -eq 'Passed' -and $_.Block -eq $block.name }).Count
+                        ErrorCount       = @($mtTests | Where-Object { $_.Result -eq 'Error' -and $_.Block -eq $block.name }).Count
+                        InvestigateCount = @($mtTests | Where-Object { $_.Result -eq 'Investigate' -and $_.Block -eq $block.name }).Count
+                        SkippedCount     = @($mtTests | Where-Object { $_.Result -eq 'Skipped' -and $_.Block -eq $block.name }).Count
+                        NotRunCount      = @($mtTests | Where-Object { $_.Result -eq 'NotRun' -and $_.Block -eq $block.name }).Count
+                        TotalCount       = $blockTotal
+                        Tag              = $block.Tag
+                    }
+                    $mtBlocks += $mtBlockInfo
                 }
-                $mtBlocks += $mtBlockInfo
             } else {
                 # We already seen and counted all blocks
             }

@@ -42,7 +42,7 @@ Install-Module Az.Accounts, ExchangeOnlineManagement, MicrosoftTeams, PnP.PowerS
 
 In order to run all the CISA tests, you need to connect to the Azure, Exchange Online, and other modules.
 
-For a more detailed introduction to these concepts see the [Connect-M365Advisor](connect-m365advisor/readme.md) documentation.
+For a more detailed introduction to these concepts see the [Connect-M365Advisor](connect-M365Advisor/readme.md) documentation.
 
 Run the following command to interactively connect to the Azure, Microsoft Graph, Exchange Online, and other modules. A sign-in window will appear for each module.
 
@@ -67,7 +67,7 @@ Install-Module ADOPS -Scope CurrentUser
 
 In order to run all the Azure DevOps tests, you need to connect to Azure DevOps.
 
-This is currently not included as part of [Connect-M365Advisor](connect-m365advisor/readme.md) and must be called separately. Run the following command to interactively connect using the Azure DevOps modules. A sign-in window will appear.
+This is currently not included as part of [Connect-M365Advisor](connect-M365Advisor/readme.md) and must be called separately. Run the following command to interactively connect using the Azure DevOps modules. A sign-in window will appear.
 
 Example with PowerShell variable
 ```powershell

@@ -15,6 +15,10 @@ keywords:
   - "CIS E5"
   - "CIS E5 Level 2"
   - "CIS M365 v6.0.1"
+  - "ISO 27001"
+  - "ISO 27002"
+  - "ISO27001:8.7"
+  - "ISO27002:8.7"
   - "L2"
 ---
 
@@ -66,7 +70,7 @@ Set-SPOTenant -DisallowInfectedFileDownload $true
 | Suite | CIS |
 | Category | SharePoint Online |
 | PowerShell test | [Test-MtCisSpoPreventDownloadMaliciousFile](/docs/commands/Test-MtCisSpoPreventDownloadMaliciousFile) |
-| Tags | CIS, CIS E5, CIS E5 Level 2, CIS M365 v6.0.1, CIS.M365.7.3.1, L2, SharePoint Online |
+| Tags | CIS, CIS E5, CIS E5 Level 2, CIS M365 v6.0.1, CIS.M365.7.3.1, ISO 27001, ISO 27002, ISO27001:8.7, ISO27002:8.7, L2, SharePoint Online |
 
 ## Related Links
 

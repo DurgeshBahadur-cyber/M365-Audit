@@ -14,6 +14,10 @@ keywords:
   - "CIS E3 Level 1"
   - "CIS E3"
   - "CIS M365 v6.0.1"
+  - "ISO 27001"
+  - "ISO 27002"
+  - "ISO27001:5.17"
+  - "ISO27002:5.17"
   - "L1"
 ---
 
@@ -72,7 +76,7 @@ Update-MgDomain -DomainId <Domain> -PasswordValidityPeriodInDays 2147483647
 | Suite | CIS |
 | Category | CIS E3 Level 1 |
 | PowerShell test | [Test-MtCisPasswordExpiry](/docs/commands/Test-MtCisPasswordExpiry) |
-| Tags | CIS, CIS E3, CIS E3 Level 1, CIS M365 v6.0.1, CIS.M365.1.3.1, L1 |
+| Tags | CIS, CIS E3, CIS E3 Level 1, CIS M365 v6.0.1, CIS.M365.1.3.1, ISO 27001, ISO 27002, ISO27001:5.17, ISO27002:5.17, L1 |
 
 ## Remediation
 

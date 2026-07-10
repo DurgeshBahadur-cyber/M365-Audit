@@ -16,6 +16,12 @@ keywords:
   - "CIS E5"
   - "CIS E5 Level 2"
   - "CIS M365 v6.0.1"
+  - "ISO 27001"
+  - "ISO 27002"
+  - "ISO27001:5.16"
+  - "ISO27001:5.17"
+  - "ISO27002:5.16"
+  - "ISO27002:5.17"
   - "L2"
   - "Security"
 ---
@@ -61,7 +67,7 @@ If user consent is disabled, previous consent grants will still be honored but a
 | Suite | CIS |
 | Category | CIS E3 Level 2 |
 | PowerShell test | [Test-MtCisEnsureUserConsentToAppsDisallowed](/docs/commands/Test-MtCisEnsureUserConsentToAppsDisallowed) |
-| Tags | CIS, CIS E3, CIS E3 Level 2, CIS E5, CIS E5 Level 2, CIS M365 v6.0.1, CIS.M365.5.1.5.1, L2, Security |
+| Tags | CIS, CIS E3, CIS E3 Level 2, CIS E5, CIS E5 Level 2, CIS M365 v6.0.1, CIS.M365.5.1.5.1, ISO 27001, ISO 27002, ISO27001:5.16, ISO27001:5.17, ISO27002:5.16, ISO27002:5.17, L2, Security |
 
 ## Remediation
 

@@ -6,10 +6,11 @@ import useBaseUrl from '@docusaurus/useBaseUrl';
 import styles from './get-started.module.css';
 
 const frameworks = [
+  /*
   {
     id: "m365",
     title: "M365 Advisor Baselines",
-    subtitle: "Best-practice security tests for tenant posture",
+    subtitle: "Best-practice security tests for posture",
     desc: "170+ automated checks validating authentication strength, conditional access, administration settings, and external sharing policies.",
     accent: "#ff7a7a",
     glow: "rgba(255, 122, 122, 0.15)",
@@ -45,6 +46,7 @@ const frameworks = [
     connectCmd: "Connect-M365Advisor",
     runCmd: "Invoke-M365Advisor"
   },
+  */
   {
     id: "cis",
     title: "CIS Benchmarks",
@@ -56,8 +58,35 @@ const frameworks = [
     tag: "CIS Benchmark",
     setupCmd: "Install-Module Pester -SkipPublisherCheck -Force -Scope CurrentUser\nInstall-Module M365Advisor -Scope CurrentUser\n\nmd M365Advisor-tests\ncd M365Advisor-tests\nInstall-M365AdvisorTests",
     connectCmd: "Connect-M365Advisor",
-    runCmd: "Invoke-M365Advisor"
+    runCmd: "Invoke-M365Advisor -Tag 'CIS'"
   },
+  {
+    id: "iso27001",
+    title: "ISO/IEC 27001:2022",
+    subtitle: "Information Security Management System",
+    desc: "44 controls mapped to the international standard for information security (ISMS).",
+    accent: "#059669",
+    glow: "rgba(5, 150, 105, 0.15)",
+    icon: "🌐",
+    tag: "ISO 27001",
+    setupCmd: "Install-Module Pester -SkipPublisherCheck -Force -Scope CurrentUser\nInstall-Module M365Advisor -Scope CurrentUser\n\nmd M365Advisor-tests\ncd M365Advisor-tests\nInstall-M365AdvisorTests",
+    connectCmd: "Connect-M365Advisor",
+    runCmd: "Invoke-M365Advisor -Tag 'ISO 27001'"
+  },
+  {
+    id: "iso27002",
+    title: "ISO/IEC 27002:2022",
+    subtitle: "Security Controls Guidance",
+    desc: "44 controls mapped to ISO 27002 implementation guidelines for security controls.",
+    accent: "#0d9488",
+    glow: "rgba(13, 148, 136, 0.15)",
+    icon: "📋",
+    tag: "ISO 27002",
+    setupCmd: "Install-Module Pester -SkipPublisherCheck -Force -Scope CurrentUser\nInstall-Module M365Advisor -Scope CurrentUser\n\nmd M365Advisor-tests\ncd M365Advisor-tests\nInstall-M365AdvisorTests",
+    connectCmd: "Connect-M365Advisor",
+    runCmd: "Invoke-M365Advisor -Tag 'ISO 27002'"
+  },
+  /*
   {
     id: "orca",
     title: "ORCA Exchange Hygiene",
@@ -71,6 +100,7 @@ const frameworks = [
     connectCmd: "Connect-M365Advisor",
     runCmd: "Invoke-M365Advisor"
   }
+  */
 ];
 
 function CopyButton({ text }) {
@@ -102,7 +132,7 @@ function CopyButton({ text }) {
 }
 
 export default function GetStarted() {
-  const [selectedId, setSelectedId] = useState("m365"); // default select first
+  const [selectedId, setSelectedId] = useState("cis"); // default select first
   const [step, setStep] = useState(1); // 1 = select, 2 = commands
   const [showManual, setShowManual] = useState(false);
 

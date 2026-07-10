@@ -17,6 +17,10 @@ keywords:
   - "CIS E5"
   - "CIS E5 Level 1"
   - "CIS M365 v6.0.1"
+  - "ISO 27001"
+  - "ISO 27002"
+  - "ISO27001:5.14"
+  - "ISO27002:5.14"
   - "L1"
   - "OneDrive"
 ---
@@ -74,7 +78,7 @@ Set-SPOTenant -DefaultSharingLinkType Internal
 | Suite | CIS |
 | Category | SharePoint Online |
 | PowerShell test | [Test-MtCisSpoDefaultSharingLink](/docs/commands/Test-MtCisSpoDefaultSharingLink) |
-| Tags | CIS, CIS E3, CIS E3 Level 1, CIS E5, CIS E5 Level 1, CIS M365 v6.0.1, CIS.M365.7.2.7, L1, OneDrive, SharePoint Online |
+| Tags | CIS, CIS E3, CIS E3 Level 1, CIS E5, CIS E5 Level 1, CIS M365 v6.0.1, CIS.M365.7.2.7, ISO 27001, ISO 27002, ISO27001:5.14, ISO27002:5.14, L1, OneDrive, SharePoint Online |
 
 ## Related Links
 

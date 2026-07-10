@@ -17,6 +17,14 @@ keywords:
   - "CIS E5"
   - "CIS E5 Level 1"
   - "CIS M365 v6.0.1"
+  - "ISO 27001"
+  - "ISO 27002"
+  - "ISO27001:5.14"
+  - "ISO27001:5.15"
+  - "ISO27001:5.18"
+  - "ISO27002:5.14"
+  - "ISO27002:5.15"
+  - "ISO27002:5.18"
   - "L1"
   - "OneDrive"
 ---
@@ -78,7 +86,7 @@ Set-SPOTenant -ExternalUserExpireInDays 30 -ExternalUserExpirationRequired $True
 | Suite | CIS |
 | Category | SharePoint Online |
 | PowerShell test | [Test-MtCisSpoGuestAccessExpiry](/docs/commands/Test-MtCisSpoGuestAccessExpiry) |
-| Tags | CIS, CIS E3, CIS E3 Level 1, CIS E5, CIS E5 Level 1, CIS M365 v6.0.1, CIS.M365.7.2.9, L1, OneDrive, SharePoint Online |
+| Tags | CIS, CIS E3, CIS E3 Level 1, CIS E5, CIS E5 Level 1, CIS M365 v6.0.1, CIS.M365.7.2.9, ISO 27001, ISO 27002, ISO27001:5.14, ISO27001:5.15, ISO27001:5.18, ISO27002:5.14, ISO27002:5.15, ISO27002:5.18, L1, OneDrive, SharePoint Online |
 
 ## Related Links
 

@@ -1,4 +1,4 @@
-﻿---
+---
 id: overview
 title: Tests Overview
 sidebar_label: Tests Overview
@@ -18,7 +18,7 @@ This section is generated from the M365Advisor test source. Each page includes t
 
 | Suite | Tests | Description |
 | --- | ---: | --- |
-| [M365Advisor](./m365advisor) | 144 | M365Advisor security tests for Microsoft 365 and Microsoft Entra configurations. |
+| [M365Advisor](./M365Advisor) | 144 | M365Advisor security tests for Microsoft 365 and Microsoft Entra configurations. |
 | [Entra ID SCA](./eidsca) | 44 | Entra ID Security Config Analyzer tests mapped to Microsoft Entra security configuration checks. |
 | [CISA](./cisa) | 73 | CISA SCuBA baseline tests for Microsoft 365 security configurations. |
 | [CIS](./cis) | 38 | CIS Microsoft 365 Foundations Benchmark controls implemented as M365Advisor tests. |

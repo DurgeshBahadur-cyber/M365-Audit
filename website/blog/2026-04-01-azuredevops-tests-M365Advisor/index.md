@@ -1,4 +1,4 @@
-﻿---
+---
 title: Azure DevOps tests for M365Advisor
 description: Azure DevOps Security tests for M365Advisor
 slug: azuredevops-tests-for-m365advisor
@@ -174,7 +174,7 @@ jobs:
     displayName: 'Run M365Advisor tests and publish report'
 ```
 
-> This pipeline only includes Microsoft Graph and Azure DevOps connections. To add Exchange Online, Teams, or Security & Compliance, see the [advanced connection guide](/docs/connect-m365advisor/connect-m365advisor-advanced).
+> This pipeline only includes Microsoft Graph and Azure DevOps connections. To add Exchange Online, Teams, or Security & Compliance, see the [advanced connection guide](/docs/connect-M365Advisor/connect-M365Advisor-advanced).
 
 ### Documentation
 

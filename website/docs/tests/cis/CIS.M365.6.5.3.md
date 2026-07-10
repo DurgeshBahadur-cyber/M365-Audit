@@ -16,6 +16,10 @@ keywords:
   - "CIS E5"
   - "CIS E5 Level 2"
   - "CIS M365 v6.0.1"
+  - "ISO 27001"
+  - "ISO 27002"
+  - "ISO27001:5.14"
+  - "ISO27002:5.14"
   - "L2"
   - "Security"
 ---
@@ -73,7 +77,7 @@ AdditionalStorageProvidersAvailable : True
 | Suite | CIS |
 | Category | CIS E3 Level 2 |
 | PowerShell test | [Test-MtCisExoAdditionalStorageProvider](/docs/commands/Test-MtCisExoAdditionalStorageProvider) |
-| Tags | CIS, CIS E3, CIS E3 Level 2, CIS E5, CIS E5 Level 2, CIS M365 v6.0.1, CIS.M365.6.5.3, L2, Security |
+| Tags | CIS, CIS E3, CIS E3 Level 2, CIS E5, CIS E5 Level 2, CIS M365 v6.0.1, CIS.M365.6.5.3, ISO 27001, ISO 27002, ISO27001:5.14, ISO27002:5.14, L2, Security |
 
 ## Related Links
 

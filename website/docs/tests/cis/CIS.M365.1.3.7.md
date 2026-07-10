@@ -16,6 +16,10 @@ keywords:
   - "CIS E5"
   - "CIS E5 Level 2"
   - "CIS M365 v6.0.1"
+  - "ISO 27001"
+  - "ISO 27002"
+  - "ISO27001:5.14"
+  - "ISO27002:5.14"
   - "L2"
   - "Security"
 ---
@@ -73,7 +77,7 @@ Update-MgServicePrincipal -ServicePrincipalId $SP.Id -AccountEnabled:$false
 | Suite | CIS |
 | Category | CIS E3 Level 2 |
 | PowerShell test | [Test-MtCisThirdPartyStorageServicesRestricted](/docs/commands/Test-MtCisThirdPartyStorageServicesRestricted) |
-| Tags | CIS, CIS E3, CIS E3 Level 2, CIS E5, CIS E5 Level 2, CIS M365 v6.0.1, CIS.M365.1.3.7, L2, Security |
+| Tags | CIS, CIS E3, CIS E3 Level 2, CIS E5, CIS E5 Level 2, CIS M365 v6.0.1, CIS.M365.1.3.7, ISO 27001, ISO 27002, ISO27001:5.14, ISO27002:5.14, L2, Security |
 
 ## Remediation
 

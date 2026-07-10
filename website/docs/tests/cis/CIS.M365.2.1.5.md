@@ -14,6 +14,10 @@ keywords:
   - "CIS E5 Level 2"
   - "CIS E5"
   - "CIS M365 v6.0.1"
+  - "ISO 27001"
+  - "ISO 27002"
+  - "ISO27001:8.7"
+  - "ISO27002:8.7"
   - "L2"
 ---
 
@@ -72,7 +76,7 @@ Set-AtpPolicyForO365 -EnableATPForSPOTeamsODB $true -EnableSafeDocs $true -Allow
 | Suite | CIS |
 | Category | CIS E5 Level 2 |
 | PowerShell test | [Test-MtCisSafeAttachmentsAtpPolicy](/docs/commands/Test-MtCisSafeAttachmentsAtpPolicy) |
-| Tags | CIS, CIS E5, CIS E5 Level 2, CIS M365 v6.0.1, CIS.M365.2.1.5, L2 |
+| Tags | CIS, CIS E5, CIS E5 Level 2, CIS M365 v6.0.1, CIS.M365.2.1.5, ISO 27001, ISO 27002, ISO27001:8.7, ISO27002:8.7, L2 |
 
 ## Remediation
 

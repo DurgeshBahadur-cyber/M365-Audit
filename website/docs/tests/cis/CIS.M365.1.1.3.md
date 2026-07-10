@@ -14,6 +14,14 @@ keywords:
   - "CIS E3 Level 1"
   - "CIS E3"
   - "CIS M365 v6.0.1"
+  - "ISO 27001"
+  - "ISO 27002"
+  - "ISO27001:5.15"
+  - "ISO27001:5.16"
+  - "ISO27001:8.2"
+  - "ISO27002:5.15"
+  - "ISO27002:5.16"
+  - "ISO27002:8.2"
   - "L1"
 ---
 
@@ -73,7 +81,7 @@ To remove Global Admins:
 | Suite | CIS |
 | Category | CIS E3 Level 1 |
 | PowerShell test | [Test-MtCisGlobalAdminCount](/docs/commands/Test-MtCisGlobalAdminCount) |
-| Tags | CIS, CIS E3, CIS E3 Level 1, CIS M365 v6.0.1, CIS.M365.1.1.3, L1 |
+| Tags | CIS, CIS E3, CIS E3 Level 1, CIS M365 v6.0.1, CIS.M365.1.1.3, ISO 27001, ISO 27002, ISO27001:5.15, ISO27001:5.16, ISO27001:8.2, ISO27002:5.15, ISO27002:5.16, ISO27002:8.2, L1 |
 
 ## Remediation
 

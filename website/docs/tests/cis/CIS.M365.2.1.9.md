@@ -14,6 +14,12 @@ keywords:
   - "CIS E3 Level 1"
   - "CIS E3"
   - "CIS M365 v6.0.1"
+  - "ISO 27001"
+  - "ISO 27002"
+  - "ISO27001:8.20"
+  - "ISO27001:8.21"
+  - "ISO27002:8.20"
+  - "ISO27002:8.21"
   - "L1"
 ---
 
@@ -88,7 +94,7 @@ Set-DkimSigningConfig -Identity < domainName > -Enabled $True
 | Suite | CIS |
 | Category | CIS E3 Level 1 |
 | PowerShell test | [Test-MtCisDkim](/docs/commands/Test-MtCisDkim) |
-| Tags | CIS, CIS E3, CIS E3 Level 1, CIS M365 v6.0.1, CIS.M365.2.1.9, L1 |
+| Tags | CIS, CIS E3, CIS E3 Level 1, CIS M365 v6.0.1, CIS.M365.2.1.9, ISO 27001, ISO 27002, ISO27001:8.20, ISO27001:8.21, ISO27002:8.20, ISO27002:8.21, L1 |
 
 ## Remediation
 
