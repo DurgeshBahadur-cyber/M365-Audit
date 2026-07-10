@@ -1,4 +1,4 @@
-function Test-ORCA233{
+﻿function Test-ORCA233{
     <#
     .SYNOPSIS
     Domains are pointed directly at EOP or enhanced filtering is used.

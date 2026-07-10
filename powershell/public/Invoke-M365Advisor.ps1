@@ -1,4 +1,4 @@
-function Invoke-M365Advisor {
+﻿function Invoke-M365Advisor {
     <#
     .SYNOPSIS
     This is the main M365Advisor command that runs the tests and generates a report of the results.

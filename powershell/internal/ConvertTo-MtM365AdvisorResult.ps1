@@ -1,4 +1,4 @@
-function ConvertTo-MtM365AdvisorResult {
+﻿function ConvertTo-MtM365AdvisorResult {
     <#
     .SYNOPSIS
     Converts Pester results to the M365Advisor test results format which includes additional information.

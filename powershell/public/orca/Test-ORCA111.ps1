@@ -1,4 +1,4 @@
-function Test-ORCA111{
+﻿function Test-ORCA111{
     <#
     .SYNOPSIS
     Anti-phishing policy exists and EnableUnauthenticatedSender is true.

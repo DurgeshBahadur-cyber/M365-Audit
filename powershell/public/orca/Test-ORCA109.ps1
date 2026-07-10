@@ -1,4 +1,4 @@
-function Test-ORCA109{
+﻿function Test-ORCA109{
     <#
     .SYNOPSIS
     Senders are not being allow listed in an unsafe manner.

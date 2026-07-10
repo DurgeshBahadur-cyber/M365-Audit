@@ -1,4 +1,4 @@
-function Test-ORCA100{
+﻿function Test-ORCA100{
     <#
     .SYNOPSIS
     Bulk Complaint Level threshold is between 4 and 6.

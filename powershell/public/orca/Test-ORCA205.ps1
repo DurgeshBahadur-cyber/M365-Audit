@@ -1,4 +1,4 @@
-function Test-ORCA205{
+﻿function Test-ORCA205{
     <#
     .SYNOPSIS
     Common attachment type filter is enabled.

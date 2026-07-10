@@ -1,4 +1,4 @@
-function Test-ORCA142{
+﻿function Test-ORCA142{
     <#
     .SYNOPSIS
     Phish action set to Quarantine message.

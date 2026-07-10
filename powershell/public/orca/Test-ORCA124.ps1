@@ -1,4 +1,4 @@
-function Test-ORCA124{
+﻿function Test-ORCA124{
     <#
     .SYNOPSIS
     Safe attachments unknown malware response set to block messages.

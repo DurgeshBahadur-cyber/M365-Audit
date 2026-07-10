@@ -1,4 +1,4 @@
-function Test-ORCA227{
+﻿function Test-ORCA227{
     <#
     .SYNOPSIS
     Each domain has a Safe Attachments policy applied to it.

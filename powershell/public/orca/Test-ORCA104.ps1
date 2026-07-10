@@ -1,4 +1,4 @@
-function Test-ORCA104{
+﻿function Test-ORCA104{
     <#
     .SYNOPSIS
     High Confidence Phish action set to Quarantine message.

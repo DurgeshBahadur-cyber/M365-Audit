@@ -1,4 +1,4 @@
-function Test-ORCA229{
+﻿function Test-ORCA229{
     <#
     .SYNOPSIS
     No trusted domains in Anti-phishing policy.

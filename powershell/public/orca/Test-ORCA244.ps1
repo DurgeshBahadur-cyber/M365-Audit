@@ -1,4 +1,4 @@
-function Test-ORCA244{
+﻿function Test-ORCA244{
     <#
     .SYNOPSIS
     Policies are configured to honor sending domains DMARC.

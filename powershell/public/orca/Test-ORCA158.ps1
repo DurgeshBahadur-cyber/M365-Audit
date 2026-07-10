@@ -1,4 +1,4 @@
-function Test-ORCA158{
+﻿function Test-ORCA158{
     <#
     .SYNOPSIS
     Safe Attachments is enabled for SharePoint and Teams.

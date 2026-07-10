@@ -1,4 +1,4 @@
-function Test-ORCA141{
+﻿function Test-ORCA141{
     <#
     .SYNOPSIS
     Bulk action set to Move message to Junk Email Folder.

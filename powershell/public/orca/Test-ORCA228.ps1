@@ -1,4 +1,4 @@
-function Test-ORCA228{
+﻿function Test-ORCA228{
     <#
     .SYNOPSIS
     No trusted senders in Anti-phishing policy.

@@ -1,4 +1,4 @@
-function Test-MtPrivPermanentDirectoryRole {
+﻿function Test-MtPrivPermanentDirectoryRole {
     <#
     .Synopsis
     Checks if Permanent Assignments for Entra ID roles exists

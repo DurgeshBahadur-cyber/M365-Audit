@@ -71,7 +71,7 @@ const frameworks = [
     tag: "ISO 27001",
     setupCmd: "Install-Module Pester -SkipPublisherCheck -Force -Scope CurrentUser\nInstall-Module M365Advisor -Scope CurrentUser\n\nmd M365Advisor-tests\ncd M365Advisor-tests\nInstall-M365AdvisorTests",
     connectCmd: "Connect-M365Advisor",
-    runCmd: "Invoke-M365Advisor -Tag 'ISO 27001'"
+    runCmd: "Invoke-M365Advisor -Path .\\m365advisor-tests\\iso27001"
   },
   {
     id: "iso27002",
@@ -84,7 +84,7 @@ const frameworks = [
     tag: "ISO 27002",
     setupCmd: "Install-Module Pester -SkipPublisherCheck -Force -Scope CurrentUser\nInstall-Module M365Advisor -Scope CurrentUser\n\nmd M365Advisor-tests\ncd M365Advisor-tests\nInstall-M365AdvisorTests",
     connectCmd: "Connect-M365Advisor",
-    runCmd: "Invoke-M365Advisor -Tag 'ISO 27002'"
+    runCmd: "Invoke-M365Advisor -Path .\\m365advisor-tests\\iso27002"
   },
   /*
   {

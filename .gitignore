@@ -530,3 +530,4 @@ website/build/
 build/orca/orca/
 
 powershell/maester-tests
+powershell/m365advisor-tests

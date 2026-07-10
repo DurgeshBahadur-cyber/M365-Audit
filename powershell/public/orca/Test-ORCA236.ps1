@@ -1,4 +1,4 @@
-function Test-ORCA236{
+﻿function Test-ORCA236{
     <#
     .SYNOPSIS
     Safe Links is enabled for emails.

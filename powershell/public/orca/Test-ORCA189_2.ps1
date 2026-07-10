@@ -1,4 +1,4 @@
-function Test-ORCA189_2{
+﻿function Test-ORCA189_2{
     <#
     .SYNOPSIS
     Safe Links is not bypassed.

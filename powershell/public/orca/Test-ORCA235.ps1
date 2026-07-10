@@ -1,4 +1,4 @@
-function Test-ORCA235{
+﻿function Test-ORCA235{
     <#
     .SYNOPSIS
     SPF records is set up for all your custom domains.

@@ -1,4 +1,4 @@
-function Test-ORCA116{
+﻿function Test-ORCA116{
     <#
     .SYNOPSIS
     Mailbox intelligence based impersonation protection action set to move message to junk mail folder.

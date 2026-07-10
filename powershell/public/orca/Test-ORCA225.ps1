@@ -1,4 +1,4 @@
-function Test-ORCA225{
+﻿function Test-ORCA225{
     <#
     .SYNOPSIS
     Safe Documents is enabled for Office clients.

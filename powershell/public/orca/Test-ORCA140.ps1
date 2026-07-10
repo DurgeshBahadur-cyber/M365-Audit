@@ -1,4 +1,4 @@
-function Test-ORCA140{
+﻿function Test-ORCA140{
     <#
     .SYNOPSIS
     High Confidence Spam action set to Quarantine message.

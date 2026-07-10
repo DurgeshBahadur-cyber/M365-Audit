@@ -1,4 +1,4 @@
-function Test-ORCA238{
+﻿function Test-ORCA238{
     <#
     .SYNOPSIS
     Safe Links is enabled for office documents.

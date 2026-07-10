@@ -1,4 +1,4 @@
-function Test-ORCA156{
+﻿function Test-ORCA156{
     <#
     .SYNOPSIS
     Safe Links Policies are tracking when user clicks on safe links.

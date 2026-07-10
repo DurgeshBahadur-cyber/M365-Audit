@@ -1,4 +1,4 @@
-function Test-ORCA139{
+﻿function Test-ORCA139{
     <#
     .SYNOPSIS
     Spam action set to move message to junk mail folder or quarantine.

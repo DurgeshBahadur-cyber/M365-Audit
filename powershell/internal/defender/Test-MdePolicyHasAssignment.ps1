@@ -1,4 +1,4 @@
-function Test-MdePolicyHasAssignment {
+﻿function Test-MdePolicyHasAssignment {
     <#
     .SYNOPSIS
         Checks if a configuration policy is assigned to any groups or devices

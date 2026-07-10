@@ -1,4 +1,4 @@
-Describe "CISA" -Tag "MS.AAD", "MS.AAD.5.4", "CISA.MS.AAD.5.4", "CISA",  "Entra ID Free" {
+﻿Describe "CISA" -Tag "MS.AAD", "MS.AAD.5.4", "CISA.MS.AAD.5.4", "CISA",  "Entra ID Free" {
     It "CISA.MS.AAD.5.4: Group owners SHALL NOT be allowed to consent to applications." -Tag "Deprecated" {
         $result = Test-MtCisaAppGroupOwnerConsent
 

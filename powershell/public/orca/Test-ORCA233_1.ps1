@@ -1,4 +1,4 @@
-function Test-ORCA233_1{
+﻿function Test-ORCA233_1{
     <#
     .SYNOPSIS
     Domains are pointed directly at EOP or enhanced filtering is configured on all default connectors.

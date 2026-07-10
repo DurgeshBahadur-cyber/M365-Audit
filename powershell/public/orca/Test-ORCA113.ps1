@@ -1,4 +1,4 @@
-function Test-ORCA113{
+﻿function Test-ORCA113{
     <#
     .SYNOPSIS
     AllowClickThrough is disabled in Safe Links policies.

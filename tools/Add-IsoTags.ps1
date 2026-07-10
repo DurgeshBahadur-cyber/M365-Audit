@@ -1,4 +1,4 @@
-<#
+﻿<#
 .SYNOPSIS
     Adds ISO 27001:2022 and ISO 27002:2022 compliance tags to CIS Pester test files.
 .DESCRIPTION

@@ -1,4 +1,4 @@
-function Test-ORCA108{
+﻿function Test-ORCA108{
     <#
     .SYNOPSIS
     DKIM signing is set up for all your custom domains.

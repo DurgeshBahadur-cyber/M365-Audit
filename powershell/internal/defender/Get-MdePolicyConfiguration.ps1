@@ -1,4 +1,4 @@
-function Get-MdePolicyConfiguration {
+﻿function Get-MdePolicyConfiguration {
     <#
     .SYNOPSIS
         Gets Microsoft Defender Antivirus policies that are assigned to devices

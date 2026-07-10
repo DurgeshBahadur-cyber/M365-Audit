@@ -1,4 +1,4 @@
-function Get-MtMarkdownReport {
+﻿function Get-MtMarkdownReport {
     <#
     .Synopsis
      Generates a markdown report using the M365Advisor test results format.

@@ -1,4 +1,4 @@
-# Generated on 08/10/2025 15:41:32 by .\build\orca\Update-OrcaTests.ps1
+﻿# Generated on 08/10/2025 15:41:32 by .\build\orca\Update-OrcaTests.ps1
 
 Describe "ORCA" -Tag "ORCA", "ORCA.228", "EXO" {
     It "ORCA.228: No trusted senders in Anti-phishing policy." {

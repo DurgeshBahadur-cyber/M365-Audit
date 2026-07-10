@@ -1,4 +1,4 @@
-function Test-ORCA241{
+﻿function Test-ORCA241{
     <#
     .SYNOPSIS
     Anti-phishing policy exists and EnableFirstContactSafetyTips is true.

@@ -1,4 +1,4 @@
-function Test-ORCA112{
+﻿function Test-ORCA112{
     <#
     .SYNOPSIS
     Anti-spoofing protection action is configured to Move message to the recipients' Junk Email folders in Anti-phishing policy.

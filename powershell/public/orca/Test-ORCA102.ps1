@@ -1,4 +1,4 @@
-function Test-ORCA102{
+﻿function Test-ORCA102{
     <#
     .SYNOPSIS
     Advanced Spam filter options are turned off.

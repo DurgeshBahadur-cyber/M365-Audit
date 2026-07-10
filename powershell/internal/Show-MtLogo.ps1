@@ -1,4 +1,4 @@
-function Show-MtLogo {
+﻿function Show-MtLogo {
     [CmdletBinding()]
     [Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSAvoidUsingWriteHost', '', Justification = 'Colors are beautiful')]
     [OutputType([string])]

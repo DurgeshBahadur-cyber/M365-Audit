@@ -1,4 +1,4 @@
-function Test-ORCA232{
+﻿function Test-ORCA232{
     <#
     .SYNOPSIS
     Each domain has a malware filter policy applied to it, or the default policy is being used.

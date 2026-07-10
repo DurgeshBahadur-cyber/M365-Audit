@@ -1,4 +1,4 @@
-function Test-ORCA123{
+﻿function Test-ORCA123{
     <#
     .SYNOPSIS
     Unusual Characters Safety Tips is enabled.

@@ -1,4 +1,4 @@
-function Test-ORCA222{
+﻿function Test-ORCA222{
     <#
     .SYNOPSIS
     Domain Impersonation action is set to move to Quarantine.

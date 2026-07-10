@@ -1,4 +1,4 @@
-BeforeDiscovery {
+﻿BeforeDiscovery {
     try {
         $EntraIDPlan = Get-MtLicenseInformation -Product 'EntraID'
         $RegularUsers = Get-MtUser -Count 5 -UserType 'Member'

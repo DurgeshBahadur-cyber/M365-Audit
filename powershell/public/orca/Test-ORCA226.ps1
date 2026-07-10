@@ -1,4 +1,4 @@
-function Test-ORCA226{
+﻿function Test-ORCA226{
     <#
     .SYNOPSIS
     Each domain has a Safe Link policy applied to it.

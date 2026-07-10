@@ -1,4 +1,4 @@
-function Test-ORCA239{
+﻿function Test-ORCA239{
     <#
     .SYNOPSIS
     No exclusions for the built-in protection policies.

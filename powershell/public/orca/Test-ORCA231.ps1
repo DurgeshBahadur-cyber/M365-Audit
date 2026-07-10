@@ -1,4 +1,4 @@
-function Test-ORCA231{
+﻿function Test-ORCA231{
     <#
     .SYNOPSIS
     Each domain has a anti-spam policy applied to it, or the default policy is being used.

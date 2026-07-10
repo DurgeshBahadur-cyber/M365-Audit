@@ -1,4 +1,4 @@
-function Test-ORCA242{
+﻿function Test-ORCA242{
     <#
     .SYNOPSIS
     Important protection alerts responsible for AIR activities are enabled.

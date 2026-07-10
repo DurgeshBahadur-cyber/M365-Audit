@@ -1,4 +1,4 @@
-function Test-ORCA243{
+﻿function Test-ORCA243{
     <#
     .SYNOPSIS
     Authenticated Receive Chain is set up for domains not pointing to EOP/MDO, or all domains point to EOP/MDO.

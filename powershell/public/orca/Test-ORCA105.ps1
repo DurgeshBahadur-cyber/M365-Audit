@@ -1,4 +1,4 @@
-function Test-ORCA105{
+﻿function Test-ORCA105{
     <#
     .SYNOPSIS
     Safe Links Synchronous URL detonation is enabled.

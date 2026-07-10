@@ -1,4 +1,4 @@
-function Invoke-MtGraphSecurityQuery {
+﻿function Invoke-MtGraphSecurityQuery {
     <#
     .SYNOPSIS
     Execute KQL query in Microsoft 365 Defender Advanced Hunting by using Graph API Security endpoint to get results programmatically.

@@ -1,4 +1,4 @@
-function Test-ORCA107{
+﻿function Test-ORCA107{
     <#
     .SYNOPSIS
     End-user spam notification is enabled.

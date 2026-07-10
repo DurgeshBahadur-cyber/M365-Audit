@@ -1,4 +1,4 @@
-function Test-ORCA224{
+﻿function Test-ORCA224{
     <#
     .SYNOPSIS
     Similar Users Safety Tips is enabled.

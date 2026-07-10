@@ -1,4 +1,4 @@
-function Test-MdePolicyCompliance {
+﻿function Test-MdePolicyCompliance {
     <#
     .SYNOPSIS
         Tests policy compliance for an MDE setting across all assigned policies

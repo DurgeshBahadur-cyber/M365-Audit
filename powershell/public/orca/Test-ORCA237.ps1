@@ -1,4 +1,4 @@
-function Test-ORCA237{
+﻿function Test-ORCA237{
     <#
     .SYNOPSIS
     Safe Links is enabled for teams messages.

@@ -1,4 +1,4 @@
-function Test-MtPimAlertsExists {
+﻿function Test-MtPimAlertsExists {
     <#
     .Synopsis
     Checks if PIM alerts exists

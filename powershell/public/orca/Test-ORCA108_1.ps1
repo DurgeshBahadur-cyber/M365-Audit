@@ -1,4 +1,4 @@
-function Test-ORCA108_1{
+﻿function Test-ORCA108_1{
     <#
     .SYNOPSIS
     DNS Records have been set up to support DKIM.

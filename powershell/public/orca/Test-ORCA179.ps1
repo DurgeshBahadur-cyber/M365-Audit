@@ -1,4 +1,4 @@
-function Test-ORCA179{
+﻿function Test-ORCA179{
     <#
     .SYNOPSIS
     Safe Links is enabled intra-organization.

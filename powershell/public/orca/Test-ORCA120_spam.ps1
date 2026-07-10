@@ -1,4 +1,4 @@
-function Test-ORCA120_spam{
+﻿function Test-ORCA120_spam{
     <#
     .SYNOPSIS
     Zero Hour Autopurge Enabled for Spam.

@@ -1,4 +1,4 @@
-function Test-ORCA118_3{
+﻿function Test-ORCA118_3{
     <#
     .SYNOPSIS
     Your own domains are not being allow listed in an unsafe manner in Anti-Spam Policies.

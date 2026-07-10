@@ -1,4 +1,4 @@
-function Test-ORCA234{
+﻿function Test-ORCA234{
     <#
     .SYNOPSIS
     Click through is disabled for Safe Documents.

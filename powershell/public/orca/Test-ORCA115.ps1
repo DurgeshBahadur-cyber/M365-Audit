@@ -1,4 +1,4 @@
-function Test-ORCA115{
+﻿function Test-ORCA115{
     <#
     .SYNOPSIS
     Mailbox intelligence based impersonation protection is enabled in anti-phishing policies.

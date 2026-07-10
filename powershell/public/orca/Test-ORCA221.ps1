@@ -1,4 +1,4 @@
-function Test-ORCA221{
+﻿function Test-ORCA221{
     <#
     .SYNOPSIS
     Mailbox intelligence is enabled in anti-phishing policies.

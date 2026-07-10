@@ -1,4 +1,4 @@
-function Invoke-MtGraphRequest {
+﻿function Invoke-MtGraphRequest {
     <#
     .SYNOPSIS
     Enhanced version of Invoke-MgGraphRequest that supports paging, batching and caching.

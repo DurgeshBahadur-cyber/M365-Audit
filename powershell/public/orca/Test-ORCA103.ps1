@@ -1,4 +1,4 @@
-function Test-ORCA103{
+﻿function Test-ORCA103{
     <#
     .SYNOPSIS
     Outbound spam filter policy settings configured.

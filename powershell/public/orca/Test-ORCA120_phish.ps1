@@ -1,4 +1,4 @@
-function Test-ORCA120_phish{
+﻿function Test-ORCA120_phish{
     <#
     .SYNOPSIS
     Zero Hour Autopurge Enabled for Phish.

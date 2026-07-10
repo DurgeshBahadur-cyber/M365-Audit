@@ -1,4 +1,4 @@
-<#
+﻿<#
 .SYNOPSIS
     Builds the M365Advisor PowerShell module into a consolidated, publishable artifact.
 
@@ -139,11 +139,11 @@ function Set-Utf8BomContent {
     [System.IO.File]::WriteAllText($Path, $Value, $Utf8BomEncoding)
 }
 
-# ──────────────────────────────────────────────────────────────────────────────
-# Phase A — Clean and recreate the output directory
-# ──────────────────────────────────────────────────────────────────────────────
+# ------------------------------------------------------------------------------
+# Phase A - Clean and recreate the output directory
+# ------------------------------------------------------------------------------
 
-Write-Host '── Phase A: Preparing output directory' -ForegroundColor Cyan
+Write-Host '-- Phase A: Preparing output directory' -ForegroundColor Cyan
 
 # Safety guard: reject OutputRoot paths that could cause catastrophic deletion.
 $RepoRoot = (Resolve-Path -LiteralPath "$PSScriptRoot/..").Path
@@ -168,11 +168,11 @@ $OutputRoot = (Resolve-Path -LiteralPath $OutputRoot).Path
 
 Write-Host "   Output: $OutputRoot"
 
-# ──────────────────────────────────────────────────────────────────────────────
-# Phase B — AST parsing: collect FunctionsToExport from public source files
-# ──────────────────────────────────────────────────────────────────────────────
+# ------------------------------------------------------------------------------
+# Phase B - AST parsing: collect FunctionsToExport from public source files
+# ------------------------------------------------------------------------------
 
-Write-Host '── Phase B: Parsing public functions (AST)' -ForegroundColor Cyan
+Write-Host '-- Phase B: Parsing public functions (AST)' -ForegroundColor Cyan
 
 $PublicSourceFiles = @(Get-ChildItem -Path "$SourceRoot/public" -Filter '*.ps1' -Recurse |
     Where-Object { $_.Name -notlike '*.Tests.ps1' } |
@@ -186,7 +186,7 @@ foreach ($File in $PublicSourceFiles) {
     $Ast = Get-PowerShellAst -Path $File.FullName
 
     # Find top-level function definitions only (not nested inside other functions
-    # and not nested anywhere inside a type definition). Walk the full parent chain — any
+    # and not nested anywhere inside a type definition). Walk the full parent chain - any
     # FunctionDefinitionAst or TypeDefinitionAst ancestor means this function definition is nested,
     # regardless of intermediate block types.
     $TopLevelFunctions = $Ast.FindAll({
@@ -229,12 +229,12 @@ foreach ($File in $PublicSourceFiles) {
 
     $AdditionalTopLevelFunctions = $TopLevelFunctions | Where-Object { $_.Name -ne $File.BaseName }
     foreach ($Extra in $AdditionalTopLevelFunctions) {
-        Write-Warning "Skipping additional top-level function '$($Extra.Name)' in '$($File.Name)' — only '$($File.BaseName)' is exported"
+        Write-Warning "Skipping additional top-level function '$($Extra.Name)' in '$($File.Name)' - only '$($File.BaseName)' is exported"
     }
 
     # Only export functions that follow the Verb-Noun naming convention.
     if ($MatchingFunction.Name -notmatch '-') {
-        Write-Warning "Skipping '$($MatchingFunction.Name)' in '$($File.Name)' — not a Verb-Noun function"
+        Write-Warning "Skipping '$($MatchingFunction.Name)' in '$($File.Name)' - not a Verb-Noun function"
         continue
     }
 
@@ -249,7 +249,7 @@ foreach ($File in $PublicSourceFiles) {
 
 $ExportFunctionList.Sort([System.StringComparer]::OrdinalIgnoreCase)
 
-# Deduplicate — some helper functions (e.g., SPFRecord) are defined in multiple files.
+# Deduplicate - some helper functions (e.g., SPFRecord) are defined in multiple files.
 $SeenFunctions = [System.Collections.Generic.HashSet[string]]::new([System.StringComparer]::OrdinalIgnoreCase)
 $DuplicateNames = [System.Collections.Generic.List[string]]::new()
 foreach ($Name in $ExportFunctionList) {
@@ -268,11 +268,11 @@ if ($DuplicateNames.Count -gt 0) {
 
 Write-Host "   Found $($ExportFunctionList.Count) public functions"
 
-# ──────────────────────────────────────────────────────────────────────────────
-# Phase C — Consolidate internal + public .ps1 files into M365Advisor.psm1
-# ──────────────────────────────────────────────────────────────────────────────
+# ------------------------------------------------------------------------------
+# Phase C - Consolidate internal + public .ps1 files into M365Advisor.psm1
+# ------------------------------------------------------------------------------
 
-Write-Host '── Phase C: Consolidating M365Advisor.psm1' -ForegroundColor Cyan
+Write-Host '-- Phase C: Consolidating M365Advisor.psm1' -ForegroundColor Cyan
 
 $InternalFiles = @(Get-ChildItem -Path "$SourceRoot/internal" -Filter '*.ps1' -Recurse |
     Where-Object {
@@ -289,7 +289,7 @@ Write-Host "   Internal files: $($InternalFiles.Count)"
 Write-Host "   Public files:   $($PublicFiles.Count)"
 
 # Helper: compute directory depth of a file relative to $SourceRoot.
-# e.g. powershell/internal/foo.ps1 → depth 1, powershell/public/core/bar.ps1 → depth 2
+# e.g. powershell/internal/foo.ps1 -> depth 1, powershell/public/core/bar.ps1 -> depth 2
 function Get-RelativeDepth {
     param (
         [string] $FilePath,
@@ -324,11 +324,11 @@ function Resolve-ConsolidatedPaths {
     $ForwardPattern = ('../' * $Depth)
     $BackslashPattern = ('..\' * $Depth)
 
-    # Pattern A: inline string interpolation — $PSScriptRoot/../... or $PSScriptRoot\..\...
+    # Pattern A: inline string interpolation - $PSScriptRoot/../... or $PSScriptRoot\..\...
     $Content = $Content.Replace("`$PSScriptRoot/$ForwardPattern", '$PSScriptRoot/')
     $Content = $Content.Replace("`$PSScriptRoot\$BackslashPattern", '$PSScriptRoot\')
 
-    # Pattern B: Join-Path with separate -ChildPath string arguments — '../...' or '..\..'
+    # Pattern B: Join-Path with separate -ChildPath string arguments - '../...' or '..\..'
     # Process line-by-line to only adjust lines that reference $PSScriptRoot.
     $Lines = $Content -split "`n"
     $AdjustedLines = [System.Collections.Generic.List[string]]::new($Lines.Count)
@@ -345,7 +345,7 @@ function Resolve-ConsolidatedPaths {
 
     # Safety check: warn about any remaining parent-directory navigation after $PSScriptRoot
     if ($Content -match '\$PSScriptRoot[/\\]\.\.') {
-        Write-Warning "Remaining `$PSScriptRoot/.. reference in consolidated content from '$FileName' — manual review recommended"
+        Write-Warning "Remaining `$PSScriptRoot/.. reference in consolidated content from '$FileName' - manual review recommended"
     }
 
     return $Content
@@ -390,7 +390,7 @@ function Remove-FileLevelPreamble {
             }
 
             if ($Trimmed -eq '' -or $Trimmed.StartsWith('#')) {
-                # Blank lines and regular comments — keep in preamble region.
+                # Blank lines and regular comments - keep in preamble region.
                 # But skip "# Generated by" comments.
                 if ($Trimmed -match $GeneratedPattern) {
                     $StrippedItems.Add('Generated-by comment')
@@ -417,7 +417,7 @@ function Remove-FileLevelPreamble {
                 continue
             }
 
-            # This line is actual code — exit preamble mode and keep it.
+            # This line is actual code - exit preamble mode and keep it.
             $InPreamble = $false
             $Result.Add($Line)
         } else {
@@ -474,7 +474,7 @@ if ($Format) {
 $Builder = [System.Text.StringBuilder]::new()
 
 # Preamble: module header, #Requires, and session variable initialization.
-# Extracted from the source M365Advisor.psm1 — the dot-sourcing loops are replaced by
+# Extracted from the source M365Advisor.psm1 - the dot-sourcing loops are replaced by
 # the inline consolidated content below.
 $null = $Builder.AppendLine(@'
 <#
@@ -522,7 +522,7 @@ foreach ($File in $InternalFiles) {
         $FileContent = Format-SourceContent -Content $FileContent -FileName $File.Name
     }
 
-    $null = $Builder.AppendLine("# ── $($File.Name) ──")
+    $null = $Builder.AppendLine("# -- $($File.Name) --")
     $null = $Builder.AppendLine($FileContent.TrimEnd())
     $null = $Builder.AppendLine()
 }
@@ -541,7 +541,7 @@ foreach ($File in $PublicFiles) {
         $FileContent = Format-SourceContent -Content $FileContent -FileName $File.Name
     }
 
-    $null = $Builder.AppendLine("# ── $($File.Name) ──")
+    $null = $Builder.AppendLine("# -- $($File.Name) --")
     $null = $Builder.AppendLine($FileContent.TrimEnd())
     $null = $Builder.AppendLine()
 }
@@ -578,27 +578,27 @@ Write-Host '   Written: M365Advisor.psm1'
 $null = Get-PowerShellAst -Path $OutputPsm1
 Write-Host '   Validated: M365Advisor.psm1 syntax'
 
-# ──────────────────────────────────────────────────────────────────────────────
-# Phase D — Consolidate ORCA class files into OrcaClasses.ps1
-# ──────────────────────────────────────────────────────────────────────────────
+# ------------------------------------------------------------------------------
+# Phase D - Consolidate ORCA class files into OrcaClasses.ps1
+# ------------------------------------------------------------------------------
 
-Write-Host '── Phase D: Consolidating ORCA classes' -ForegroundColor Cyan
+Write-Host '-- Phase D: Consolidating ORCA classes' -ForegroundColor Cyan
 
 $OrcaBuilder = [System.Text.StringBuilder]::new()
 
-# Base classes and enums from orcaClass.psm1 — must come first (defines all base
+# Base classes and enums from orcaClass.psm1 - must come first (defines all base
 # types before any derived check classes).
 $OrcaClassPath = Join-Path $SourceRoot 'internal/orca/orcaClass.psm1'
 $OrcaBaseContent = Get-Content -Path $OrcaClassPath -Raw
 
 $null = $OrcaBuilder.AppendLine('# Consolidated ORCA class definitions')
-$null = $OrcaBuilder.AppendLine('# Generated by Build-M365AdvisorModule.ps1 — do not edit manually.')
+$null = $OrcaBuilder.AppendLine('# Generated by Build-M365AdvisorModule.ps1 - do not edit manually.')
 $null = $OrcaBuilder.AppendLine()
-$null = $OrcaBuilder.AppendLine('# ── Base Classes and Enums (orcaClass.psm1) ──')
+$null = $OrcaBuilder.AppendLine('# -- Base Classes and Enums (orcaClass.psm1) --')
 $null = $OrcaBuilder.AppendLine($OrcaBaseContent.TrimEnd())
 $null = $OrcaBuilder.AppendLine()
 
-# Derived check classes — each check-ORCA*.ps1 file defines a class that inherits
+# Derived check classes - each check-ORCA*.ps1 file defines a class that inherits
 # from ORCACheck. The `using module` directive is stripped because the base classes
 # are now defined inline above.
 $OrcaCheckFiles = @(Get-ChildItem -Path "$SourceRoot/internal/orca" -Filter 'check-ORCA*.ps1' -Recurse |
@@ -623,7 +623,7 @@ foreach ($File in $OrcaCheckFiles) {
                 Where-Object { $_ -notmatch $UsingModulePattern }) -join "`n"
     }
 
-    $null = $OrcaBuilder.AppendLine("# ── $($File.Name) ──")
+    $null = $OrcaBuilder.AppendLine("# -- $($File.Name) --")
     $null = $OrcaBuilder.AppendLine($FileContent.TrimEnd())
     $null = $OrcaBuilder.AppendLine()
 }
@@ -634,12 +634,12 @@ Write-Host "   Written: OrcaClasses.ps1 ($($OrcaCheckFiles.Count) check classes)
 $null = Get-PowerShellAst -Path $OutputOrcaClasses
 Write-Host '   Validated: OrcaClasses.ps1 syntax'
 
-# ──────────────────────────────────────────────────────────────────────────────
-# Phase E — Copy static assets (must run before manifest update so that
+# ------------------------------------------------------------------------------
+# Phase E - Copy static assets (must run before manifest update so that
 #           FormatsToProcess references can be validated)
-# ──────────────────────────────────────────────────────────────────────────────
+# ------------------------------------------------------------------------------
 
-Write-Host '── Phase E: Copying static assets' -ForegroundColor Cyan
+Write-Host '-- Phase E: Copying static assets' -ForegroundColor Cyan
 
 # Assets directory
 $AssetsSource = Join-Path $SourceRoot 'assets'
@@ -681,11 +681,11 @@ if (Test-Path -LiteralPath $ReadmeFile) {
 }
 #>
 
-# ──────────────────────────────────────────────────────────────────────────────
-# Phase F — Copy and update module manifest
-# ──────────────────────────────────────────────────────────────────────────────
+# ------------------------------------------------------------------------------
+# Phase F - Copy and update module manifest
+# ------------------------------------------------------------------------------
 
-Write-Host '── Phase F: Updating module manifest' -ForegroundColor Cyan
+Write-Host '-- Phase F: Updating module manifest' -ForegroundColor Cyan
 
 $OutputManifest = Join-Path $OutputRoot 'M365Advisor.psd1'
 Copy-Item -Path "$SourceRoot/M365Advisor.psd1" -Destination $OutputManifest -Force
@@ -720,22 +720,22 @@ if ($manifestTemplate -match $requiredModulesPattern) {
 Write-Host "   FunctionsToExport: $($ExportFunctionList.Count) functions"
 Write-Host '   ScriptsToProcess:  OrcaClasses.ps1'
 
-# ──────────────────────────────────────────────────────────────────────────────
-# Phase G — Copy tests as-is and preserve Pester file boundaries
-# ──────────────────────────────────────────────────────────────────────────────
+# ------------------------------------------------------------------------------
+# Phase G - Copy tests as-is and preserve Pester file boundaries
+# ------------------------------------------------------------------------------
 
-Write-Host '── Phase G: Copying test suites' -ForegroundColor Cyan
+Write-Host '-- Phase G: Copying test suites' -ForegroundColor Cyan
 
 $TestsOutput = Join-Path $OutputRoot 'm365advisor-tests'
 Copy-Item -Path $TestsRoot -Destination $TestsOutput -Recurse -Force
-Write-Host '   Copied: tests/ → m365advisor-tests/'
+Write-Host '   Copied: tests/ -> m365advisor-tests/'
 
-# ──────────────────────────────────────────────────────────────────────────────
-# Phase H — Build profiling (optional)
-# ──────────────────────────────────────────────────────────────────────────────
+# ------------------------------------------------------------------------------
+# Phase H - Build profiling (optional)
+# ------------------------------------------------------------------------------
 
 if ($Profile) {
-    Write-Host '── Phase H: Profiling module import' -ForegroundColor Cyan
+    Write-Host '-- Phase H: Profiling module import' -ForegroundColor Cyan
 
     $OutputManifestPath = Join-Path $OutputRoot 'M365Advisor.psd1'
     $ImportTimer = [System.Diagnostics.Stopwatch]::StartNew()
@@ -755,12 +755,12 @@ if ($Profile) {
     $ImportedModules | Remove-Module -Force -ErrorAction SilentlyContinue
 }
 
-# ──────────────────────────────────────────────────────────────────────────────
+# ------------------------------------------------------------------------------
 # Summary
-# ──────────────────────────────────────────────────────────────────────────────
+# ------------------------------------------------------------------------------
 
 Write-Host ''
-Write-Host '── Build complete' -ForegroundColor Green
+Write-Host '-- Build complete' -ForegroundColor Green
 Write-Host "   Output directory: $OutputRoot"
 Write-Host '   Consolidated PSM1: M365Advisor.psm1'
 Write-Host '   ORCA classes:      OrcaClasses.ps1'

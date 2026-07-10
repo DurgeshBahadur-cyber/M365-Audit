@@ -1,4 +1,4 @@
-function Test-ORCA118_2{
+﻿function Test-ORCA118_2{
     <#
     .SYNOPSIS
     Domains are not being allow listed in an unsafe manner in Transport Rules.

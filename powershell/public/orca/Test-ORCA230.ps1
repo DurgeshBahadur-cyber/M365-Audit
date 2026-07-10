@@ -1,4 +1,4 @@
-function Test-ORCA230{
+﻿function Test-ORCA230{
     <#
     .SYNOPSIS
     Each domain has a Anti-phishing policy applied to it, or the default policy is being used.

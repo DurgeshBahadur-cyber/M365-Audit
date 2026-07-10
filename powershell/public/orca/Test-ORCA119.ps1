@@ -1,4 +1,4 @@
-function Test-ORCA119{
+﻿function Test-ORCA119{
     <#
     .SYNOPSIS
     Similar Domains Safety Tips is enabled.

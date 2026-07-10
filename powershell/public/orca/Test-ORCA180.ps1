@@ -1,4 +1,4 @@
-function Test-ORCA180{
+﻿function Test-ORCA180{
     <#
     .SYNOPSIS
     Anti-phishing policy exists and EnableSpoofIntelligence is true.

@@ -1,4 +1,4 @@
-function Test-ORCA240{
+﻿function Test-ORCA240{
     <#
     .SYNOPSIS
     Outlook is configured to display external tags for external emails.

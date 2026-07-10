@@ -1,4 +1,4 @@
-# Generated on 08/10/2025 15:41:31 by .\build\orca\Update-OrcaTests.ps1
+﻿# Generated on 08/10/2025 15:41:31 by .\build\orca\Update-OrcaTests.ps1
 
 Describe "ORCA" -Tag "ORCA", "ORCA.118.3", "EXO" {
     It "ORCA.118.3: Your own domains are not being allow listed in an unsafe manner in Anti-Spam Policies." {

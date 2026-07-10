@@ -1,4 +1,4 @@
-function Test-ORCA118_1{
+﻿function Test-ORCA118_1{
     <#
     .SYNOPSIS
     Domains are not being allow listed in an unsafe manner in Anti-Spam Policies.

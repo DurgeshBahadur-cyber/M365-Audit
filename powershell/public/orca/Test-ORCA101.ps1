@@ -1,4 +1,4 @@
-function Test-ORCA101{
+﻿function Test-ORCA101{
     <#
     .SYNOPSIS
     Bulk is marked as spam.
