@@ -1,4 +1,4 @@
-﻿---
+---
 sidebar_class_name: hidden
 description: "Send an email with the summary of the M365Advisor test results"
 id: Send-MtMail
@@ -15,8 +15,9 @@ Send an email with the summary of the M365Advisor test results
 ## SYNTAX
 
 ```powershell
-Send-MtMail [-M365AdvisorResults] <PSObject> [-Recipient] <String[]> [-Subject <String>] [-TestResultsUri <String>]
- [-CreateBodyOnly] [-UserId <String>] [-ProgressAction <ActionPreference>] [<CommonParameters>]
+Send-MtMail [-M365AdvisorResults] <PSObject> [-Recipient] <String[]> [-Subject <String>]
+ [-TestResultsUri <String>] [-CreateBodyOnly] [-UserId <String>] [-ProgressAction <ActionPreference>]
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -179,4 +180,3 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## RELATED LINKS
 
 [https://m365advisor.dev/docs/commands/Send-MtMail](https://m365advisor.dev/docs/commands/Send-MtMail)
-

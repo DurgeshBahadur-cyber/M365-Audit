@@ -56,7 +56,7 @@ const frameworks = [
     glow: "rgba(251, 146, 60, 0.15)",
     icon: "🌀",
     tag: "CIS Benchmark",
-    setupCmd: "Install-Module Pester -SkipPublisherCheck -Force -Scope CurrentUser\nInstall-Module M365Advisor -Scope CurrentUser\n\nmd M365Advisor-tests\ncd M365Advisor-tests\nInstall-M365AdvisorTests",
+    setupCmd: "Install-Module Pester -SkipPublisherCheck -Force -Scope CurrentUser -AllowClobber\nInstall-Module M365Advisor -Scope CurrentUser -Force -AllowClobber\n\nif (-not (Test-Path M365Advisor-tests)) { md M365Advisor-tests }\ncd M365Advisor-tests\nInstall-M365AdvisorTests -Force",
     connectCmd: "Connect-M365Advisor",
     runCmd: "Invoke-M365Advisor -Tag 'CIS'"
   },
@@ -69,9 +69,9 @@ const frameworks = [
     glow: "rgba(5, 150, 105, 0.15)",
     icon: "🌐",
     tag: "ISO 27001",
-    setupCmd: "Install-Module Pester -SkipPublisherCheck -Force -Scope CurrentUser\nInstall-Module M365Advisor -Scope CurrentUser\n\nmd M365Advisor-tests\ncd M365Advisor-tests\nInstall-M365AdvisorTests",
+    setupCmd: "Install-Module Pester -SkipPublisherCheck -Force -Scope CurrentUser -AllowClobber\nInstall-Module M365Advisor -Scope CurrentUser -Force -AllowClobber\n\nif (-not (Test-Path M365Advisor-tests)) { md M365Advisor-tests }\ncd M365Advisor-tests\nInstall-M365AdvisorTests -Force",
     connectCmd: "Connect-M365Advisor",
-    runCmd: "Invoke-M365Advisor -Path .\\m365advisor-tests\\iso27001"
+    runCmd: "Invoke-M365Advisor -Path .\\iso27001"
   },
   {
     id: "iso27002",
@@ -82,9 +82,9 @@ const frameworks = [
     glow: "rgba(13, 148, 136, 0.15)",
     icon: "📋",
     tag: "ISO 27002",
-    setupCmd: "Install-Module Pester -SkipPublisherCheck -Force -Scope CurrentUser\nInstall-Module M365Advisor -Scope CurrentUser\n\nmd M365Advisor-tests\ncd M365Advisor-tests\nInstall-M365AdvisorTests",
+    setupCmd: "Install-Module Pester -SkipPublisherCheck -Force -Scope CurrentUser -AllowClobber\nInstall-Module M365Advisor -Scope CurrentUser -Force -AllowClobber\n\nif (-not (Test-Path M365Advisor-tests)) { md M365Advisor-tests }\ncd M365Advisor-tests\nInstall-M365AdvisorTests -Force",
     connectCmd: "Connect-M365Advisor",
-    runCmd: "Invoke-M365Advisor -Path .\\m365advisor-tests\\iso27002"
+    runCmd: "Invoke-M365Advisor -Path .\\iso27002"
   },
   /*
   {
@@ -155,9 +155,6 @@ export default function GetStarted() {
 
   const handleContinue = () => {
     setStep(2);
-    setTimeout(() => {
-      handleDownloadCmd(selectedFramework);
-    }, 300);
   };
 
   return (
@@ -259,7 +256,7 @@ export default function GetStarted() {
                     </div>
                     <div className={styles.launcherTitleSection}>
                       <h3 className={styles.launcherCardTitle}>One-Click Automated Assessment</h3>
-                      <p className={styles.launcherCardStatus}>📥 Launcher script generated & downloaded!</p>
+                      <p className={styles.launcherCardStatus}>📥 Launcher script is ready!</p>
                     </div>
                   </div>
                   
@@ -274,7 +271,7 @@ export default function GetStarted() {
                       onClick={() => handleDownloadCmd(selectedFramework)}
                       type="button"
                     >
-                      📥 Download Launcher Again
+                      📥 Download Launcher Script
                     </button>
                   </div>
 

@@ -1,4 +1,4 @@
-﻿---
+---
 sidebar_class_name: hidden
 description: "Installs the latest ready-made M365Advisor tests built by the M365Advisor team and the required Pester module."
 id: Install-M365AdvisorTests
@@ -15,7 +15,7 @@ Installs the latest ready-made M365Advisor tests built by the M365Advisor team a
 ## SYNTAX
 
 ```powershell
-Install-M365AdvisorTests [[-Path] <String>] [-SkipPesterCheck] [-ProgressAction <ActionPreference>]
+Install-M365AdvisorTests [[-Path] <String>] [-SkipPesterCheck] [-Force] [-ProgressAction <ActionPreference>]
  [<CommonParameters>]
 ```
 
@@ -87,6 +87,22 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
+### -Force
+
+Forces the installation and overwrites existing test files without prompting.
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### -ProgressAction
 
 \{\{ Fill ProgressAction Description \}\}
@@ -116,4 +132,3 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## RELATED LINKS
 
 [https://m365advisor.dev/docs/commands/Install-M365AdvisorTests](https://m365advisor.dev/docs/commands/Install-M365AdvisorTests)
-

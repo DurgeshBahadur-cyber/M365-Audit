@@ -1,4 +1,4 @@
-﻿---
+---
 id: commands-overview
 title: M365Advisor Commands Overview
 sidebar_class_name: powershell

@@ -1,4 +1,4 @@
-﻿function Install-M365AdvisorTests {
+function Install-M365AdvisorTests {
     <#
     .SYNOPSIS
     Installs the latest ready-made M365Advisor tests built by the M365Advisor team and the required Pester module.
@@ -11,8 +11,11 @@
     .PARAMETER Path
     The path to install the M365Advisor tests in. Defaults to the current directory.
 
-    .Parameter SkipPesterCheck
+    .PARAMETER SkipPesterCheck
     Skips the automatic installation check for Pester.
+
+    .PARAMETER Force
+    Forces the installation and overwrites existing test files without prompting.
 
     .EXAMPLE
     Install-M365AdvisorTests
@@ -42,7 +45,11 @@
 
         # Skip automatic installation of Pester
         [Parameter(Mandatory = $false)]
-        [switch] $SkipPesterCheck
+        [switch] $SkipPesterCheck,
+
+        # Force the installation and overwrite of tests without prompting
+        [Parameter(Mandatory = $false)]
+        [switch] $Force
     )
 
     # Note: If testing this locally in dev, you will need to run ./build/Copy-M365AdvisorTestsToPSModule.ps1 to copy the tests to the correct location.
@@ -72,14 +79,16 @@
 
     # Check if current folder is empty and prompt user to continue if it is not
     if ($targetFolderExists -and (Get-ChildItem -Path $Path).Count -gt 0) {
-        $message = "`nThe folder $Path is not empty.`nWe recommend installing the tests in an empty folder.`nDo you want to continue with this folder? (y/n): "
-        $continue = Get-MtConfirmation $message
-        if (!$continue) {
-            Write-Host "M365Advisor tests not installed." -ForegroundColor Red
-            return
+        if (!$Force) {
+            $message = "`nThe folder $Path is not empty.`nWe recommend installing the tests in an empty folder.`nDo you want to continue with this folder? (y/n): "
+            $continue = Get-MtConfirmation $message
+            if (!$continue) {
+                Write-Host "M365Advisor tests not installed." -ForegroundColor Red
+                return
+            }
         }
     }
 
-    Update-MtM365AdvisorTests -Path $Path -Install
+    Update-MtM365AdvisorTests -Path $Path -Install -Force:$Force
 }
 
