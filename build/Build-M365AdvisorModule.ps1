@@ -1,4 +1,4 @@
-﻿<#
+<#
 .SYNOPSIS
     Builds the M365Advisor PowerShell module into a consolidated, publishable artifact.
 
@@ -651,8 +651,8 @@ Write-Host '   Copied: assets/'
 $PublicSource = Join-Path $SourceRoot 'public'
 $PublicOutput = Join-Path $OutputRoot 'public'
 if (Test-Path $PublicSource) {
-    # Get all .md files under public/ and copy them preserving directory structure
-    Get-ChildItem -Path $PublicSource -Filter *.md -Recurse | ForEach-Object {
+    # Get all .md and .json files under public/ and copy them preserving directory structure
+    Get-ChildItem -Path $PublicSource -Include *.md, *.json -Recurse | ForEach-Object {
         $relativeDir = Split-Path $_.FullName.Substring($PublicSource.Length)
         # Trim leading slash if any
         $relativeDir = $relativeDir.TrimStart('\').TrimStart('/')
@@ -662,7 +662,7 @@ if (Test-Path $PublicSource) {
         }
         Copy-Item -Path $_.FullName -Destination $destDir -Force
     }
-    Write-Host '   Copied: public/ *.md files'
+    Write-Host '   Copied: public/ *.md and *.json files'
 }
 
 # Format file

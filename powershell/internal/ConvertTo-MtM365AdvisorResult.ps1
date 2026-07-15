@@ -1,4 +1,4 @@
-﻿function ConvertTo-MtM365AdvisorResult {
+function ConvertTo-MtM365AdvisorResult {
     <#
     .SYNOPSIS
     Converts Pester results to the M365Advisor test results format which includes additional information.
@@ -295,6 +295,92 @@
         }
         $testResultDetail = $__MtSession.TestResultDetail[$test.ExpandedName]
 
+        if ($null -eq $testResultDetail) {
+            # Attempt to locate and load markdown file by testId (e.g. ISO27001.A.8.20.1.md)
+            $moduleRoot = $PSScriptRoot
+            while ($moduleRoot -and -not (Test-Path (Join-Path $moduleRoot "M365Advisor.psd1"))) {
+                $parent = Split-Path $moduleRoot -Parent
+                if ($parent -eq $moduleRoot -or [string]::IsNullOrEmpty($parent)) {
+                    $moduleRoot = $PSScriptRoot
+                    break
+                }
+                $moduleRoot = $parent
+            }
+            $searchPath = Join-Path $moduleRoot "public"
+            if (-not (Test-Path $searchPath)) {
+                $searchPath = $moduleRoot
+            }
+            
+            $metadataPath = Join-Path $searchPath "iso/metadata.json"
+            $metaItem = $null
+            if (Test-Path $metadataPath) {
+                try {
+                    $metadata = Get-Content $metadataPath -Raw -Encoding utf8 -ErrorAction Stop | ConvertFrom-Json -ErrorAction Stop
+                    if ($metadata -and $metadata.PSObject.Properties[$testId]) {
+                        $metaItem = $metadata.$testId
+                    }
+                } catch {
+                    Write-Verbose "Failed to load metadata.json: $($_.Exception.Message)"
+                }
+            }
+
+            $markdownPath = Get-ChildItem -Path $searchPath -Filter "$testId.md" -Recurse -ErrorAction SilentlyContinue | Select-Object -ExpandProperty FullName -First 1
+            if ($markdownPath -and (Test-Path $markdownPath)) {
+                try {
+                    $content = Get-Content $markdownPath -Raw -Encoding utf8 -ErrorAction Stop
+                    $splitContent = $content -split "<!--- Results --->"
+                    $mdDescription = $splitContent[0]
+                    $mdResult = if ($splitContent.Count -gt 1) { $splitContent[1] } else { "" }
+                    
+                    $reason = ""
+                    if ($test.Result -eq 'Failed') {
+                        if ($test.ErrorRecord -and $test.ErrorRecord.Count -gt 0) {
+                            $reason = $test.ErrorRecord[0].Exception.Message
+                        }
+                    }
+                    if ([string]::IsNullOrEmpty($reason)) {
+                        $reason = $test.Result
+                    }
+                    
+                    if ($mdResult -match "%TestResult%") {
+                        $mdResult = $mdResult -replace "%TestResult%", $reason
+                    }
+                    
+                    $metaSeverity = ''
+                    if ($metaItem -and $metaItem.severity) {
+                        $metaSeverity = $metaItem.severity
+                    }
+                    
+                    $testResultDetail = [PSCustomObject]@{
+                        TestTitle       = $testTitle
+                        TestDescription = $mdDescription
+                        TestResult      = $mdResult
+                        TestSkipped     = $null
+                        SkippedReason   = $null
+                        TestInvestigate = $false
+                        Severity        = $metaSeverity
+                        Service         = ''
+                    }
+                } catch {
+                    Write-Warning "Failed to parse markdown for $($testId): $($_.Exception.Message)"
+                }
+            }
+        }
+
+        if ($null -eq $testResultDetail) {
+            $testResultDetail = [PSCustomObject]@{
+                TestTitle       = $testTitle
+                TestDescription = ""
+                TestResult      = ""
+                TestSkipped     = $null
+                SkippedReason   = $null
+                TestInvestigate = $false
+                Severity        = ''
+                Service         = ''
+            }
+        }
+
+
         # Add the other test metadata to the test result
         $testSetting = Get-MtM365AdvisorConfigTestSetting -TestId $testId
         $severity = $testResultDetail.Severity # Default to the test result severity
@@ -302,6 +388,24 @@
             # Overwrite the settings if it is set in the config
             $severity = $testSetting.Severity
         }
+
+        if ([string]::IsNullOrEmpty($severity)) {
+            # Try to find a severity level from the tags
+            $allTags = @($test.Block.Tag + $test.Tag)
+            foreach ($tTag in $allTags) {
+                if ($tTag -in @('Critical', 'High', 'Medium', 'Low', 'Info')) {
+                    $severity = $tTag
+                    break
+                }
+            }
+        }
+        if ([string]::IsNullOrEmpty($severity)) {
+            $severity = 'Medium' # Default fallback
+        }
+
+        # Ensure the ResultDetail also has the correct severity
+        $testResultDetail.Severity = $severity
+
 
         # Setting Result to Error or Investigate, Overwriting the Skipped state
         if ($testResultDetail.TestSkipped -eq 'Error' ) {

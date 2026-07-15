@@ -28,7 +28,17 @@ export default function TestResultsTable(props) {
   const setSelectedStatus = props.onStatusChange ?? setInternalSelectedStatus;
   const [selectedBlock, setSelectedBlock] = useState([]);
   const [selectedTag, setSelectedTag] = useState([]);
-  const [selectedFramework, setSelectedFramework] = useState([]);
+  const defaultFramework = useMemo(() => {
+    const requestedTags = props.TestResults?.PesterConfig?.Filter?.Tag || [];
+    const frameworks = ["CIS", "CISA", "ISO 27001", "ISO 27002", "EIDSCA"];
+    return frameworks.filter(fw => requestedTags.some(t => typeof t === 'string' && t.toUpperCase().includes(fw.toUpperCase())));
+  }, [props.TestResults]);
+
+  const [selectedFramework, setSelectedFramework] = useState(defaultFramework);
+
+  useEffect(() => {
+    setSelectedFramework(defaultFramework);
+  }, [defaultFramework]);
   const [selectedSeverity, setSelectedSeverity] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
   const [sortColumn, setSortColumn] = useState("Id");
